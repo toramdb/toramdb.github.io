@@ -511,7 +511,9 @@ window.ToramSheets = (function () {
 
     fetchSheet(sheetName)
       .then(function (csv) {
-        renderer(parseCSV(csv), container);
+        var rows = parseCSV(csv);
+        rows.reverse();
+        renderer(rows, container);
         // Signal to main.js that new filterable elements are ready.
         document.dispatchEvent(new CustomEvent('sheetsrendered'));
       })
@@ -544,7 +546,9 @@ window.ToramSheets = (function () {
 
     fetchSheet(sheetName)
       .then(function (csv) {
-        var rows = parseCSV(csv).slice(0, max || 3);
+        var rows = parseCSV(csv);
+        rows.reverse();
+        rows = rows.slice(0, max || 3);
         if (rows.length) {
           renderer(rows, container);
           document.dispatchEvent(new CustomEvent('sheetsrendered'));
