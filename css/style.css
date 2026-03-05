@@ -705,8 +705,13 @@ tbody td { padding: .65rem 1rem; }
   transition: all var(--transition);
 }
 
-.page-btn { pointer-events: none; opacity: .5; cursor: not-allowed; }
-.page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; opacity: 1; }
+.page-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+.page-btn:disabled { opacity: .4; cursor: default; }
+.page-btn:disabled:hover { border-color: var(--border); color: var(--text-secondary); }
+.page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+/* Hide items outside current page */
+.paginated-hide { display: none !important; }
 
 /* Empty state when filter returns no results */
 .empty-state {
