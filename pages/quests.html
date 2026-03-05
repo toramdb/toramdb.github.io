@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Toram Online quest database — main story, side quests, daily quests, and special events." />
+  <title>Quests — ToramCodex</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="../index.html" class="nav-brand">
+      <span class="brand-icon">⚔️</span><span>ToramCodex</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="items.html">Items</a></li>
+      <li><a href="monsters.html">Monsters</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="maps.html">Maps</a></li>
+      <li><a href="quests.html" class="active">Quests</a></li>
+    </ul>
+    <div class="nav-search">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="navSearchInput" class="search-sync" placeholder="Search quests…" aria-label="Search" />
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" role="menu">
+    <a href="../index.html" role="menuitem">🏠 Home</a>
+    <a href="items.html" role="menuitem">🗡️ Items</a>
+    <a href="monsters.html" role="menuitem">👾 Monsters</a>
+    <a href="skills.html" role="menuitem">✨ Skills</a>
+    <a href="maps.html" role="menuitem">🗺️ Maps</a>
+    <a href="quests.html" role="menuitem">📜 Quests</a>
+    <div class="mobile-search">
+      <span class="search-icon">🔍</span>
+      <input type="search" class="search-sync" placeholder="Search quests…" aria-label="Mobile search" />
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <h1>📜 Quests Database</h1>
+    <p>Main story, side quests, daily quests, and special events</p>
+  </div>
+
+  <main>
+    <div class="section">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">›</span>
+        <span class="current">Quests</span>
+      </nav>
+
+      <div class="filter-bar" role="search" aria-label="Filter quests">
+        <input type="search" id="filterInput" class="search-sync" placeholder="Search quest name…" aria-label="Filter by name" />
+        <select id="filterSelect" aria-label="Filter by type">
+          <option value="">All Types</option>
+          <option value="main">Main Story</option>
+          <option value="side">Side Quest</option>
+          <option value="daily">Daily</option>
+          <option value="event">Event</option>
+        </select>
+      </div>
+
+      <div class="data-grid" id="questsGrid">
+
+        <article class="data-card" data-filter="awakening protagonist main story" data-category="main">
+          <div class="data-card-header">
+            <div class="data-card-icon">📖</div>
+            <div>
+              <div class="data-card-title">The Awakening</div>
+              <div class="data-card-subtitle">Main Story · Chapter 1</div>
+            </div>
+          </div>
+          <div class="data-card-body">
+            <span class="tag gold">Main Story</span>
+            <span class="tag">Lv.1+</span>
+            <p class="mt-1 text-muted">The first quest. Save the village from a goblin raid and meet NPC Mao.</p>
+            <p class="mt-1"><strong>Reward:</strong> 5,000 EXP · 1,000 Spina</p>
+          </div>
+        </article>
+
+        <article class="data-card" data-filter="shadow conspiracy main story" data-category="main">
+          <div class="data-card-header">
+            <div class="data-card-icon">📖</div>
+            <div>
+              <div class="data-card-title">Shadow Conspiracy</div>
+              <div class="data-card-subtitle">Main Story · Chapter 12</div>
+            </div>
+          </div>
+          <div class="data-card-body">
+            <span class="tag gold">Main Story</span>
+            <span class="tag">Lv.180+</span>
+            <p class="mt-1 text-muted">Investigate a shadow clan planning to invade the capital city.</p>
+            <p class="mt-1"><strong>Reward:</strong> 500,000 EXP · Rare Equipment</p>
+          </div>
+        </article>
+
+        <article class="data-card" data-filter="lost cat side quest" data-category="side">
+          <div class="data-card-header">
+            <div class="data-card-icon">🐱</div>
+            <div>
+              <div class="data-card-title">The Lost Cat</div>
+              <div class="data-card-subtitle">Side Quest · Adventurer's Guild</div>
+            </div>
+          </div>
+          <div class="data-card-body">
+            <span class="tag">Side Quest</span>
+            <span class="tag">Lv.30+</span>
+            <p class="mt-1 text-muted">Help a townsperson find their missing cat in Beginner Forest.</p>
+            <p class="mt-1"><strong>Reward:</strong> 8,000 EXP · 3,000 Spina</p>
+          </div>
+        </article>
+
+        <article class="data-card" data-filter="blacksmith helper side quest craft" data-category="side">
+          <div class="data-card-header">
+            <div class="data-card-icon">⚒️</div>
+            <div>
+              <div class="data-card-title">Blacksmith's Helper</div>
+              <div class="data-card-subtitle">Side Quest · Craft Series</div>
+            </div>
+          </div>
+          <div class="data-card-body">
+            <span class="tag">Side Quest</span>
+            <span class="tag">Lv.50+</span>
+            <p class="mt-1 text-muted">Gather materials for the village blacksmith. Unlocks new crafting recipes.</p>
+            <p class="mt-1"><strong>Reward:</strong> Crafting Recipe x3 · 20,000 EXP</p>
+          </div>
+        </article>
+
+        <article class="data-card" data-filter="monster hunt daily" data-category="daily">
+          <div class="data-card-header">
+            <div class="data-card-icon">🗓️</div>
+            <div>
+              <div class="data-card-title">Daily Hunt: Goblin</div>
+              <div class="data-card-subtitle">Daily Quest · Resets 00:00</div>
+            </div>
+          </div>
+          <div class="data-card-body">
+            <span class="tag green">Daily</span>
+            <span class="tag">Lv.1+</span>
+            <p class="mt-1 text-muted">Kill 20 Goblin Raiders in Beginner Forest. Resets daily at 00:00.</p>
+            <p class="mt-1"><strong>Reward:</strong> 15,000 EXP · Daily Coin x5</p>
+          </div>
+        </article>
+
+        <article class="data-card" data-filter="dragon festival event" data-category="event">
+          <div class="data-card-header">
+            <div class="data-card-icon">🎉</div>
+            <div>
+              <div class="data-card-title">Dragon Festival</div>
+              <div class="data-card-subtitle">Event Quest · Limited</div>
+            </div>
+          </div>
+          <div class="data-card-body">
+            <span class="tag red">Event</span>
+            <span class="tag">Lv.100+</span>
+            <p class="mt-1 text-muted">Seasonal event. Defeat special dragons and exchange tokens for exclusive items.</p>
+            <p class="mt-1"><strong>Reward:</strong> Dragon Token · Exclusive Costume</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="pagination" role="navigation" aria-label="Pagination">
+        <button class="page-btn active" aria-current="page">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">…</button>
+        <button class="page-btn">30</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">⚔️ ToramCodex</div>
+        <p class="footer-desc">Fan-made database · Not affiliated with Asobimo, Inc.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Database</h4>
+        <a href="items.html">Items</a>
+        <a href="monsters.html">Monsters</a>
+        <a href="skills.html">Skills</a>
+        <a href="maps.html">Maps</a>
+        <a href="quests.html">Quests</a>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <a href="#">About</a>
+        <a href="#">Contribute</a>
+        <a href="https://github.com/ut053082686/toramcodex.github.io" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToramCodex · Fan-made</span>
+      <span>Toram Online™ is a trademark of Asobimo, Inc.</span>
+    </div>
+  </footer>
+
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="../js/sheets.js"></script>
+  <script src="../js/main.js"></script>
+  <script>ToramSheets.load('quests', 'questsGrid');</script>
+</body>
+</html>

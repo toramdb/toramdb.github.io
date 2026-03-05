@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Toram Online monster database — bosses, mini-bosses, regular mobs, drop tables, and spawn locations." />
+  <title>Monsters — ToramCodex</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="../index.html" class="nav-brand">
+      <span class="brand-icon">⚔️</span><span>ToramCodex</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="items.html">Items</a></li>
+      <li><a href="monsters.html" class="active">Monsters</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="maps.html">Maps</a></li>
+      <li><a href="quests.html">Quests</a></li>
+    </ul>
+    <div class="nav-search">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="navSearchInput" class="search-sync" placeholder="Search monsters…" aria-label="Search" />
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" role="menu">
+    <a href="../index.html" role="menuitem">🏠 Home</a>
+    <a href="items.html" role="menuitem">🗡️ Items</a>
+    <a href="monsters.html" role="menuitem">👾 Monsters</a>
+    <a href="skills.html" role="menuitem">✨ Skills</a>
+    <a href="maps.html" role="menuitem">🗺️ Maps</a>
+    <a href="quests.html" role="menuitem">📜 Quests</a>
+    <div class="mobile-search">
+      <span class="search-icon">🔍</span>
+      <input type="search" class="search-sync" placeholder="Search monsters…" aria-label="Mobile search" />
+    </div>
+  </div>
+
+  <div class="page-hero">
+    <h1>👾 Monsters Database</h1>
+    <p>Bosses, mini-bosses, regular mobs — drop table &amp; spawn locations</p>
+  </div>
+
+  <main>
+    <div class="section">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="sep">›</span>
+        <span class="current">Monsters</span>
+      </nav>
+
+      <div class="filter-bar" role="search" aria-label="Filter monsters">
+        <input type="search" id="filterInput" class="search-sync" placeholder="Search monster name…" aria-label="Filter by name" />
+        <select id="filterSelect" aria-label="Filter by type">
+          <option value="">All Types</option>
+          <option value="boss">Boss</option>
+          <option value="mini-boss">Mini-Boss</option>
+          <option value="mob">Mob</option>
+        </select>
+        <select id="filterSelect2" aria-label="Filter by element">
+          <option value="">All Elements</option>
+          <option value="fire">Fire</option>
+          <option value="ice">Ice</option>
+          <option value="wind">Wind</option>
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+
+      <!-- Table view for monsters -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Monster</th>
+              <th>Level</th>
+              <th>Type</th>
+              <th>Element</th>
+              <th>HP</th>
+              <th>Location</th>
+              <th>Main Drop</th>
+            </tr>
+          </thead>
+          <tbody id="monstersTable">
+            <tr data-filter="ifrit rex boss fire" data-category="boss" data-category2="fire">
+              <td>🐉 Ifrit Rex</td>
+              <td><span class="tag gold">250</span></td>
+              <td><span class="tag red">Boss</span></td>
+              <td><span class="tag red">Fire</span></td>
+              <td>2,400,000</td>
+              <td>Volcano Summit</td>
+              <td>Sword of Eternal Flame</td>
+            </tr>
+            <tr data-filter="crystal spider queen boss ice" data-category="boss" data-category2="ice">
+              <td>🕷️ Crystal Spider Queen</td>
+              <td><span class="tag gold">235</span></td>
+              <td><span class="tag red">Boss</span></td>
+              <td>Ice</td>
+              <td>1,800,000</td>
+              <td>Crystal Cave</td>
+              <td>Crystal Thread, Ice Core</td>
+            </tr>
+            <tr data-filter="fenrir shadow mini-boss dark" data-category="mini-boss" data-category2="dark">
+              <td>🐺 Fenrir Shadow</td>
+              <td><span class="tag">210</span></td>
+              <td><span class="tag">Mini-Boss</span></td>
+              <td><span class="tag">Dark</span></td>
+              <td>900,000</td>
+              <td>Frozen Tundra</td>
+              <td>Shadow Fang, Dark Essence</td>
+            </tr>
+            <tr data-filter="stone golem mini-boss earth" data-category="mini-boss" data-category2="earth">
+              <td>🪨 Stone Golem</td>
+              <td><span class="tag">180</span></td>
+              <td><span class="tag">Mini-Boss</span></td>
+              <td>Earth</td>
+              <td>600,000</td>
+              <td>Ancient Ruins</td>
+              <td>Golem Core, Rock Fragment</td>
+            </tr>
+            <tr data-filter="goblin mob common" data-category="mob">
+              <td>👺 Goblin Raider</td>
+              <td><span class="tag">25</span></td>
+              <td>Mob</td>
+              <td>None</td>
+              <td>1,200</td>
+              <td>Beginner Forest</td>
+              <td>Goblin Ear, Copper Coin</td>
+            </tr>
+            <tr data-filter="slime mob common" data-category="mob">
+              <td>🫧 Blue Slime</td>
+              <td><span class="tag">10</span></td>
+              <td>Mob</td>
+              <td>Water</td>
+              <td>450</td>
+              <td>Starter Plains</td>
+              <td>Slime Gel, Small Crystal</td>
+            </tr>
+            <tr data-filter="dark dragon boss dark legendary" data-category="boss" data-category2="dark">
+              <td>🐲 Dark Dragon</td>
+              <td><span class="tag gold">260</span></td>
+              <td><span class="tag red">Boss</span></td>
+              <td><span class="tag">Dark</span></td>
+              <td>3,200,000</td>
+              <td>Shadow Realm</td>
+              <td>Dragon Heart, Dark Scale</td>
+            </tr>
+            <tr data-filter="tempest eagle mini-boss wind" data-category="mini-boss" data-category2="wind">
+              <td>🦅 Tempest Eagle</td>
+              <td><span class="tag">195</span></td>
+              <td><span class="tag">Mini-Boss</span></td>
+              <td><span class="tag green">Wind</span></td>
+              <td>750,000</td>
+              <td>Sky Plateau</td>
+              <td>Eagle Feather, Wind Stone</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" role="navigation" aria-label="Pagination">
+        <button class="page-btn active" aria-current="page">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">…</button>
+        <button class="page-btn">28</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">⚔️ ToramCodex</div>
+        <p class="footer-desc">Fan-made database · Not affiliated with Asobimo, Inc.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Database</h4>
+        <a href="items.html">Items</a>
+        <a href="monsters.html">Monsters</a>
+        <a href="skills.html">Skills</a>
+        <a href="maps.html">Maps</a>
+        <a href="quests.html">Quests</a>
+      </div>
+      <div class="footer-col">
+        <h4>Info</h4>
+        <a href="#">About</a>
+        <a href="#">Contribute</a>
+        <a href="https://github.com/ut053082686/toramcodex.github.io" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToramCodex · Fan-made</span>
+      <span>Toram Online™ is a trademark of Asobimo, Inc.</span>
+    </div>
+  </footer>
+
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <script src="../js/sheets.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Table filter — queries rows fresh each call so Sheets data is included.
+    (function () {
+      var filterInput   = document.getElementById('filterInput');
+      var filterSelect  = document.getElementById('filterSelect');
+      var filterSelect2 = document.getElementById('filterSelect2');
+      var tbody         = document.getElementById('monstersTable');
+
+      function applyTableFilter() {
+        var q    = filterInput   ? filterInput.value.toLowerCase()   : '';
+        var type = filterSelect  ? filterSelect.value.toLowerCase()  : '';
+        var elem = filterSelect2 ? filterSelect2.value.toLowerCase() : '';
+        tbody.querySelectorAll('tr').forEach(function (row) {
+          var text = (row.dataset.filter    || '').toLowerCase();
+          var cat1 = (row.dataset.category  || '').toLowerCase();
+          var cat2 = (row.dataset.category2 || '').toLowerCase();
+          var ok = (!q    || text.includes(q))
+                && (!type || cat1 === type)
+                && (!elem || cat2 === elem);
+          row.style.display = ok ? '' : 'none';
+        });
+      }
+
+      if (filterInput)   filterInput.addEventListener('input',   applyTableFilter);
+      if (filterSelect)  filterSelect.addEventListener('change',  applyTableFilter);
+      if (filterSelect2) filterSelect2.addEventListener('change', applyTableFilter);
+      // Re-apply after Sheets data renders.
+      document.addEventListener('sheetsrendered', applyTableFilter);
+    }());
+
+    ToramSheets.load('monsters', 'monstersTable');
+  </script>
+</body>
+</html>
