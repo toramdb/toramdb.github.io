@@ -70,18 +70,16 @@
           <option value="accessory">Accessory</option>
           <option value="material">Material</option>
         </select>
-        <select id="filterSelect2" aria-label="Filter by rarity">
-          <option value="">All Rarities</option>
-          <option value="common">Common</option>
-          <option value="rare">Rare</option>
-          <option value="epic">Epic</option>
-          <option value="legendary">Legendary</option>
+        <select id="filterSelect2" aria-label="Filter by category">
+          <option value="">All</option>
+          <option value="event">Event</option>
+          <option value="non-event">Non-Event</option>
         </select>
       </div>
 
       <div class="data-grid" id="itemsGrid">
 
-        <article class="data-card" data-filter="shadow blade sword" data-category="sword" data-category2="rare" data-name="Shadow Blade" style="cursor:pointer">
+        <article class="data-card" data-filter="shadow blade sword non-event" data-category="sword" data-category2="non-event" data-name="Shadow Blade" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🗡️</div>
             <div>
@@ -92,12 +90,12 @@
           <div class="data-card-body">
             <span class="tag">ATK +350</span>
             <span class="tag green">CRIT +15%</span>
-            <span class="tag rare">Rare</span>
+            <span class="tag non-event">Non-Event</span>
             <p class="mt-1">Drop: Dark Forest Boss</p>
           </div>
         </article>
 
-        <article class="data-card" data-filter="windrunner bow" data-category="bow" data-category2="epic" data-name="Windrunner Bow" style="cursor:pointer">
+        <article class="data-card" data-filter="windrunner bow non-event" data-category="bow" data-category2="non-event" data-name="Windrunner Bow" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🏹</div>
             <div>
@@ -108,12 +106,12 @@
           <div class="data-card-body">
             <span class="tag">ATK +410</span>
             <span class="tag green">AGI +20</span>
-            <span class="tag epic">Epic</span>
+            <span class="tag non-event">Non-Event</span>
             <p class="mt-1">Drop: Tempest Eagle · Sky Plateau</p>
           </div>
         </article>
 
-        <article class="data-card" data-filter="arcane staff" data-category="staff" data-category2="rare" data-name="Arcane Staff" style="cursor:pointer">
+        <article class="data-card" data-filter="arcane staff non-event" data-category="staff" data-category2="non-event" data-name="Arcane Staff" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🔮</div>
             <div>
@@ -124,12 +122,12 @@
           <div class="data-card-body">
             <span class="tag">MATK +480</span>
             <span class="tag green">INT +30</span>
-            <span class="tag rare">Rare</span>
+            <span class="tag non-event">Non-Event</span>
             <p class="mt-1">Craft: Magic Workshop Lv.8</p>
           </div>
         </article>
 
-        <article class="data-card" data-filter="eternal flame sword legendary" data-category="sword" data-category2="legendary" data-name="Sword of Eternal Flame" style="cursor:pointer">
+        <article class="data-card" data-filter="eternal flame sword event" data-category="sword" data-category2="event" data-name="Sword of Eternal Flame" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🔥</div>
             <div>
@@ -140,12 +138,12 @@
           <div class="data-card-body">
             <span class="tag">ATK +500</span>
             <span class="tag fire">Fire +40%</span>
-            <span class="tag legendary">Legendary</span>
+            <span class="tag event">Event</span>
             <p class="mt-1">Drop: Ifrit Rex · Volcano Summit</p>
           </div>
         </article>
 
-        <article class="data-card" data-filter="dragon scale armor" data-category="armor" data-category2="epic" data-name="Dragon Scale Armor" style="cursor:pointer">
+        <article class="data-card" data-filter="dragon scale armor non-event" data-category="armor" data-category2="non-event" data-name="Dragon Scale Armor" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🛡️</div>
             <div>
@@ -156,12 +154,12 @@
           <div class="data-card-body">
             <span class="tag">DEF +320</span>
             <span class="tag green">HP +2000</span>
-            <span class="tag epic">Epic</span>
+            <span class="tag non-event">Non-Event</span>
             <p class="mt-1">Drop: Dragon Nest Boss</p>
           </div>
         </article>
 
-        <article class="data-card" data-filter="moonstone ring accessory" data-category="accessory" data-category2="rare" data-name="Moonstone Ring" style="cursor:pointer">
+        <article class="data-card" data-filter="moonstone ring accessory non-event" data-category="accessory" data-category2="non-event" data-name="Moonstone Ring" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">💍</div>
             <div>
@@ -172,12 +170,12 @@
           <div class="data-card-body">
             <span class="tag">INT +25</span>
             <span class="tag">MP +500</span>
-            <span class="tag rare">Rare</span>
+            <span class="tag non-event">Non-Event</span>
             <p class="mt-1">Shop: Magic Guild · 50,000 Spina</p>
           </div>
         </article>
 
-        <article class="data-card" data-filter="dragon heart material" data-category="material" data-category2="rare" data-name="Dragon Heart" style="cursor:pointer">
+        <article class="data-card" data-filter="dragon heart material non-event" data-category="material" data-category2="non-event" data-name="Dragon Heart" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">❤️‍🔥</div>
             <div>
@@ -187,12 +185,12 @@
           </div>
           <div class="data-card-body">
             <span class="tag">Crafting Mat</span>
-            <span class="tag rare">Rare</span>
+            <span class="tag non-event">Non-Event</span>
             <p class="mt-1">Drop: Any Dragon-type Monster</p>
           </div>
         </article>
 
-        <article class="data-card" data-filter="iron ore material common" data-category="material" data-category2="common" data-name="Iron Ore" style="cursor:pointer">
+        <article class="data-card" data-filter="iron ore material non-event" data-category="material" data-category2="non-event" data-name="Iron Ore" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">⛏️</div>
             <div>

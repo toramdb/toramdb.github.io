@@ -50,7 +50,7 @@ Daftar semua item/equipment yang ditampilkan sebagai card di halaman Items.
 | Type     | ✅ Ya  | Jenis item. Menentukan icon otomatis & filter kategori   |
 | Level    | ❌     | Level requirement item                                   |
 | Stats    | ❌     | Stat utama item (misal: ATK+350)                        |
-| Rarity   | ❌     | Kelangkaan: Common, Rare, Legendary, Epic               |
+| Rarity   | ❌     | Kategori item: Event atau Non-Event                     |
 | Source   | ❌     | Sumber mendapatkan item                                  |
 
 ### Type yang Didukung (Auto Icon)
@@ -84,14 +84,14 @@ Daftar semua item/equipment yang ditampilkan sebagai card di halaman Items.
 
 | Name                | Icon | ImageURL | Type            | Level | Stats   | Rarity    | Source                  |
 |---------------------|------|----------|-----------------|-------|---------|-----------|-------------------------|
-| 10th Anniv Sword IV |      |          | 1 Handed Sword  | 0     | 485     | Common    | Event 10th Anniversary  |
-| Gale Arch Bow       |      |          | Bow             | 230   | ATK+280 | Rare      | Boss Drop: Venena Coenubia |
-| Darkness Staff      |      |          | Staff           | 200   | MATK+320| Legendary | Boss Drop: Dark Dragon  |
-| Titan's Fist        |      |          | Knuckles        | 245   | ATK+400 | Epic      | World Boss: Gravicep    |
-| Iron Ore            |      |          | Material        | 0     |         | Common    | Mining                  |
-| HP Potion 5000      |      |          | Consumable      | 0     | HP+5000 | Common    | NPC Shop                |
-| Sakura Katana       | 🌸   |          | Katana          | 220   | ATK+310 | Rare      | Event: Spring Festival  |
-| Crystal Shield      |      |          | Shield          | 210   | DEF+180 | Rare      | Boss Drop: Crystal Golem|
+| 10th Anniv Sword IV |      |          | 1 Handed Sword  | 0     | 485     | Event     | Event 10th Anniversary  |
+| Gale Arch Bow       |      |          | Bow             | 230   | ATK+280 | Non-Event | Boss Drop: Venena Coenubia |
+| Darkness Staff      |      |          | Staff           | 200   | MATK+320| Non-Event | Boss Drop: Dark Dragon  |
+| Titan's Fist        |      |          | Knuckles        | 245   | ATK+400 | Non-Event | World Boss: Gravicep    |
+| Iron Ore            |      |          | Material        | 0     |         | Non-Event | Mining                  |
+| HP Potion 5000      |      |          | Consumable      | 0     | HP+5000 | Non-Event | NPC Shop                |
+| Sakura Katana       | 🌸   |          | Katana          | 220   | ATK+310 | Event     | Event: Spring Festival  |
+| Crystal Shield      |      |          | Shield          | 210   | DEF+180 | Non-Event | Boss Drop: Crystal Golem|
 
 ---
 
@@ -441,13 +441,11 @@ Angka statistik hero counter di hero section.
 - **Filter kategori** menggunakan kolom Type (Items, Skills), Zone (Maps), Type (Quests, Monsters).
 - **Filter kedua** menggunakan kolom Rarity (Items), Element (Monsters), Category (Skills).
 
-### Rarity Badge
+### Rarity Badge (Event / Non-Event)
 | Rarity    | Warna Badge |
 |-----------|-------------|
-| Common    | Default     |
-| Rare      | Gold        |
-| Epic      | Gold        |
-| Legendary | Gold        |
+| Event     | Gold/oranye |
+| Non-Event | Default     |
 
 ### Monster Level Badge
 - Level ≥ 240 → gold badge otomatis.

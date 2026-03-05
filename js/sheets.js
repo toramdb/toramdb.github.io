@@ -225,8 +225,7 @@ window.ToramSheets = (function () {
 
   function rarityClass(rarity) {
     var r = (rarity || '').toLowerCase();
-    return r === 'legendary' || r === 'epic' ? 'gold' :
-           r === 'rare'                       ? 'gold' : '';
+    return r === 'event' ? 'event' : '';
   }
 
   function renderItems(rows, container) {
@@ -264,7 +263,7 @@ window.ToramSheets = (function () {
           '</div>' +
         '</div>' +
         '<div class="data-card-body">' +
-          (stats  ? '<span class="tag">'         + stats  + '</span>' : '') +
+          (stats  ? '<span class="tag">Base: '   + stats  + '</span>' : '') +
           (rarity ? '<span class="tag ' + rc + '">' + rarity + '</span>' : '') +
           (source ? '<p class="mt-1">Source: ' + source + '</p>' : '') +
         '</div>';

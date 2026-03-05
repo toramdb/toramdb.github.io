@@ -45,12 +45,9 @@
   --el-water:      #2179b5;
   --el-neutral:    #6b7280;
 
-  /* Toram Rarity Colors — adjusted for light bg */
-  --rarity-common:    #6b7280;
-  --rarity-uncommon:  #1ea85a;
-  --rarity-rare:      #2c7be5;
-  --rarity-epic:      #7c3aed;
-  --rarity-legendary: #d47a0a;
+  /* Item Category Colors */
+  --tag-event:     #d47a0a;
+  --tag-non-event: #6b7280;
 
   /* Layout */
   --radius-sm:     6px;
@@ -528,13 +525,9 @@ ul { list-style: none; }
   margin-top: .25rem;
 }
 
-/* Rarity tags */
-.tag.gold,
-.tag.legendary  { background: rgba(212,122,10,.1);  color: var(--rarity-legendary); }
-.tag.epic       { background: rgba(124,58,237,.08); color: var(--rarity-epic); }
-.tag.rare       { background: rgba(44,123,229,.08);  color: var(--rarity-rare); }
-.tag.uncommon   { background: rgba(30,168,90,.08);  color: var(--rarity-uncommon); }
-.tag.common     { background: rgba(107,114,128,.08);  color: var(--rarity-common); }
+/* Event / Non-Event tags */
+.tag.event      { background: rgba(212,122,10,.12); color: var(--tag-event); font-weight: 600; }
+.tag.non-event  { background: rgba(107,114,128,.08); color: var(--tag-non-event); }
 
 /* Element tags */
 .tag.red,

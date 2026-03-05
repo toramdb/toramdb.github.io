@@ -29,7 +29,7 @@ Fan-made database untuk game **Toram Online**, dihosting lewat GitHub Pages.
 |---|---|
 | **Palet warna** | Soft gray-white light theme, aksen goldenrod `#b8860b` |
 | **Element colors** | Fire `#d94b1a` · Ice `#2e8bc0` · Wind `#3a9d5e` · Earth `#8b6914` · Dark `#6a0dad` · Light `#d4a017` · Water `#1e7ca8` |
-| **Rarity colors** | Common · Uncommon · Rare · Epic · Legendary |
+| **Rarity tags** | Event (gold/oranye) · Non-Event (default) |
 | **Typography** | Segoe UI / system-ui, sans-serif |
 | **Layout** | Mobile-first CSS Grid & Flexbox |
 | **Navigasi** | Sticky navbar + hamburger drawer di mobile |

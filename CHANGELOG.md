@@ -4,6 +4,17 @@ Semua perubahan penting pada proyek ToramCodex dicatat di sini.
 
 ---
 
+## [0.8.0] — 2026-03-05
+
+### Changed
+- **Rarity system** diganti dari Common/Rare/Epic/Legendary menjadi **Event / Non-Event**
+- Badge `Event` tampil warna gold/oranye, `Non-Event` warna default abu-abu
+- Filter dropdown di halaman Items sekarang: All / Event / Non-Event
+- Update CSS: hapus rarity colors lama, tambah `.tag.event` dan `.tag.non-event`
+- Update semua sample data dan dokumentasi
+
+---
+
 ## [0.7.1] — 2026-03-05
 
 ### Changed
