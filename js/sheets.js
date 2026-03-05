@@ -12,16 +12,19 @@
 //     Items | Monsters | Skills | Maps | Quests
 //
 // EXPECTED COLUMN HEADERS (row 1 of each sheet):
-//  Items       : Name, Icon, Type, Level, Stats, Rarity, Source
+//  Items       : Name, Icon, ImageURL, Type, Level, Stats, Rarity, Source
 //  ItemDetails : Name, Icon, Type, Level, ImageURL, SellSpina, SellOther,
 //                Stats, Obtain, Recipe
 //                (Stats format: "Base DEF:150;Guard Recharge:+18%;...")
 //                (Obtain format: "Drop: Monster Name; Quest: Quest Name")
 //                (Recipe format: "Iron Ore x3; Dragon Heart x1")
-//  Monsters    : Name, Icon, Level, Type, Element, HP, Location, Drop
-//  Skills      : Name, Icon, Type, Category, Damage, MP Cost, Description
-//  Maps        : Name, Icon, Zone, LevelRange, Boss, Description
-//  Quests      : Name, Icon, Type, MinLevel, Reward, Description
+//  Monsters    : Name, Icon, ImageURL, Level, Type, Element, HP, Location, Drop
+//  Skills      : Name, Icon, ImageURL, Type, Category, Damage, MP Cost, Description
+//  Maps        : Name, Icon, ImageURL, Zone, LevelRange, Boss, Description
+//  Quests      : Name, Icon, ImageURL, Type, MinLevel, Reward, Description
+//
+//  NOTE: ImageURL is optional for all sheets. If empty, the Icon emoji is used.
+//        If Icon is also empty, a default emoji per category is used.
 // ============================================================
 
 window.ToramSheets = (function () {
@@ -96,6 +99,58 @@ window.ToramSheets = (function () {
       .replace(/"/g, '&quot;');
   }
 
+  // ---- TYPE → DEFAULT ICON MAP ------------------------------------
+  // Toram Online equipment / category types → emoji fallback.
+  // Used when Google Sheet has no Icon or ImageURL for a row.
+  var TYPE_ICONS = {
+    // Weapons
+    '1-handed sword': '🗡️',
+    'one-hand sword':  '🗡️',
+    '2-handed sword': '⚔️',
+    'two-hand sword':  '⚔️',
+    'bow':            '🏹',
+    'bowgun':         '🔫',
+    'knuckles':       '🥊',
+    'magic device':   '🔮',
+    'staff':          '🪄',
+    'halberd':        '🔱',
+    'katana':         '⚔️',
+    'dagger':         '🔪',
+    'arrow':          '🎯',
+    // Defense
+    'shield':         '🛡️',
+    'armor':          '🛡️',
+    'heavy armor':    '🛡️',
+    'light armor':    '🛡️',
+    // Accessories & other
+    'ninjutsu scroll':'📜',
+    'additional':     '💍',
+    'special':        '⭐',
+    'ring':           '💍',
+    'earring':        '💎',
+    'necklace':       '📿',
+    // Non-equipment
+    'material':       '⛏️',
+    'consumable':     '🧪',
+    'quest item':     '📦'
+  };
+
+  // Resolve the best icon: ImageURL > Sheet Icon > type-based > fallback
+  function resolveIcon(type) {
+    return TYPE_ICONS[(type || '').toLowerCase()] || '🗡️';
+  }
+
+  // ---- ICON / IMAGE HELPER ------------------------------------------
+  // Returns HTML for the icon area:
+  //   - If imageURL is provided → <img> tag
+  //   - Otherwise → emoji icon (from Sheet, or type-based, or default)
+  function iconHTML(imageURL, icon, type, altText) {
+    if (imageURL) {
+      return '<img src="' + esc(imageURL) + '" alt="' + esc(altText) + '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" />';
+    }
+    return icon || resolveIcon(type);
+  }
+
   // ---- LOADING STATE ------------------------------------------------
   function showLoading(container) {
     var html = '';
@@ -122,17 +177,18 @@ window.ToramSheets = (function () {
   function renderItems(rows, container) {
     container.innerHTML = '';
     if (!rows.length) {
-      showError(container, 'No item data found. Check your Sheet ID and column headers (Name, Icon, Type, Level, Stats, Rarity, Source).');
+      showError(container, 'No item data found. Check your Sheet ID and column headers (Name, Icon, ImageURL, Type, Level, Stats, Rarity, Source).');
       return;
     }
     rows.forEach(function (row) {
-      var name   = esc(row['Name']   || '');
-      var icon   = esc(row['Icon']   || '🗡️');
-      var type   = esc(row['Type']   || '');
-      var level  = esc(row['Level']  || '');
-      var stats  = esc(row['Stats']  || '');
-      var rarity = esc(row['Rarity'] || '');
-      var source = esc(row['Source'] || '');
+      var name   = esc(row['Name']     || '');
+      var icon   = esc(row['Icon']     || '');
+      var imgURL = (row['ImageURL']    || '').trim();
+      var type   = esc(row['Type']     || '');
+      var level  = esc(row['Level']    || '');
+      var stats  = esc(row['Stats']    || '');
+      var rarity = esc(row['Rarity']   || '');
+      var source = esc(row['Source']   || '');
       var rc     = rarityClass(rarity);
 
       var el       = document.createElement('article');
@@ -144,7 +200,7 @@ window.ToramSheets = (function () {
       el.dataset.name      = row['Name'] || '';
       el.innerHTML =
         '<div class="data-card-header">' +
-          '<div class="data-card-icon">' + icon + '</div>' +
+          '<div class="data-card-icon">' + iconHTML(imgURL, icon, type, name) + '</div>' +
           '<div>' +
             '<div class="data-card-title">' + name + '</div>' +
             '<div class="data-card-subtitle">' + type + (level ? ' · Lv.' + level : '') + '</div>' +
@@ -168,22 +224,26 @@ window.ToramSheets = (function () {
       return;
     }
     rows.forEach(function (row) {
-      var name  = esc(row['Name']     || '');
-      var icon  = esc(row['Icon']     || '👾');
-      var level = esc(row['Level']    || '');
-      var type  = esc(row['Type']     || '');
-      var elem  = esc(row['Element']  || '');
-      var hp    = esc(row['HP']       || '');
-      var loc   = esc(row['Location'] || '');
-      var drop  = esc(row['Drop']     || '');
+      var name   = esc(row['Name']     || '');
+      var icon   = esc(row['Icon']     || '');
+      var imgURL = (row['ImageURL']    || '').trim();
+      var level  = esc(row['Level']    || '');
+      var type   = esc(row['Type']     || '');
+      var elem   = esc(row['Element']  || '');
+      var hp     = esc(row['HP']       || '');
+      var loc    = esc(row['Location'] || '');
+      var drop   = esc(row['Drop']     || '');
 
       var isBoss = type.toLowerCase() === 'boss';
+      var monIcon = imgURL
+        ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />'
+        : (icon || (isBoss ? '🐉' : '👾')) + ' ';
       var tr   = document.createElement('tr');
       tr.dataset.filter    = (name + ' ' + type + ' ' + elem).toLowerCase();
       tr.dataset.category  = type.toLowerCase().replace(/\s+/g, '-');
       tr.dataset.category2 = elem.toLowerCase();
       tr.innerHTML =
-        '<td>' + icon + ' ' + name + '</td>' +
+        '<td>' + monIcon + name + '</td>' +
         '<td><span class="tag' + (parseInt(level, 10) >= 240 ? ' gold' : '') + '">' + level + '</span></td>' +
         '<td><span class="tag' + (isBoss ? ' red' : '') + '">' + type + '</span></td>' +
         '<td>' + elem + '</td>' +
@@ -202,7 +262,8 @@ window.ToramSheets = (function () {
     }
     rows.forEach(function (row) {
       var name   = esc(row['Name']        || '');
-      var icon   = esc(row['Icon']        || '✨');
+      var icon   = esc(row['Icon']        || '');
+      var imgURL = (row['ImageURL']       || '').trim();
       var type   = esc(row['Type']        || '');
       var cat    = esc(row['Category']    || '');
       var dmg    = esc(row['Damage']      || '');
@@ -216,7 +277,7 @@ window.ToramSheets = (function () {
       el.dataset.category2 = cat.toLowerCase();
       el.innerHTML =
         '<div class="data-card-header">' +
-          '<div class="data-card-icon">' + icon + '</div>' +
+          '<div class="data-card-icon">' + iconHTML(imgURL, icon, type, name) + '</div>' +
           '<div>' +
             '<div class="data-card-title">' + name + '</div>' +
             '<div class="data-card-subtitle">' + type + (cat ? ' · ' + cat + ' Skill' : '') + '</div>' +
@@ -238,12 +299,13 @@ window.ToramSheets = (function () {
       return;
     }
     rows.forEach(function (row) {
-      var name  = esc(row['Name']        || '');
-      var icon  = esc(row['Icon']        || '🗺️');
-      var zone  = esc(row['Zone']        || '');
-      var range = esc(row['LevelRange']  || '');
-      var boss  = esc(row['Boss']        || '');
-      var desc  = esc(row['Description'] || '');
+      var name   = esc(row['Name']        || '');
+      var icon   = esc(row['Icon']        || '');
+      var imgURL = (row['ImageURL']       || '').trim();
+      var zone   = esc(row['Zone']        || '');
+      var range  = esc(row['LevelRange']  || '');
+      var boss   = esc(row['Boss']        || '');
+      var desc   = esc(row['Description'] || '');
 
       var el       = document.createElement('article');
       el.className = 'data-card';
@@ -251,7 +313,7 @@ window.ToramSheets = (function () {
       el.dataset.category = zone.toLowerCase().replace(/\s+/g, '-');
       el.innerHTML =
         '<div class="data-card-header">' +
-          '<div class="data-card-icon">' + icon + '</div>' +
+          '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'map', name) + '</div>' +
           '<div>' +
             '<div class="data-card-title">' + name + '</div>' +
             '<div class="data-card-subtitle">' + zone + (range ? ' · Lv.' + range : '') + '</div>' +
@@ -273,7 +335,8 @@ window.ToramSheets = (function () {
     }
     rows.forEach(function (row) {
       var name   = esc(row['Name']        || '');
-      var icon   = esc(row['Icon']        || '📜');
+      var icon   = esc(row['Icon']        || '');
+      var imgURL = (row['ImageURL']       || '').trim();
       var type   = esc(row['Type']        || '');
       var minlv  = esc(row['MinLevel']    || '');
       var reward = esc(row['Reward']      || '');
@@ -285,7 +348,7 @@ window.ToramSheets = (function () {
       el.dataset.category = type.toLowerCase();
       el.innerHTML =
         '<div class="data-card-header">' +
-          '<div class="data-card-icon">' + icon + '</div>' +
+          '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'quest item', name) + '</div>' +
           '<div>' +
             '<div class="data-card-title">' + name + '</div>' +
             '<div class="data-card-subtitle">' + type + (minlv ? ' · Lv.' + minlv + '+' : '') + '</div>' +
@@ -347,11 +410,37 @@ window.ToramSheets = (function () {
       });
   }
 
+  // ---- PUBLIC: loadLatest(page, containerId, max) ------------------
+  // Like load(), but only renders the first `max` rows.
+  // Used on the homepage for "Latest Items", "Popular Monsters", etc.
+  // If Sheets is not configured, leaves the static HTML untouched.
+  function loadLatest(page, containerId, max) {
+    if (CONFIG.SHEET_ID === 'YOUR_GOOGLE_SHEET_ID') { return; }
+    var sheetName = CONFIG.SHEETS[page];
+    var renderer  = RENDERERS[page];
+    var container = document.getElementById(containerId);
+    if (!sheetName || !renderer || !container) { return; }
+
+    fetchSheet(sheetName)
+      .then(function (csv) {
+        var rows = parseCSV(csv).slice(0, max || 3);
+        if (rows.length) {
+          renderer(rows, container);
+          document.dispatchEvent(new CustomEvent('sheetsrendered'));
+        }
+      })
+      .catch(function () {
+        // Silently keep the static HTML on homepage
+      });
+  }
+
   return {
-    CONFIG     : CONFIG,
-    load       : load,
-    fetchSheet : fetchSheet,
-    parseCSV   : parseCSV,
-    esc        : esc
+    CONFIG      : CONFIG,
+    load        : load,
+    loadLatest  : loadLatest,
+    fetchSheet  : fetchSheet,
+    parseCSV    : parseCSV,
+    esc         : esc,
+    resolveIcon : resolveIcon
   };
 }());

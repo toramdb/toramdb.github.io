@@ -188,7 +188,7 @@
         <h2 class="section-title"><span class="icon">🆕</span>Latest Items</h2>
         <a href="pages/items.html" class="section-link">View all →</a>
       </div>
-      <div class="data-grid">
+      <div class="data-grid" id="latestItemsGrid">
 
         <article class="data-card" data-name="Shadow Blade" style="cursor:pointer">
           <div class="data-card-header">
@@ -243,7 +243,7 @@
         <h2 class="section-title"><span class="icon">👾</span>Popular Monsters</h2>
         <a href="pages/monsters.html" class="section-link">View all →</a>
       </div>
-      <div class="data-grid">
+      <div class="data-grid" id="popularMonstersGrid">
 
         <article class="data-card">
           <div class="data-card-header">
@@ -336,11 +336,14 @@
   <script src="js/main.js"></script>
   <script src="js/modal.js"></script>
   <script>
+    // Load latest data from Sheets (if configured), else keep static HTML
+    ToramSheets.loadLatest('items', 'latestItemsGrid', 3);
+
     // Make Latest Items cards clickable → popup modal
-    document.querySelectorAll('.data-card[data-name]').forEach(function (card) {
-      card.addEventListener('click', function () {
-        ItemModal.open(this.dataset.name);
-      });
+    // Use event delegation so it works with both static and dynamic cards
+    document.getElementById('latestItemsGrid').addEventListener('click', function (e) {
+      var card = e.target.closest('[data-name]');
+      if (card) ItemModal.open(card.dataset.name);
     });
   </script>
 </body>

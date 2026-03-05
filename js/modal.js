@@ -143,8 +143,8 @@ window.ItemModal = (function () {
     }
 
     var name  = item['Name']      || '';
-    var icon  = item['Icon']      || '🗡️';
     var type  = item['Type']      || '';
+    var icon  = item['Icon']      || (window.ToramSheets ? window.ToramSheets.resolveIcon(type) : '🗡️');
     var level = item['Level']     || '';
     var img   = item['ImageURL']  || '';
     var sell  = item['SellSpina'] || '';
