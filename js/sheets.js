@@ -469,7 +469,7 @@ window.ToramSheets = (function () {
       if (hasElement) {
         tr.innerHTML =
           '<td>' + petIcon + name + '</td>' +
-          '<td>' + (elem ? '<span class="tag' + elemClass + '">' + elem + '</span>' : 'Neutral') + '</td>' +
+          '<td>' + (elem ? '<span class="tag' + elemClass + '">' + elem + '</span>' : '') + '</td>' +
           '<td><span class="tag' + (highLv ? ' legendary' : '') + '">' + level + '</span></td>' +
           '<td>' + spawnAt + '</td>';
       } else {
