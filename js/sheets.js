@@ -369,7 +369,7 @@ window.ToramSheets = (function () {
             badgesHTML = '+' + (group.length - 1);
           }
           nameCell = '<span class="mon-name">' + monIcon + name + '</span>' +
-            ' <span class="mon-group-toggle" style="cursor:pointer;font-size:.75rem;display:inline-flex;align-items:center;gap:2px" data-group="' + gid + '">▸ ' + badgesHTML + '</span>';
+            '<br><span class="mon-group-toggle" style="cursor:pointer;font-size:.75rem;display:inline-flex;align-items:center;gap:2px" data-group="' + gid + '">▸ ' + badgesHTML + '</span>';
         } else if (hasVariants) {
           // Variant row: indent with marker, hidden by default
           nameCell = '<span style="padding-left:1.2rem;opacity:.85">↳ </span><span class="mon-name">' + monIcon + name + '</span>';
