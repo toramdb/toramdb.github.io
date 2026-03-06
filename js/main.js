@@ -43,8 +43,10 @@
     heroSearchForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var q = document.getElementById('heroSearchInput').value.trim();
+      var cat = document.getElementById('heroSearchCategory');
+      var page = cat ? cat.value : 'items';
       if (q) {
-        window.location.href = 'pages/items.html?q=' + encodeURIComponent(q);
+        window.location.href = 'pages/' + page + '.html?q=' + encodeURIComponent(q);
       }
     });
   }
@@ -63,6 +65,14 @@
     var visible = 0;
     var items = document.querySelectorAll('[data-filter]');
     items.forEach(function (card) {
+      // Respect collapsed monster variant rows
+      if (card.dataset.monGroup) {
+        var gid = card.dataset.monGroup;
+        var toggle = document.querySelector('[data-group="' + gid + '"]');
+        var groupOpen = toggle && toggle.dataset.open === '1';
+        if (!groupOpen) { card.style.display = 'none'; return; }
+      }
+
       var text  = (card.dataset.filter    || '').toLowerCase();
       var c1    = (card.dataset.category  || '').toLowerCase();
       var c2    = (card.dataset.category2 || '').toLowerCase();

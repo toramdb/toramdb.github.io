@@ -225,6 +225,13 @@
         var type = filterSelect  ? filterSelect.value.toLowerCase()  : '';
         var elem = filterSelect2 ? filterSelect2.value.toLowerCase() : '';
         tbody.querySelectorAll('tr').forEach(function (row) {
+          // Skip variant rows that are collapsed (hidden by group toggle)
+          if (row.dataset.monGroup) {
+            var gid = row.dataset.monGroup;
+            var toggle = tbody.querySelector('[data-group="' + gid + '"]');
+            var groupOpen = toggle && toggle.dataset.open === '1';
+            if (!groupOpen) { row.style.display = 'none'; return; }
+          }
           var text = (row.dataset.filter    || '').toLowerCase();
           var cat1 = (row.dataset.category  || '').toLowerCase();
           var cat2 = (row.dataset.category2 || '').toLowerCase();

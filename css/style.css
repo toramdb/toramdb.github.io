@@ -300,10 +300,23 @@ ul { list-style: none; }
 
 .hero-search {
   display: flex;
-  max-width: 520px;
+  max-width: 580px;
   margin: 0 auto 2rem;
   gap: .5rem;
 }
+
+.hero-search select {
+  padding: .75rem .75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: .9rem;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.hero-search select:focus { outline: none; border-color: var(--accent); }
 
 .hero-search input {
   flex: 1;
