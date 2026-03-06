@@ -158,34 +158,35 @@ Daftar monster yang ditampilkan sebagai tabel di halaman Monsters.
 
 ### Header Kolom
 
-| Name | Icon | ImageURL | Level | Type | Element | HP | Location | Drop |
-|------|------|----------|-------|------|---------|----|----------|------|
+| Name | Icon | ImageURL | Level | Difficulty | Type | Element | HP | Location | Drop |
+|------|------|----------|-------|------------|------|---------|----|----------|------|
 
 ### Penjelasan Kolom
 
-| Kolom    | Wajib? | Keterangan                                              |
-|----------|--------|---------------------------------------------------------|
-| Name     | ✅ Ya  | Nama monster                                             |
-| Icon     | ❌     | Emoji kustom. Kosongkan = 👾 (normal) atau 🐉 (boss)    |
-| ImageURL | ❌     | URL gambar monster                                       |
-| Level    | ✅ Ya  | Level monster (≥240 otomatis gold badge)                 |
-| Type     | ✅ Ya  | Normal, Mini Boss, Boss (Boss otomatis merah)            |
-| Element  | ❌     | Elemen: Fire, Water, Wind, Earth, Light, Dark, Neutral   |
-| HP       | ❌     | Jumlah HP                                                |
-| Location | ❌     | Lokasi spawn                                             |
-| Drop     | ❌     | Item drop utama                                          |
+| Kolom      | Wajib? | Keterangan                                              |
+|------------|--------|---------------------------------------------------------|
+| Name       | ✅ Ya  | Nama monster                                             |
+| Icon       | ❌     | Emoji kustom. Kosongkan = 👾 (normal) atau 🐉 (boss)    |
+| ImageURL   | ❌     | URL gambar monster                                       |
+| Level      | ✅ Ya  | Level monster (≥240 otomatis gold badge)                 |
+| Difficulty | ❌     | Tingkat kesulitan: Easy, Normal, Hard, Nightmare, Ultimate |
+| Type       | ✅ Ya  | Mob, Mini Boss, Boss (Boss merah, Mini Boss oranye)      |
+| Element    | ❌     | Elemen: Fire, Water, Wind, Earth, Light, Dark, Neutral   |
+| HP         | ❌     | Jumlah HP                                                |
+| Location   | ❌     | Lokasi spawn                                             |
+| Drop       | ❌     | Item drop utama (pisahkan dengan `;` jika banyak)        |
 
 ### Contoh Data
 
-| Name             | Icon | ImageURL | Level | Type      | Element | HP        | Location            | Drop                    |
-|------------------|------|----------|-------|-----------|---------|-----------|---------------------|-------------------------|
-| Pom-Pom Pom      |      |          | 1     | Normal    | Neutral | 50        | Sofya City Outskirts| Pom Pom Fur             |
-| Colon            |      |          | 5     | Normal    | Water   | 200       | Ruined Temple       | Colon Jelly             |
-| Venena Coenubia  |      |          | 230   | Boss      | Dark    | 5000000   | El Scaro            | Gale Arch Bow           |
-| Gravicep         |      |          | 250   | Boss      | Earth   | 12000000  | Ultimea Palace      | Titan's Fist            |
-| Shadow Puppet    |      |          | 180   | Mini Boss | Dark    | 800000    | Dark Castle         | Shadow Gem              |
-| Fire Willow      |      |          | 120   | Normal    | Fire    | 50000     | Lava Valley         | Fire Crystal            |
-| Crystal Golem    |      |          | 210   | Boss      | Earth   | 3000000   | Crystal Cave        | Crystal Shield          |
+| Name             | Icon | ImageURL | Level | Difficulty | Type      | Element | HP        | Location            | Drop                                    |
+|------------------|------|----------|-------|------------|-----------|---------|-----------|---------------------|-----------------------------------------|
+| Pom-Pom Pom      |      |          | 1     | Easy       | Mob       | Neutral | 50        | Sofya City Outskirts| Pom Pom Fur                             |
+| Colon            |      |          | 5     | Easy       | Mob       | Water   | 200       | Ruined Temple       | Colon Jelly                             |
+| Venena Coenubia  |      |          | 230   | Ultimate   | Boss      | Dark    | 5000000   | El Scaro            | Gale Arch Bow; Dark Fragment            |
+| Gravicep         |      |          | 250   | Ultimate   | Boss      | Earth   | 12000000  | Ultimea Palace      | Titan's Fist; Earth Core; Boss Crystal  |
+| Shadow Puppet    |      |          | 180   | Hard       | Mini Boss | Dark    | 800000    | Dark Castle         | Shadow Gem; Dark Essence                |
+| Fire Willow      |      |          | 120   | Normal     | Mob       | Fire    | 50000     | Lava Valley         | Fire Crystal                            |
+| Crystal Golem    |      |          | 210   | Nightmare  | Boss      | Earth   | 3000000   | Crystal Cave        | Crystal Shield; Golem Core              |
 
 ---
 
@@ -449,6 +450,27 @@ Angka statistik hero counter di hero section.
 
 ### Monster Level Badge
 - Level ≥ 240 → gold badge otomatis.
+
+### Monster Difficulty Badge
+| Difficulty | Warna  |
+|------------|--------|
+| Easy       | Hijau  |
+| Normal     | Biru   |
+| Hard       | Kuning |
+| Nightmare  | Merah  |
+| Ultimate   | Ungu   |
+
+### Monster Type Badge
+| Type      | Warna  |
+|-----------|--------|
+| Boss      | Merah  |
+| Mini Boss | Oranye |
+| Mob       | Default|
+
+### Monster Drop
+- Pisahkan item drop dengan `;` (titik koma).
+- Contoh: `Shadow Gem; Dark Essence; Rare Fragment`
+- Jika drop > 3 item → otomatis ditampilkan 3 + tombol "+N more".
 
 ### Homepage Stats Counter
 - Kolom `Count` berisi angka saja (misal: `1500`, bukan `1500+`).

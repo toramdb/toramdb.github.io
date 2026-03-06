@@ -4,6 +4,20 @@ Semua perubahan penting pada proyek ToramCodex dicatat di sini.
 
 ---
 
+## [0.9.0] — 2026-03-06
+
+### Added
+- **Kolom Difficulty** pada Monsters — 5 tingkat kesulitan: Easy (hijau), Normal (biru), Hard (kuning), Nightmare (merah), Ultimate (ungu)
+- **Drop tag badges** — Setiap item drop dipisahkan `;` dan ditampilkan sebagai tag terpisah
+- **Collapsible drops** — Jika drop >3 item, tampilkan 3 + tombol "+N more" yang bisa diklik expand/collapse
+- **Mini Boss tag** — Warna oranye khusus + no-wrap agar teks tidak terpotong
+
+### Changed
+- **Data display order** diubah dari FIFO ke **LIFO** — data terbaru (paling bawah di Sheet) tampil di paling atas website
+- Tabel Monsters sekarang 8 kolom: Monster, Level, Difficulty, Type, Element, HP, Location, Main Drop
+
+---
+
 ## [0.8.0] — 2026-03-05
 
 ### Changed

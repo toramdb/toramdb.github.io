@@ -532,6 +532,13 @@ ul { list-style: none; }
 /* Monster type tags */
 .tag.mini-boss  { background: rgba(212,122,10,.12); color: #b45309; white-space: nowrap; }
 
+/* Monster difficulty tags */
+.tag.diff-easy      { background: rgba(34,197,94,.12);  color: #16a34a; }
+.tag.diff-normal    { background: rgba(59,130,246,.12); color: #2563eb; }
+.tag.diff-hard      { background: rgba(245,158,11,.12); color: #d97706; }
+.tag.diff-nightmare { background: rgba(239,68,68,.12);  color: #dc2626; white-space: nowrap; }
+.tag.diff-ultimate  { background: rgba(168,85,247,.12); color: #9333ea; }
+
 /* Element tags */
 .tag.red,
 .tag.fire       { background: rgba(217,75,26,.1);  color: var(--el-fire); }

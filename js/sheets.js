@@ -19,7 +19,7 @@
 //                (Stats format: "ATK:+350;CRIT Rate:+15%;>With Light Armor:Aspd:+15%")
 //                (Obtain format: "Drop: Monster Name;Quest: Quest Name")
 //                (Recipe format: "Iron Ore x3;Dragon Heart x1")
-//  Monsters    : Name, Icon, ImageURL, Level, Type, Element, HP, Location, Drop
+//  Monsters    : Name, Icon, ImageURL, Level, Difficulty, Type, Element, HP, Location, Drop
 //  Skills      : Name, Icon, ImageURL, Type, Category, Damage, MP Cost, Description
 //  Maps        : Name, Icon, ImageURL, Zone, LevelRange, Boss, Description
 //  Quests      : Name, Icon, ImageURL, Type, MinLevel, Reward, Description
@@ -276,7 +276,7 @@ window.ToramSheets = (function () {
     tbody.innerHTML = '';
     if (!rows.length) {
       var tr = document.createElement('tr');
-      tr.innerHTML = '<td colspan="7" class="text-muted" style="padding:1rem">No monster data found. Check your Sheet ID and column headers (Name, Icon, Level, Type, Element, HP, Location, Drop).</td>';
+      tr.innerHTML = '<td colspan="8" class="text-muted" style="padding:1rem">No monster data found. Check your Sheet ID and column headers (Name, Icon, Level, Difficulty, Type, Element, HP, Location, Drop).</td>';
       tbody.appendChild(tr);
       return;
     }
@@ -284,9 +284,10 @@ window.ToramSheets = (function () {
       var name   = esc(row['Name']     || '');
       var icon   = esc(row['Icon']     || '');
       var imgURL = (row['ImageURL']    || '').trim();
-      var level  = esc(row['Level']    || '');
-      var type   = esc(row['Type']     || '');
-      var elem   = esc(row['Element']  || '');
+      var level  = esc(row['Level']      || '');
+      var diff   = esc(row['Difficulty'] || '');
+      var type   = esc(row['Type']       || '');
+      var elem   = esc(row['Element']    || '');
       var hp     = esc(row['HP']       || '');
       var loc    = esc(row['Location'] || '');
       var rawDrop = (row['Drop']       || '').trim();
@@ -318,9 +319,11 @@ window.ToramSheets = (function () {
       tr.dataset.filter    = (name + ' ' + type + ' ' + elem).toLowerCase();
       tr.dataset.category  = type.toLowerCase().replace(/\s+/g, '-');
       tr.dataset.category2 = elem.toLowerCase();
+      var diffClass = diff ? ' diff-' + diff.toLowerCase() : '';
       tr.innerHTML =
         '<td>' + monIcon + name + '</td>' +
         '<td><span class="tag' + (parseInt(level, 10) >= 240 ? ' gold' : '') + '">' + level + '</span></td>' +
+        (diff ? '<td><span class="tag' + diffClass + '">' + diff + '</span></td>' : '<td></td>') +
         '<td><span class="tag' + (isBoss ? ' red' : (isMiniBoss ? ' mini-boss' : '')) + '">' + type + '</span></td>' +
         '<td>' + elem + '</td>' +
         '<td>' + hp + '</td>' +
@@ -556,7 +559,7 @@ window.ToramSheets = (function () {
         if (page === 'monsters') {
           var tbody = container;
           var tr = document.createElement('tr');
-          tr.innerHTML = '<td colspan="7" class="text-muted" style="padding:1rem">&#9888; ' + esc(msg) + '</td>';
+          tr.innerHTML = '<td colspan="8" class="text-muted" style="padding:1rem">&#9888; ' + esc(msg) + '</td>';
           tbody.innerHTML = '';
           tbody.appendChild(tr);
         } else {
