@@ -280,70 +280,122 @@ window.ToramSheets = (function () {
       tbody.appendChild(tr);
       return;
     }
+
+    // Group rows by Name (case-insensitive), preserve first-seen order
+    var groups = [];
+    var groupMap = {};
     rows.forEach(function (row) {
-      var name   = esc(row['Name']     || '');
-      var icon   = esc(row['Icon']     || '');
-      var imgURL = (row['ImageURL']    || '').trim();
-      var level  = esc(row['Level']      || '');
-      var diff   = esc(row['Difficulty'] || '');
-      var type   = esc(row['Type']       || '');
-      var elem   = esc(row['Element']    || '');
-      var hp     = esc(row['HP']       || '');
-      var loc    = esc(row['Location'] || '');
-      var rawDrop = (row['Drop']       || '').trim();
-
-      var typeLower = type.toLowerCase();
-      var isBoss = typeLower === 'boss';
-      var isMiniBoss = typeLower === 'mini boss' || typeLower === 'mini-boss';
-      var monIcon = imgURL
-        ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />'
-        : (icon || (isBoss ? '🐉' : '👾')) + ' ';
-
-      // Split drops by ";" and render each as a separate tag
-      // Show max 3 visible; rest hidden behind "+N more" toggle
-      var dropHTML = '';
-      if (rawDrop) {
-        var drops = rawDrop.split(';').map(function (d) { return d.trim(); }).filter(Boolean);
-        var MAX_VISIBLE = 3;
-        drops.forEach(function (d, i) {
-          var hidden = i >= MAX_VISIBLE ? ' style="display:none" data-drop-extra' : '';
-          dropHTML += '<span class="tag"' + hidden + '>' + esc(d) + '</span> ';
-        });
-        if (drops.length > MAX_VISIBLE) {
-          var extra = drops.length - MAX_VISIBLE;
-          dropHTML += '<span class="tag drop-toggle" style="cursor:pointer;opacity:.7" data-drop-toggle>+' + extra + ' more</span>';
-        }
+      var key = (row['Name'] || '').trim().toLowerCase();
+      if (!groupMap[key]) {
+        groupMap[key] = [];
+        groups.push(groupMap[key]);
       }
-
-      var tr   = document.createElement('tr');
-      tr.dataset.filter    = (name + ' ' + type + ' ' + elem).toLowerCase();
-      tr.dataset.category  = type.toLowerCase().replace(/\s+/g, '-');
-      tr.dataset.category2 = elem.toLowerCase();
-      var diffClass = diff ? ' diff-' + diff.toLowerCase() : '';
-      tr.innerHTML =
-        '<td>' + monIcon + name + '</td>' +
-        '<td><span class="tag' + (parseInt(level, 10) >= 240 ? ' gold' : '') + '">' + level + '</span></td>' +
-        (diff ? '<td><span class="tag' + diffClass + '">' + diff + '</span></td>' : '<td></td>') +
-        '<td><span class="tag' + (isBoss ? ' red' : (isMiniBoss ? ' mini-boss' : '')) + '">' + type + '</span></td>' +
-        '<td>' + elem + '</td>' +
-        '<td>' + hp + '</td>' +
-        '<td>' + loc + '</td>' +
-        '<td>' + dropHTML + '</td>';
-      tbody.appendChild(tr);
+      groupMap[key].push(row);
     });
 
-    // Click handler for "+N more" drop toggles
+    var groupId = 0;
+    groups.forEach(function (group) {
+      var gid = 'mon-grp-' + (groupId++);
+      var hasVariants = group.length > 1;
+
+      group.forEach(function (row, idx) {
+        var name   = esc(row['Name']       || '');
+        var icon   = esc(row['Icon']       || '');
+        var imgURL = (row['ImageURL']      || '').trim();
+        var level  = esc(row['Level']      || '');
+        var diff   = esc(row['Difficulty'] || '');
+        var type   = esc(row['Type']       || '');
+        var elem   = esc(row['Element']    || '');
+        var hp     = esc(row['HP']         || '');
+        var loc    = esc(row['Location']   || '');
+        var rawDrop = (row['Drop']         || '').trim();
+
+        var typeLower = type.toLowerCase();
+        var isBoss = typeLower === 'boss';
+        var isMiniBoss = typeLower === 'mini boss' || typeLower === 'mini-boss';
+        var monIcon = imgURL
+          ? '<img src="' + esc(imgURL) + '" alt="' + name + '" style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />'
+          : (icon || (isBoss ? '🐉' : '👾')) + ' ';
+
+        // Drop tags with collapsible overflow
+        var dropHTML = '';
+        if (rawDrop) {
+          var drops = rawDrop.split(';').map(function (d) { return d.trim(); }).filter(Boolean);
+          var MAX_VISIBLE = 3;
+          drops.forEach(function (d, i) {
+            var hidden = i >= MAX_VISIBLE ? ' style="display:none" data-drop-extra' : '';
+            dropHTML += '<span class="tag"' + hidden + '>' + esc(d) + '</span> ';
+          });
+          if (drops.length > MAX_VISIBLE) {
+            var extra = drops.length - MAX_VISIBLE;
+            dropHTML += '<span class="tag drop-toggle" style="cursor:pointer;opacity:.7" data-drop-toggle>+' + extra + ' more</span>';
+          }
+        }
+
+        var tr = document.createElement('tr');
+        tr.dataset.filter    = (name + ' ' + type + ' ' + elem).toLowerCase();
+        tr.dataset.category  = type.toLowerCase().replace(/\s+/g, '-');
+        tr.dataset.category2 = elem.toLowerCase();
+
+        var diffClass = diff ? ' diff-' + diff.toLowerCase() : '';
+        var nameCell;
+
+        if (hasVariants && idx === 0) {
+          // First row of group: show name + expand toggle
+          nameCell = monIcon + name +
+            ' <span class="tag mon-group-toggle" style="cursor:pointer;opacity:.7;font-size:.75rem" data-group="' + gid + '">▸ ' + group.length + ' variants</span>';
+        } else if (hasVariants) {
+          // Variant row: indent with marker, hidden by default
+          nameCell = '<span style="padding-left:1.2rem;opacity:.85">↳ </span>' + monIcon + name;
+          tr.dataset.monGroup = gid;
+          tr.style.display = 'none';
+          tr.style.background = 'var(--bg-card-hover, rgba(0,0,0,.02))';
+        } else {
+          // Single row (no duplicates)
+          nameCell = monIcon + name;
+        }
+
+        tr.innerHTML =
+          '<td>' + nameCell + '</td>' +
+          '<td><span class="tag' + (parseInt(level, 10) >= 240 ? ' gold' : '') + '">' + level + '</span></td>' +
+          (diff ? '<td><span class="tag' + diffClass + '">' + diff + '</span></td>' : '<td></td>') +
+          '<td><span class="tag' + (isBoss ? ' red' : (isMiniBoss ? ' mini-boss' : '')) + '">' + type + '</span></td>' +
+          '<td>' + elem + '</td>' +
+          '<td>' + hp + '</td>' +
+          '<td>' + loc + '</td>' +
+          '<td>' + dropHTML + '</td>';
+        tbody.appendChild(tr);
+      });
+    });
+
+    // Click handler for group toggles and drop toggles
     tbody.addEventListener('click', function (e) {
-      var toggle = e.target.closest('[data-drop-toggle]');
-      if (!toggle) return;
-      var td = toggle.closest('td');
-      if (!td) return;
-      var extras = td.querySelectorAll('[data-drop-extra]');
-      var showing = toggle.dataset.expanded === '1';
-      extras.forEach(function (el) { el.style.display = showing ? 'none' : ''; });
-      if (!toggle.dataset.label) toggle.dataset.label = toggle.textContent;
-      toggle.dataset.expanded = showing ? '0' : '1';
-      toggle.textContent = showing ? toggle.dataset.label : 'show less';
+      // Drop expand/collapse
+      var dropToggle = e.target.closest('[data-drop-toggle]');
+      if (dropToggle) {
+        var td = dropToggle.closest('td');
+        if (!td) return;
+        var extras = td.querySelectorAll('[data-drop-extra]');
+        var showing = dropToggle.dataset.expanded === '1';
+        extras.forEach(function (el) { el.style.display = showing ? 'none' : ''; });
+        if (!dropToggle.dataset.label) dropToggle.dataset.label = dropToggle.textContent;
+        dropToggle.dataset.expanded = showing ? '0' : '1';
+        dropToggle.textContent = showing ? dropToggle.dataset.label : 'show less';
+        return;
+      }
+
+      // Monster group expand/collapse
+      var grpToggle = e.target.closest('[data-group]');
+      if (grpToggle) {
+        var gid = grpToggle.dataset.group;
+        var variantRows = tbody.querySelectorAll('[data-mon-group="' + gid + '"]');
+        var isOpen = grpToggle.dataset.open === '1';
+        variantRows.forEach(function (r) { r.style.display = isOpen ? 'none' : ''; });
+        grpToggle.dataset.open = isOpen ? '0' : '1';
+        grpToggle.textContent = isOpen
+          ? grpToggle.textContent.replace('▾', '▸').replace('hide', 'variants')
+          : grpToggle.textContent.replace('▸', '▾').replace('variants', 'hide');
+      }
     });
   }
 

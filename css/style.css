@@ -539,6 +539,9 @@ ul { list-style: none; }
 .tag.diff-nightmare { background: rgba(239,68,68,.12);  color: #dc2626; white-space: nowrap; }
 .tag.diff-ultimate  { background: rgba(168,85,247,.12); color: #9333ea; }
 
+/* Monster group toggle */
+.tag.mon-group-toggle { background: rgba(99,102,241,.10); color: #6366f1; }
+
 /* Element tags */
 .tag.red,
 .tag.fire       { background: rgba(217,75,26,.1);  color: var(--el-fire); }
