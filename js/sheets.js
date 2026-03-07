@@ -28,10 +28,12 @@
 //                Type, Level, Rarity, Stats, Source
 //
 // HOMEPAGE — Section values:
-//  'category'  → Category card (Name, Icon, ImageURL, Link, Count)
-//  'featured'  → Spotlight item (Name, Icon, ImageURL, Type, Level, Rarity,
-//                Stats, Description, Link)
-//  'stat'      → Hero counter  (Name = label, Count = number, Icon = suffix e.g. "+")
+//  'category'        → Category card (Name, Icon, ImageURL, Link, Count)
+//  'featured'        → Spotlight item (Name, Icon, ImageURL, Type, Level, Rarity,
+//                      Stats, Description, Link)
+//  'stat'            → Hero counter  (Name = label, Count = number, Icon = suffix e.g. "+")
+//  'popular_monster' → Popular Monster card (Name, Icon, ImageURL, Type, Level,
+//                      Description, Stats=Element, Source=HP)
 //
 // ICON vs ImageURL (they serve DIFFERENT purposes):
 //  • Icon column     → small icon on the card/list view (emoji or text).
@@ -710,9 +712,10 @@ window.ToramSheets = (function () {
   //   Type, Level, Rarity, Stats, Source
   //
   // Section values:
-  //   'category'  → updates the categories grid
-  //   'featured'  → updates the spotlight/featured card
-  //   'stat'      → updates hero counter stats (Name=label, Count=number)
+  //   'category'        → updates the categories grid
+  //   'featured'        → updates the spotlight/featured card
+  //   'stat'            → updates hero counter stats (Name=label, Count=number)
+  //   'popular_monster' → updates the popular monsters grid
   function loadHomepage() {
     if (CONFIG.SHEET_ID === 'YOUR_GOOGLE_SHEET_ID') { return; }
     var sheetName = CONFIG.SHEETS.homepage;
@@ -726,12 +729,14 @@ window.ToramSheets = (function () {
         var categories = [];
         var featured   = null;
         var stats      = [];
+        var popularMonsters = [];
 
         rows.forEach(function (row) {
-          var section = (row['Section'] || '').toLowerCase().trim();
-          if (section === 'category')  categories.push(row);
-          else if (section === 'featured') featured = row;
-          else if (section === 'stat')     stats.push(row);
+          var section = (row['Section'] || '').toLowerCase().trim().replace(/[\s-]+/g, '_');
+          if (section === 'category')         categories.push(row);
+          else if (section === 'featured')    featured = row;
+          else if (section === 'stat')        stats.push(row);
+          else if (section === 'popular_monster') popularMonsters.push(row);
         });
 
         // --- Render categories ---
@@ -824,6 +829,62 @@ window.ToramSheets = (function () {
             });
             // Re-trigger counter animation
             if (window.animateCounters) window.animateCounters();
+          }
+        }
+
+        // --- Render popular monsters ---
+        if (popularMonsters.length) {
+          var monGrid = document.getElementById('popularMonstersGrid');
+          if (monGrid) {
+            monGrid.innerHTML = '';
+            popularMonsters.forEach(function (m) {
+              var mname  = esc(m['Name']        || '');
+              var micon  = m['Icon']             || '';
+              var mimgURL = (m['ImageURL']       || '').trim();
+              var mtype  = esc(m['Type']         || '');
+              var mlevel = esc(m['Level']        || '');
+              var melem  = esc(m['Stats']        || '');  // Stats col = Element
+              var mhp    = esc(m['Source']       || '');  // Source col = HP
+              var mdesc  = esc(m['Description']  || '');
+
+              // Icon: ImageURL > Icon emoji > default
+              var monIconHTML;
+              if (mimgURL) {
+                monIconHTML = '<img src="' + esc(mimgURL) + '" alt="' + mname + '" style="width:40px;height:40px;object-fit:cover;border-radius:6px" />';
+              } else {
+                monIconHTML = micon || '<img src="img/icons/monsters_ico.png" alt="" style="width:40px;height:40px;object-fit:contain" />';
+              }
+
+              // Element tag color
+              var elemLower = melem.toLowerCase();
+              var elemClass = '';
+              if (elemLower === 'fire') elemClass = ' red';
+              else if (elemLower === 'ice' || elemLower === 'water') elemClass = ' ice';
+              else if (elemLower === 'wind') elemClass = ' wind';
+              else if (elemLower === 'dark') elemClass = ' dark';
+              else if (elemLower === 'light') elemClass = ' light';
+              else if (elemLower === 'earth') elemClass = ' earth';
+
+              var levelNum = parseInt(mlevel, 10);
+              var lvClass = levelNum >= 240 ? ' gold' : ' legendary';
+
+              var article = document.createElement('article');
+              article.className = 'data-card';
+              article.innerHTML =
+                '<div class="data-card-header">' +
+                  '<div class="data-card-icon">' + monIconHTML + '</div>' +
+                  '<div>' +
+                    '<div class="data-card-title">' + mname + '</div>' +
+                    '<div class="data-card-subtitle">' + mtype + (mdesc ? ' · ' + mdesc : '') + '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="data-card-body">' +
+                  (melem ? '<span class="tag' + elemClass + '">' + melem + '</span>' : '') +
+                  (mhp ? '<span class="tag">' + mhp + '</span>' : '') +
+                  (mlevel ? '<span class="tag' + lvClass + '">Lv.' + mlevel + '</span>' : '') +
+                '</div>';
+              monGrid.appendChild(article);
+            });
           }
         }
       })
