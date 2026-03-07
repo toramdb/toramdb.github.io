@@ -124,6 +124,9 @@ ul { list-style: none; }
 /* Mobile menu — icon + text on same row */
 #mobileMenu a { display: flex; align-items: center; gap: 6px; }
 
+/* Monster modal info bar */
+.mon-info-bar { display: flex; flex-wrap: wrap; gap: 6px; padding: .5rem 0; }
+
 .nav-links {
   display: flex;
   gap: .25rem;

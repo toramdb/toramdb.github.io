@@ -255,7 +255,7 @@
       </div>
       <div class="data-grid" id="popularMonstersGrid">
 
-        <article class="data-card">
+        <article class="data-card" data-name="Ifrit Rex" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🐉</div>
             <div>
@@ -270,7 +270,7 @@
           </div>
         </article>
 
-        <article class="data-card">
+        <article class="data-card" data-name="Crystal Spider Queen" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🕷️</div>
             <div>
@@ -285,7 +285,7 @@
           </div>
         </article>
 
-        <article class="data-card">
+        <article class="data-card" data-name="Fenrir Shadow" style="cursor:pointer">
           <div class="data-card-header">
             <div class="data-card-icon">🐺</div>
             <div>
@@ -340,10 +340,13 @@
 
   <!-- Item detail modal -->
   <div id="itemModal"></div>
+  <!-- Monster detail modal -->
+  <div id="monsterModal"></div>
 
   <script src="js/sheets.js"></script>
   <script src="js/main.js"></script>
   <script src="js/modal.js"></script>
+  <script src="js/monster-modal.js"></script>
   <script>
     // Load homepage sections from Google Sheets (categories, featured, stats)
     ToramSheets.loadHomepage();
@@ -352,10 +355,15 @@
     ToramSheets.loadLatest('items', 'latestItemsGrid', 3);
 
     // Make Latest Items cards clickable → popup modal
-    // Use event delegation so it works with both static and dynamic cards
     document.getElementById('latestItemsGrid').addEventListener('click', function (e) {
       var card = e.target.closest('[data-name]');
       if (card) ItemModal.open(card.dataset.name);
+    });
+
+    // Make Popular Monsters cards clickable → monster popup modal
+    document.getElementById('popularMonstersGrid').addEventListener('click', function (e) {
+      var card = e.target.closest('[data-name]');
+      if (card) MonsterModal.open(card.dataset.name);
     });
   </script>
 </body>

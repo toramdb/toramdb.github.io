@@ -870,6 +870,8 @@ window.ToramSheets = (function () {
 
               var article = document.createElement('article');
               article.className = 'data-card';
+              article.dataset.name = m['Name'] || '';
+              article.style.cursor = 'pointer';
               article.innerHTML =
                 '<div class="data-card-header">' +
                   '<div class="data-card-icon">' + monIconHTML + '</div>' +
