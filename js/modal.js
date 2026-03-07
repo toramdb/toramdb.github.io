@@ -1,5 +1,5 @@
 // ============================================================
-// ToramCodex — modal.js
+// ToramDB — modal.js
 // Popup detail card for items (no page reload).
 // Include this script + add <div id="itemModal"></div> to pages.
 // ============================================================

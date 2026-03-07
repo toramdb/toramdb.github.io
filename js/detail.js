@@ -1,5 +1,5 @@
 // ============================================================
-// ToramCodex — detail.js
+// ToramDB — detail.js
 // Handles item/equip detail page with Google Sheets auto-update.
 //
 // URL params:  ?name=Shadow+Blade  (matches Name column)
@@ -116,7 +116,7 @@
     var rec   = item['Recipe']    || '';
 
     // Page title & breadcrumb
-    document.title = esc(name) + ' — ToramCodex';
+    document.title = esc(name) + ' — ToramDB';
     document.getElementById('breadcrumbName').textContent = name;
 
     // Header

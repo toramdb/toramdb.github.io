@@ -141,5 +141,5 @@ Aktifkan di **Settings → Pages → Deploy from branch `main`** (root `/`).
 
 ---
 
-> **Disclaimer:** ToramCodex adalah proyek fan-made dan tidak berafiliasi dengan Asobimo, Inc.  
+> **Disclaimer:** ToramDB adalah proyek fan-made dan tidak berafiliasi dengan Asobimo, Inc.  
 > Toram Online™ adalah merek dagang milik Asobimo, Inc.

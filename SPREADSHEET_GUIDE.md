@@ -1,7 +1,7 @@
-# 📋 Panduan Pengisian Google Spreadsheet — ToramCodex
+# 📋 Panduan Pengisian Google Spreadsheet — ToramDB
 
 Dokumen ini menjelaskan cara mengisi setiap tab sheet pada Google Spreadsheet
-agar data tampil dengan benar di website ToramCodex.
+agar data tampil dengan benar di website ToramDB.
 
 > **Penting:**
 > - Baris 1 **HARUS** berisi header kolom (persis seperti tabel di bawah).
@@ -445,7 +445,7 @@ Angka statistik hero counter di hero section.
 
 ### Hosting Gambar
 - **Repo sendiri** (rekomendasi): simpan gambar di folder `img/icons/`, push ke GitHub.
-  URL: `https://toramcodex.github.io/img/icons/nama-file.png`
+  URL: `https://ToramDB.github.io/img/icons/nama-file.png`
   (Untuk repo dengan nama `*.github.io`, GitHub Pages serve dari root tanpa `/repo-name/`)
 - **Hosting gratis lain**: Imgur, Postimages, ImgBB, Cloudinary.
 - Gambar yang di-insert manual via Google Sheet (Insert → Image) **tidak terbaca**.

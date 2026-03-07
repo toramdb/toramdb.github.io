@@ -1,5 +1,5 @@
 // ============================================================
-// ToramCodex — Google Sheets integration (js/sheets.js)
+// ToramDB — Google Sheets integration (js/sheets.js)
 //
 // HOW TO SET UP:
 //  1. Open your Google Sheet.
