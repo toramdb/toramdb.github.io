@@ -259,10 +259,14 @@ window.ItemModal = (function () {
           stepIcon = window.ToramSheets.resolveIcon(type);
         }
         var iconHTML;
-        if (stepIcon && stepIcon.indexOf('<img') !== -1) {
+        if (!stepIcon) {
+          iconHTML = '💎';
+        } else if (stepIcon.indexOf('<img') !== -1) {
           iconHTML = stepIcon;
+        } else if (stepIcon.match(/\.(png|jpg|gif|svg|webp)/i)) {
+          iconHTML = '<img src="' + esc(stepIcon) + '" alt="' + esc(stepName) + '" />';
         } else {
-          iconHTML = stepIcon || '💎';
+          iconHTML = stepIcon;
         }
 
         pathHTML += '<div class="enhancement-step' + currentClass + '"' +
