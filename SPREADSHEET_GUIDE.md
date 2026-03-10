@@ -133,15 +133,16 @@ ATK:+350;CRIT Rate:+15%;>With Light Armor:Aspd:+15%
 ```
 
 **Obtain** — cara mendapatkan, dipisah `;`
+Khusus awalan `Drop:`, nama monster akan menjadi **clickable** dan otomatis membuka detail monster tersebut. Awalan lain (Quest, NPC, Event, dll) akan tampil sebagai teks biasa.
 ```
 Drop: Venena Coenubia;Quest: Dragon Slayer;NPC: Blacksmith Lefina
 ```
 
 **Recipe** — bahan crafting, dipisah `;`
+Bahan recipe akan menjadi **clickable** dan otomatis membuka popup detail item tersebut (angka seperti `x3` tidak perlu dihapus, sistem otomatis mendeteksinya). Untuk item tipe **Crysta**, tampilan Recipe akan berubah menjadi *Enhancement Path*.
 ```
 Iron Ore x3;Dragon Scale x1;Magic Crystal x2
 ```
-
 ### Contoh Data
 
 | Name                | Icon | Type           | Level | ImageURL | SellSpina | SellOther | Stats                                   | Obtain                              | Recipe                              |

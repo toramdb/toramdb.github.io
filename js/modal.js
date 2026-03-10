@@ -227,9 +227,37 @@ window.ItemModal = (function () {
         else if (opLow.indexOf('craft') === 0) obtIcon = '⚒️';
         else if (opLow.indexOf('mining') === 0) obtIcon = '⛏️';
         else if (opLow.indexOf('event') === 0) obtIcon = '🎉';
-        obtHtml += '<div class="obtain-item"><div class="obtain-icon">' + obtIcon + '</div><span>' + esc(op) + '</span></div>';
+
+        // Drop: entries are clickable → MonsterModal
+        if (opLow.indexOf('drop') === 0) {
+          // Extract monster name: "Drop: Monster Name (Location)" → "Monster Name"
+          var monName = op.substring(op.indexOf(':') + 1).trim();
+          // Strip parenthetical location if present
+          var parenIdx = monName.indexOf('(');
+          if (parenIdx > 0) monName = monName.substring(0, parenIdx).trim();
+          obtHtml += '<div class="obtain-item drop-link" data-obtain-monster="' + esc(monName) + '" style="cursor:pointer">' +
+            '<div class="obtain-icon">' + obtIcon + '</div>' +
+            '<span>' + esc(op) + '</span>' +
+            '<span class="drop-arrow">→</span>' +
+            '</div>';
+        } else {
+          obtHtml += '<div class="obtain-item"><div class="obtain-icon">' + obtIcon + '</div><span>' + esc(op) + '</span></div>';
+        }
       });
       obtEl.innerHTML = obtHtml;
+
+      // Bind click on Drop obtain items → MonsterModal
+      obtEl.querySelectorAll('[data-obtain-monster]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var monsterName = this.getAttribute('data-obtain-monster');
+          if (monsterName && window.MonsterModal) {
+            close();
+            setTimeout(function () {
+              window.MonsterModal.open(monsterName);
+            }, 250);
+          }
+        });
+      });
     } else {
       obtEl.innerHTML = '<p class="text-muted">No obtain info available.</p>';
     }
@@ -300,9 +328,25 @@ window.ItemModal = (function () {
       rec.split(';').forEach(function (rp) {
         rp = rp.trim();
         if (!rp) return;
-        recHtml += '<div class="recipe-item"><div class="recipe-icon">🧪</div><span>' + esc(rp) + '</span></div>';
+        // Extract item name: "Iron Ore x3" → "Iron Ore"
+        var itemName = rp.replace(/\s+x\d+$/i, '').trim();
+        recHtml += '<div class="recipe-item drop-link" data-recipe-item="' + esc(itemName) + '" style="cursor:pointer">' +
+          '<div class="recipe-icon">🧪</div>' +
+          '<span>' + esc(rp) + '</span>' +
+          '<span class="drop-arrow">→</span>' +
+          '</div>';
       });
       recEl.innerHTML = recHtml;
+
+      // Bind click on recipe items → ItemModal (reopen with different item)
+      recEl.querySelectorAll('[data-recipe-item]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var targetItem = this.getAttribute('data-recipe-item');
+          if (targetItem) {
+            open(targetItem);
+          }
+        });
+      });
     } else {
       recEl.innerHTML = '<p class="text-muted">' + (isCrysta ? 'No enhancement path info available.' : 'No recipe info available.') + '</p>';
     }

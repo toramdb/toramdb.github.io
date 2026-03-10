@@ -10,8 +10,13 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 - **Enhancement Path** — Crysta items: tab "Recipe" berubah jadi "Enhancement Path"
 - Tampilan vertikal: icon → arrow → icon → arrow → icon
 - Item yang sedang dilihat di-highlight biru dengan badge "Current"
-- **Clickable steps** — klik crysta lain langsung buka modal detail tanpa tutup modal
-- CSS: `.enhancement-path`, `.enhancement-step`, `.enhancement-current`, `.enhancement-arrow`, `.enhancement-badge`
+- **Clickable Enhancement steps** — klik crysta lain langsung buka modal detail
+- **Clickable drops (Monster Modal)** — klik drop item di tab Drops → buka ItemModal
+- **Clickable drops (Monsters page)** — tag drop di tabel Monsters → klik → buka ItemModal popup
+- **Clickable recipe items** — klik bahan recipe di ItemModal → buka ItemModal item tersebut (strip quantity `x3`)
+- **Clickable obtain "Drop:"** — klik obtain Drop di ItemModal → buka MonsterModal (extract nama monster)
+- CSS: `.enhancement-*`, `.drop-link`, `.drop-arrow`, `.drop-tag-link`
+- `monster-modal.js` + `<div id="monsterModal">` ditambahkan ke `items.html` dan `monsters.html`
 
 ---
 ## [0.16.0] — 2026-03-07
