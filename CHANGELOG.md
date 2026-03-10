@@ -4,6 +4,16 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
 ---
 
+## [0.19.1] — 2026-03-10
+
+### Added
+- **Material Filters** — Menambahkan opsi Beast, Cloth, Mana, Wood, Metal, Medicine, dan Teleport ke dropdown kategori di halaman Items.
+
+### Fixed
+- **Filter Rarity Bug** — Memperbaiki bug di mana filter Rarity (Event/Non-Event) tidak berfungsi jika item memiliki lebih dari satu badge Rarity (efek samping dari update `v0.19.0`).
+
+---
+
 ## [0.19.0] — 2026-03-10
 
 ### Added

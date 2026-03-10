@@ -100,8 +100,12 @@
 
       var matchText = !query || text.includes(query);
       var matchCat1 = !cat1  || c1 === cat1;
-      var matchCat2 = !cat2  || c2 === cat2;
-
+      
+      var matchCat2 = !cat2;
+      if (cat2 && c2) {
+        var c2Parts = c2.split(';').map(function(s) { return s.trim(); });
+        matchCat2 = c2Parts.indexOf(cat2) !== -1;
+      }
       var show = matchText && matchCat1 && matchCat2;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
