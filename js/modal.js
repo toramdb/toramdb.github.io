@@ -1,5 +1,5 @@
 // ============================================================
-// ToramDB — modal.js
+// ToramDB — modal.js (Force redeploy)
 // Popup detail card for items (no page reload).
 // Include this script + add <div id="itemModal"></div> to pages.
 // ============================================================
