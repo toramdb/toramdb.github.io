@@ -62,6 +62,8 @@ window.ItemModal = (function () {
 
   // ---------- Cache for Sheets data ---------------------------------
   var sheetsCache = null;
+  var pendingItemDetailsFetch = null;
+  var lastOpenRequestTime = 0;
 
   // ---------- HTML escape -------------------------------------------
   function esc(s) {
@@ -454,68 +456,89 @@ window.ItemModal = (function () {
     if (!overlay) return;
     if (!overlay.querySelector('.modal-body')) buildModalHTML();
 
-    // Show overlay immediately with loading
+    var requestTime = Date.now();
+    lastOpenRequestTime = requestTime;
+
+    // Show overlay immediately with loading state
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(function () { overlay.classList.add('fade-in'); });
 
+    // Show loading text right away
+    document.getElementById('modalName').innerHTML = 'Loading…';
+    document.getElementById('modalType').textContent = '';
+    document.getElementById('modalStats').innerHTML = '<div class="skeleton" style="height:140px"></div>';
+
     // Close on Escape
     document.addEventListener('keydown', escHandler);
 
-    // Try Sheets first, then sample
-    if (window.ToramSheets && window.ToramSheets.CONFIG.SHEET_ID !== 'YOUR_GOOGLE_SHEET_ID') {
+    // Decision function to find and populate
+    var findAndPopulate = function() {
+      if (lastOpenRequestTime !== requestTime) return; // Stale request
+      
+      var found;
+      var idx = parseInt(rowIndex, 10);
+      var search = (itemName || '').trim().toLowerCase();
+      
       if (sheetsCache) {
-        var found;
-        var idx = parseInt(rowIndex, 10);
-        if (!isNaN(idx) && sheetsCache[idx] && (sheetsCache[idx]['Name'] || '').trim().toLowerCase() === (itemName || '').trim().toLowerCase()) {
+        if (!isNaN(idx) && sheetsCache[idx] && (sheetsCache[idx]['Name'] || '').trim().toLowerCase() === search) {
           found = sheetsCache[idx];
         } else {
           found = findInCache(itemName);
         }
+      }
+      
+      if (found) {
         populate(found);
       } else {
-        document.getElementById('modalName').innerHTML = 'Loading…';
-        document.getElementById('modalType').textContent = '';
-        var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
-        
-        var attemptFetch = function(retries) {
-          window.ToramSheets.fetchSheet(sheetName)
-            .then(function (csv) {
-              sheetsCache = window.ToramSheets.parseCSV(csv);
-              // Crucial: ALWAYS attach indexes so variant detector works
-              sheetsCache.forEach(function(r, i) { r._index = i; });
-              
-              var found;
-              var idx2 = parseInt(rowIndex, 10);
-              var search = (itemName || '').trim().toLowerCase();
-              
-              // Try index first, but ONLY if names match
-              if (!isNaN(idx2) && sheetsCache[idx2] && (sheetsCache[idx2]['Name'] || '').trim().toLowerCase() === search) {
-                found = sheetsCache[idx2];
-              } else {
-                found = findInCache(itemName);
-              }
-              
-              if (found) {
-                populate(found);
-              } else {
-                // Final fallback to sample data
-                populate(SAMPLE_ITEMS[itemName] || null);
-              }
-            })
-            .catch(function () {
-              if (retries > 0) {
-                setTimeout(function() { attemptFetch(retries - 1); }, 600);
-              } else {
-                populate(SAMPLE_ITEMS[itemName] || null);
-              }
-            });
-        };
-        attemptFetch(2);
+        populate(SAMPLE_ITEMS[itemName] || null);
+      }
+    };
+
+    // Try Sheets first
+    if (window.ToramSheets && window.ToramSheets.CONFIG.SHEET_ID !== 'YOUR_GOOGLE_SHEET_ID') {
+      if (sheetsCache) {
+        findAndPopulate();
+      } else {
+        ensureItemDetailsLoaded(function() {
+          findAndPopulate();
+        }, 2); // 2 retries
       }
     } else {
       populate(SAMPLE_ITEMS[itemName] || null);
     }
+  }
+
+  // Shared fetcher with deduplication and retry
+  function ensureItemDetailsLoaded(cb, retries) {
+    if (sheetsCache) return cb();
+    
+    // If a fetch is already in progress, just wait for it
+    if (pendingItemDetailsFetch) {
+      pendingItemDetailsFetch.then(cb).catch(function() {
+        // If it failed, we might still try our own retry logic if needed, 
+        // but easier to just let the main one handle it.
+        cb(); 
+      });
+      return;
+    }
+
+    var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
+    pendingItemDetailsFetch = window.ToramSheets.fetchSheet(sheetName)
+      .then(function (csv) {
+        sheetsCache = window.ToramSheets.parseCSV(csv);
+        sheetsCache.forEach(function(r, i) { r._index = i; });
+        pendingItemDetailsFetch = null;
+        cb();
+      })
+      .catch(function (err) {
+        pendingItemDetailsFetch = null;
+        if (retries > 0) {
+          setTimeout(function() { ensureItemDetailsLoaded(cb, retries - 1); }, 800);
+        } else {
+          cb();
+        }
+      });
   }
 
   function findInCache(name) {
@@ -580,21 +603,9 @@ window.ItemModal = (function () {
       cb(SAMPLE_ITEMS[name] || null);
       return;
     }
-    if (sheetsCache) {
-      cb(findInCache(name));
-    } else {
-      var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
-      window.ToramSheets.fetchSheet(sheetName)
-        .then(function (csv) {
-          sheetsCache = window.ToramSheets.parseCSV(csv);
-          // Crucial: ALWAYS attach indexes
-          sheetsCache.forEach(function(r, i) { r._index = i; });
-          cb(findInCache(name));
-        })
-        .catch(function () {
-          cb(SAMPLE_ITEMS[name] || null);
-        });
-    }
+    ensureItemDetailsLoaded(function() {
+      cb(findInCache(name) || SAMPLE_ITEMS[name] || null);
+    }, 1);
   }
 
   // ---------- Init: build on DOMContentLoaded -----------------------
