@@ -441,7 +441,7 @@ window.ItemModal = (function () {
   }
 
   // ---------- Open / Close ------------------------------------------
-  function open(itemName) {
+  function open(itemName, _internalIndex) {
     var overlay = document.getElementById('itemModal');
     if (!overlay) return;
     if (!overlay.querySelector('.modal-body')) buildModalHTML();
@@ -465,7 +465,11 @@ window.ItemModal = (function () {
     // Try Sheets first, then sample
     if (window.ToramSheets && window.ToramSheets.CONFIG.SHEET_ID !== 'YOUR_GOOGLE_SHEET_ID') {
       if (sheetsCache) {
-        populate(findInCache(itemName));
+        // If _internalIndex is provided (from variant trigger), use it directly
+        // This is safe because it's from the SAME ItemDetails cache
+        var idx = parseInt(_internalIndex, 10);
+        var found = (!isNaN(idx) && sheetsCache[idx]) ? sheetsCache[idx] : findInCache(itemName);
+        populate(found);
       } else {
         var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
         window.ToramSheets.fetchSheet(sheetName)
