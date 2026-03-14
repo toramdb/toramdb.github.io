@@ -144,9 +144,10 @@ window.ItemModal = (function () {
 
     // Variant Detector: Find other items with same name but different index
     var variants = [];
+    var searchName = name.trim().toLowerCase();
     if (sheetsCache) {
-      sheetsCache.forEach(function(row, idx) {
-        if (row['Name'] === name && row._index !== item._index) {
+      sheetsCache.forEach(function(row) {
+        if ((row['Name'] || '').trim().toLowerCase() === searchName && row._index !== item._index) {
           variants.push(row);
         }
       });
@@ -154,8 +155,10 @@ window.ItemModal = (function () {
 
     var nameHTML = esc(name);
     if (variants.length > 0) {
-      // Add a small badge or text if variants exist
-      nameHTML += ' <span style="font-size:0.7rem;font-weight:normal;opacity:0.6;background:rgba(0,0,0,0.05);padding:2px 6px;border-radius:4px;vertical-align:middle;margin-left:8px;cursor:pointer" id="variantTrigger">Other Version Available</span>';
+      // Show what version is available (Craft/Drop/etc)
+      var vType = variants[0]['Obtain'] || 'Another side';
+      var vLabel = vType.toLowerCase().indexOf('craft') !== -1 ? 'Craft' : (vType.toLowerCase().indexOf('drop') !== -1 ? 'Drop' : 'Alt');
+      nameHTML += ' <span style="font-size:0.7rem;font-weight:600;color:var(--primary);background:var(--primary-light);padding:2px 8px;border-radius:20px;vertical-align:middle;margin-left:10px;cursor:pointer;border:1px solid var(--primary)" id="variantTrigger">View ' + vLabel + ' Version</span>';
     }
     document.getElementById('modalName').innerHTML = nameHTML;
 
@@ -163,7 +166,6 @@ window.ItemModal = (function () {
     var vt = document.getElementById('variantTrigger');
     if (vt) {
       vt.addEventListener('click', function() {
-        // Toggle to the next variant (simplest approach)
         open(name, variants[0]._index);
       });
     }
@@ -360,8 +362,20 @@ window.ItemModal = (function () {
       if (usedIn.length > 0) {
         var usedHtml = '';
         usedIn.forEach(function (match) {
+          // Smart Icon Lookup for Used For
+          var matchItem = findInCache(match.itemName);
+          var mIcon = matchItem ? (window.ToramSheets ? window.ToramSheets.resolveIcon(matchItem['Type']) : '⚒️') : '⚒️';
+          if (matchItem && matchItem['Icon']) mIcon = matchItem['Icon'];
+
+          var iconDisplay = '⚒️';
+          if (typeof mIcon === 'string' && (mIcon.indexOf('/') !== -1 || mIcon.indexOf('.png') !== -1)) {
+             iconDisplay = '<img src="' + esc(mIcon) + '" ' + errHandler + ' style="width:18px;height:18px;object-fit:contain;vertical-align:middle" />';
+          } else {
+             iconDisplay = esc(mIcon);
+          }
+
           usedHtml += '<div class="recipe-item drop-link" data-recipe-item="' + esc(match.itemName) + '" style="cursor:pointer">' +
-            '<div class="recipe-icon">⚒️</div>' +
+            '<div class="recipe-icon">' + iconDisplay + '</div>' +
             '<span>' + esc(match.itemName) + ' <small class="text-muted">Requires: x' + esc(match.amount) + '</small></span>' +
             '<span class="drop-arrow">→</span>' +
             '</div>';
@@ -383,8 +397,21 @@ window.ItemModal = (function () {
         rp = rp.trim();
         if (!rp) return;
         var itemName = rp.replace(/\s+x\d+$/i, '').trim();
+        
+        // Smart Icon Lookup for Ingredients
+        var ingItem = findInCache(itemName);
+        var iIcon = ingItem ? (window.ToramSheets ? window.ToramSheets.resolveIcon(ingItem['Type']) : '🧪') : '🧪';
+        if (ingItem && ingItem['Icon']) iIcon = ingItem['Icon'];
+
+        var iDisplay = '🧪';
+        if (typeof iIcon === 'string' && (iIcon.indexOf('/') !== -1 || iIcon.indexOf('.png') !== -1)) {
+           iDisplay = '<img src="' + esc(iIcon) + '" ' + errHandler + ' style="width:18px;height:18px;object-fit:contain;vertical-align:middle" />';
+        } else {
+           iDisplay = esc(iIcon);
+        }
+
         recHtml += '<div class="recipe-item drop-link" data-recipe-item="' + esc(itemName) + '" style="cursor:pointer">' +
-          '<div class="recipe-icon">🧪</div>' +
+          '<div class="recipe-icon">' + iDisplay + '</div>' +
           '<span>' + esc(rp) + '</span>' +
           '<span class="drop-arrow">→</span>' +
           '</div>';
@@ -433,8 +460,9 @@ window.ItemModal = (function () {
     if (window.ToramSheets && window.ToramSheets.CONFIG.SHEET_ID !== 'YOUR_GOOGLE_SHEET_ID') {
       if (sheetsCache) {
         var found;
-        if (rowIndex !== undefined && rowIndex !== null && sheetsCache[rowIndex]) {
-          found = sheetsCache[rowIndex];
+        var idx = parseInt(rowIndex, 10);
+        if (!isNaN(idx) && sheetsCache[idx]) {
+          found = sheetsCache[idx];
         } else {
           found = findInCache(itemName);
         }
@@ -447,8 +475,9 @@ window.ItemModal = (function () {
             sheetsCache.forEach(function(r, i) { r._index = i; }); // Ensure indexes are attached
             
             var found;
-            if (rowIndex !== undefined && rowIndex !== null && sheetsCache[rowIndex]) {
-              found = sheetsCache[rowIndex];
+            var idx2 = parseInt(rowIndex, 10);
+            if (!isNaN(idx2) && sheetsCache[idx2]) {
+              found = sheetsCache[idx2];
             } else {
               found = findInCache(itemName);
             }
