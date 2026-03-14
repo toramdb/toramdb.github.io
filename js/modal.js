@@ -141,6 +141,7 @@ window.ItemModal = (function () {
     document.getElementById('modalRecipe').innerHTML = '<p class="text-muted">Loading…</p>';
 
     if (!item) {
+      // If we failed to find the item, use the name passed in the placeholder if possible
       document.getElementById('modalName').textContent = 'Item Not Found';
       document.getElementById('modalStats').innerHTML = '<p class="text-muted">Item not found in database.</p>';
       return;
@@ -477,16 +478,26 @@ window.ItemModal = (function () {
         window.ToramSheets.fetchSheet(sheetName)
           .then(function (csv) {
             sheetsCache = window.ToramSheets.parseCSV(csv);
-            sheetsCache.forEach(function(r, i) { r._index = i; }); // Ensure indexes are attached
+            // Crucial: ALWAYS attach indexes so variant detector works
+            sheetsCache.forEach(function(r, i) { r._index = i; });
             
             var found;
             var idx2 = parseInt(rowIndex, 10);
-            if (!isNaN(idx2) && sheetsCache[idx2] && (sheetsCache[idx2]['Name'] || '').trim().toLowerCase() === (itemName || '').trim().toLowerCase()) {
+            var search = (itemName || '').trim().toLowerCase();
+            
+            // Try index first, but ONLY if names match
+            if (!isNaN(idx2) && sheetsCache[idx2] && (sheetsCache[idx2]['Name'] || '').trim().toLowerCase() === search) {
               found = sheetsCache[idx2];
             } else {
               found = findInCache(itemName);
             }
-            populate(found);
+            
+            if (found) {
+              populate(found);
+            } else {
+              // Final fallback to sample data
+              populate(SAMPLE_ITEMS[itemName] || null);
+            }
           })
           .catch(function () {
             populate(SAMPLE_ITEMS[itemName] || null);
@@ -566,6 +577,8 @@ window.ItemModal = (function () {
       window.ToramSheets.fetchSheet(sheetName)
         .then(function (csv) {
           sheetsCache = window.ToramSheets.parseCSV(csv);
+          // Crucial: ALWAYS attach indexes
+          sheetsCache.forEach(function(r, i) { r._index = i; });
           cb(findInCache(name));
         })
         .catch(function () {
