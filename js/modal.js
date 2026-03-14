@@ -1,5 +1,5 @@
 // ============================================================
-// ToramDB — modal.js
+// ToramDB — modal.js (Force redeploy)
 // Popup detail card for items (no page reload).
 // Include this script + add <div id="itemModal"></div> to pages.
 // ============================================================
@@ -133,7 +133,15 @@ window.ItemModal = (function () {
 
   // ---------- Populate modal with item data -------------------------
   function populate(item) {
+    // Reset panels and title to avoid "ghost data"
+    document.getElementById('modalName').innerHTML = 'Loading…';
+    document.getElementById('modalType').textContent = '';
+    document.getElementById('modalStats').innerHTML = '<div class="skeleton" style="height:140px"></div>';
+    document.getElementById('modalObtain').innerHTML = '<p class="text-muted">Loading…</p>';
+    document.getElementById('modalRecipe').innerHTML = '<p class="text-muted">Loading…</p>';
+
     if (!item) {
+      // If we failed to find the item, use the name passed in the placeholder if possible
       document.getElementById('modalName').textContent = 'Item Not Found';
       document.getElementById('modalStats').innerHTML = '<p class="text-muted">Item not found in database.</p>';
       return;
@@ -441,23 +449,15 @@ window.ItemModal = (function () {
   }
 
   // ---------- Open / Close ------------------------------------------
-  function open(itemName, _internalIndex) {
+  function open(itemName, rowIndex) {
     var overlay = document.getElementById('itemModal');
     if (!overlay) return;
     if (!overlay.querySelector('.modal-body')) buildModalHTML();
 
-    // Show overlay immediately
+    // Show overlay immediately with loading
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(function () { overlay.classList.add('fade-in'); });
-
-    // Show loading placeholder right away (prevents "Item Not Found" flash)
-    document.getElementById('modalName').innerHTML = 'Loading…';
-    document.getElementById('modalType').textContent = '';
-    document.getElementById('modalImage').innerHTML = '<div class="skeleton" style="height:120px"></div>';
-    document.getElementById('modalStats').innerHTML = '<div class="skeleton" style="height:140px"></div>';
-    document.getElementById('modalObtain').innerHTML = '<p class="text-muted">Loading…</p>';
-    document.getElementById('modalRecipe').innerHTML = '<p class="text-muted">Loading…</p>';
 
     // Close on Escape
     document.addEventListener('keydown', escHandler);
@@ -465,18 +465,39 @@ window.ItemModal = (function () {
     // Try Sheets first, then sample
     if (window.ToramSheets && window.ToramSheets.CONFIG.SHEET_ID !== 'YOUR_GOOGLE_SHEET_ID') {
       if (sheetsCache) {
-        // If _internalIndex is provided (from variant trigger), use it directly
-        // This is safe because it's from the SAME ItemDetails cache
-        var idx = parseInt(_internalIndex, 10);
-        var found = (!isNaN(idx) && sheetsCache[idx]) ? sheetsCache[idx] : findInCache(itemName);
+        var found;
+        var idx = parseInt(rowIndex, 10);
+        if (!isNaN(idx) && sheetsCache[idx] && (sheetsCache[idx]['Name'] || '').trim().toLowerCase() === (itemName || '').trim().toLowerCase()) {
+          found = sheetsCache[idx];
+        } else {
+          found = findInCache(itemName);
+        }
         populate(found);
       } else {
         var sheetName = window.ToramSheets.CONFIG.SHEETS.itemdetails || 'ItemDetails';
         window.ToramSheets.fetchSheet(sheetName)
           .then(function (csv) {
             sheetsCache = window.ToramSheets.parseCSV(csv);
+            // Crucial: ALWAYS attach indexes so variant detector works
             sheetsCache.forEach(function(r, i) { r._index = i; });
-            populate(findInCache(itemName) || SAMPLE_ITEMS[itemName] || null);
+            
+            var found;
+            var idx2 = parseInt(rowIndex, 10);
+            var search = (itemName || '').trim().toLowerCase();
+            
+            // Try index first, but ONLY if names match
+            if (!isNaN(idx2) && sheetsCache[idx2] && (sheetsCache[idx2]['Name'] || '').trim().toLowerCase() === search) {
+              found = sheetsCache[idx2];
+            } else {
+              found = findInCache(itemName);
+            }
+            
+            if (found) {
+              populate(found);
+            } else {
+              // Final fallback to sample data
+              populate(SAMPLE_ITEMS[itemName] || null);
+            }
           })
           .catch(function () {
             populate(SAMPLE_ITEMS[itemName] || null);
