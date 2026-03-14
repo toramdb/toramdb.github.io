@@ -150,10 +150,13 @@ window.MonsterModal = (function () {
     // Image
     var imageEl = document.getElementById('monModalImage');
     var errHandler = 'onerror="this.onerror=null;this.src=\'img/icons/no_image.png\';this.style.opacity=\'0.6\';"';
+    var icon = mon['Icon'] || '';
     if (img) {
       imageEl.innerHTML = '<img src="' + esc(img) + '" alt="' + esc(name) + '" ' + errHandler + ' style="max-width:100%;border-radius:8px" />';
+    } else if (icon && (icon.indexOf('/') !== -1 || icon.indexOf('.png') !== -1)) {
+      imageEl.innerHTML = '<img src="' + esc(icon) + '" alt="' + esc(name) + '" ' + errHandler + ' style="max-width:120px;margin:0 auto;display:block;opacity:0.8" />';
     } else {
-      imageEl.innerHTML = '<span class="placeholder-icon" style="font-size:3rem">👾</span>';
+      imageEl.innerHTML = '<span class="placeholder-icon" style="font-size:3rem">' + (esc(icon) || '👾') + '</span>';
     }
 
     // Info bar (Element + HP)

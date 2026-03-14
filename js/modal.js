@@ -160,7 +160,12 @@ window.ItemModal = (function () {
     if (img) {
       imageEl.innerHTML = '<img src="' + esc(img) + '" alt="' + esc(name) + '" ' + errHandler + ' />';
     } else {
-      imageEl.innerHTML = '<span class="placeholder-icon">' + esc(icon) + '</span>';
+      // If icon is a path (contains / or .png), render as img, otherwise as text/emoji
+      if (typeof icon === 'string' && (icon.indexOf('/') !== -1 || icon.indexOf('.png') !== -1)) {
+        imageEl.innerHTML = '<img src="' + esc(icon) + '" alt="' + esc(name) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:contain;opacity:0.8" />';
+      } else {
+        imageEl.innerHTML = '<span class="placeholder-icon">' + esc(icon) + '</span>';
+      }
     }
 
     // Prices

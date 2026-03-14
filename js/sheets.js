@@ -229,7 +229,13 @@ window.ToramSheets = (function () {
     if (imageURL) {
       return '<img src="' + esc(imageURL) + '" alt="' + esc(altText) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:cover;border-radius:inherit" />';
     }
-    if (icon) { return esc(icon); }
+    if (icon) {
+      // If icon is a path/URL, render as img
+      if (typeof icon === 'string' && (icon.indexOf('/') !== -1 || icon.indexOf('.png') !== -1)) {
+        return '<img src="' + esc(icon) + '" alt="' + esc(altText) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:contain;border-radius:inherit" />';
+      }
+      return esc(icon);
+    }
     var resolved = resolveIcon(type);
     // If the default icon is an image path or URL, render as <img>
     if (resolved.indexOf('http') === 0 || resolved.indexOf('../img/') === 0 || resolved.indexOf('img/') === 0) {
@@ -387,9 +393,19 @@ window.ToramSheets = (function () {
           ? '<img src="' + ICON_BASE + 'boss_ico.png" alt="Boss" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:4px" />'
           : '👾 ';
         var errHandler = 'onerror="this.onerror=null;this.src=\'' + (ICON_BASE + 'no_image.png') + '\';this.style.opacity=\'0.6\';"';
-        var monIcon = imgURL
-          ? '<img src="' + esc(imgURL) + '" alt="' + name + '" ' + errHandler + ' style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />'
-          : (icon ? esc(icon) + ' ' : defaultIcon);
+        var monIcon;
+        if (imgURL) {
+          monIcon = '<img src="' + esc(imgURL) + '" alt="' + name + '" ' + errHandler + ' style="width:24px;height:24px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:4px" />';
+        } else if (icon) {
+          // If icon is a path/URL, render as img
+          if (typeof icon === 'string' && (icon.indexOf('/') !== -1 || icon.indexOf('.png') !== -1)) {
+            monIcon = '<img src="' + esc(icon) + '" alt="' + name + '" ' + errHandler + ' style="width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:4px" />';
+          } else {
+            monIcon = esc(icon) + ' ';
+          }
+        } else {
+          monIcon = defaultIcon;
+        }
 
         // Drop tags with collapsible overflow
         var dropHTML = '';

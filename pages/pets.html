@@ -202,6 +202,8 @@
         var imgEl = document.getElementById('pmImage');
         if (d.petImg) {
           imgEl.innerHTML = '<img src="' + esc(d.petImg) + '" alt="' + esc(d.petName) + '" ' + errHandler + ' style="width:120px;height:120px;object-fit:contain;border-radius:8px;margin:0 auto" />';
+        } else if (d.petEmoji && (d.petEmoji.indexOf('/') !== -1 || d.petEmoji.indexOf('.png') !== -1)) {
+          imgEl.innerHTML = '<img src="' + esc(d.petEmoji) + '" alt="' + esc(d.petName) + '" ' + errHandler + ' style="width:120px;height:120px;object-fit:contain;opacity:0.8;margin:0 auto" />';
         } else {
           imgEl.innerHTML = '<span style="font-size:4rem">' + esc(d.petEmoji) + '</span>';
         }
