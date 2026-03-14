@@ -2,6 +2,26 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+
+## [0.21.10] — 2026-03-14
+### Fixed
+- **Anti-"Ghost Data"** — Reset modal sebelum populating data baru (mencegah error "Item Not Found" bertumpuk).
+- **Logika Trim Total** — Mengabaikan spasi kosong di awal/akhir nama item di database.
+
+---
+
+## [0.21.9] — 2026-03-14
+### Fixed
+- **Header Overwrite Fix** — Memperbaiki bug di mana judul modal menimpa tombol varian ("View Version").
+- **Double Safety Index** — Jika nomor baris tidak cocok, sistem otomatis fallback ke pencarian nama.
+
+---
+
+## [0.21.8] — 2026-03-14
+### Added
+- **Smart Recipe Icons** — Ikon bahan resep/used-for kini dinamis sesuai ikon asli itemnya.
+- **View Version Link** — Tombol untuk berpindah antar varian item (Craft/Drop).
+
 ---
 
 ## [0.21.7] — 2026-03-14
