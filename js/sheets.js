@@ -111,9 +111,19 @@ window.ToramSheets = (function () {
   function parseCSV(text) {
     var lines   = text.trim().split('\n');
     var headers = splitRow(lines[0]);
-    return lines.slice(1).filter(Boolean).map(function (line) {
+    console.log('DEBUG CSV Headers Length:', headers.length, headers);
+
+    return lines.slice(1).filter(Boolean).map(function (line, rowIdx) {
+      if (line.includes('Chefiluro')) {
+        console.log('DEBUG Raw Line (Chefiluro):', line);
+      }
       var vals = splitRow(line);
       var obj  = {};
+      
+      if (rowIdx < 5) {
+        console.log('DEBUG Row ' + rowIdx + ' split into ' + vals.length + ' values');
+      }
+
       headers.forEach(function (h, i) {
         obj[h.trim()] = (vals[i] || '').trim();
       });
