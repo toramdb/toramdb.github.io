@@ -2,14 +2,16 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
-## [0.24.2] — 2026-03-16
+## [0.24.5] — 2026-03-16
 ### Fixed
-- **Case-Sensitive Header Fix**: Memperbaiki masalah pencocokan kolom yang gagal karena perbedaan huruf besar/kecil (misal: "Act1" vs "act1").
-- **Robust Act Markers**: Memperbaiki deteksi simbol `>` dan `<` agar lebih toleran terhadap spasi.
-### Added
-- **Debug Logs**: Menambahkan `console.log` untuk mendiagnosa struktur data Sheet secara langsung (membantu melihat jika ada kolom yang bergeser atau salah nama).
+- **Missing Symbols Fix (CRITICAL)**: Berpindah dari Google Visualization API ke direct CSV Export. Ini memperbaiki masalah Google yang menghapus simbol `>` dan `<` secara otomatis (security stripping) pada data Pet Acts.
+- **Column Shift Fix**: Dengan kembalinya data simbol, pergeseran kolom (shift) pada Modal Pet kini sudah normal kembali.
+### Changed
+- **Raw Data Fetch**: Sekarang data ditarik secara literal untuk memastikan keaslian format dari Google Sheets.
 
 ---
+
+## [0.24.2] — 2026-03-16
 
 ## [0.24.1] — 2026-03-16
 ### Added
