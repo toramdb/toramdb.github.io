@@ -442,7 +442,7 @@ window.ItemModal = (function () {
       rec.split(';').forEach(function (rp) {
         rp = rp.trim();
         if (!rp) return;
-        var itemName = rp.replace(/\s+x\d+$/i, '').trim();
+        var itemName = rp.replace(/(\s+x\d+.*|:.*)$/i, '').trim();
         
         // Smart Icon Lookup for Ingredients
         var iLow = itemName.toLowerCase();
@@ -617,8 +617,8 @@ window.ItemModal = (function () {
         if (!part) continue;
         
         // Extract name: "Iron Ore x15" -> "Iron Ore"
-        var ingredientName = part.replace(/\s+x\d+$/i, '').trim();
-        var amountMatched = part.match(/x(\d+)$/i);
+        var ingredientName = part.replace(/(\s+x\d+.*|:.*)$/i, '').trim();
+        var amountMatched = part.match(/(?:x|:\s*)(\d+)/i);
         var amount = amountMatched ? amountMatched[1] : '???';
 
         if (ingredientName.toLowerCase() === search) {

@@ -2,6 +2,15 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.23.6] — 2026-03-16
+### Fixed
+- **Flexible Material Detection** — Memperbaiki deteksi ikon bahan dasar (Metal, Mana, dsb):
+  - **Support Multiple Formats**: Sistem kini mendukung format "Nama xJumlah" maupun "Nama: Poin" (seperti di Google Sheet Anda).
+  - **Improved Extraction**: Memperbaiki logika pemisahan teks agar nama bahan terdeteksi dengan akurat meskipun menggunakan tanda titik dua (`:`).
+  - **Accurate Quantity**: Memperbaiki pembacaan angka jumlah/poin untuk kedua format tersebut.
+
+---
+
 ## [0.23.5] — 2026-03-16
 ### Added
 - **Basic Material Icons** — Peningkatan visual pada tab Recipe & Used For di modal Detail Item:
