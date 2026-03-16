@@ -64,45 +64,45 @@ window.ItemModal = (function () {
   var BASIC_MATERIALS = {
     'metal': {
       Name: 'Metal (Material Point)', Type: 'Basic Material',
-      Icon: 'img/icons/metal_ico.png',
-      Stats: 'Poin material yang digunakan sebagai bahan dasar pembuatan perlengkapan di Blacksmith.',
-      Obtain: 'Gunakan skill "Process Materials" (Alchemy Skills) pada perlengkapan tipe Metal atau buang item tipe Metal.'
+      Icon: 'metal_ico.png',
+      Stats: 'Material points used as a fundamental ingredient for crafting equipment at the Blacksmith.',
+      Obtain: 'Process [Metal] type equipment using "Process Materials" skill (Alchemy Skills) or discard Metal type items.'
     },
     'wood': {
       Name: 'Wood (Material Point)', Type: 'Basic Material',
-      Icon: 'img/icons/wood_ico.png',
-      Stats: 'Poin material yang digunakan sebagai bahan dasar pembuatan perlengkapan di Blacksmith.',
-      Obtain: 'Gunakan skill "Process Materials" pada perlengkapan tipe Wood atau buang item tipe Wood.'
+      Icon: 'wood_ico.png',
+      Stats: 'Material points used as a fundamental ingredient for crafting equipment at the Blacksmith.',
+      Obtain: 'Process [Wood] type equipment using "Process Materials" skill or discard Wood type items.'
     },
     'cloth': {
       Name: 'Cloth (Material Point)', Type: 'Basic Material',
-      Icon: 'img/icons/cloth_ico.png',
-      Stats: 'Poin material yang digunakan sebagai bahan dasar pembuatan perlengkapan di Blacksmith.',
-      Obtain: 'Gunakan skill "Process Materials" pada perlengkapan tipe Cloth atau buang item tipe Cloth.'
+      Icon: 'cloth_ico.png',
+      Stats: 'Material points used as a fundamental ingredient for crafting equipment at the Blacksmith.',
+      Obtain: 'Process [Cloth] type equipment using "Process Materials" skill or discard Cloth type items.'
     },
     'mana': {
       Name: 'Mana (Material Point)', Type: 'Basic Material',
-      Icon: 'img/icons/mana_ico.png',
-      Stats: 'Poin material yang sering digunakan untuk pembuatan perlengkapan berat atau sihir.',
-      Obtain: 'Gunakan skill "Process Materials" pada item tipe Mana atau buang item tipe Mana.'
+      Icon: 'mana_ico.png',
+      Stats: 'Material points heavily used for crafting heavy equipment or magic-related items.',
+      Obtain: 'Process [Mana] type items using "Process Materials" skill or discard Mana type items.'
     },
     'beast': {
       Name: 'Beast (Material Point)', Type: 'Basic Material',
-      Icon: 'img/icons/beast_ico.png',
-      Stats: 'Poin material yang dihasilkan dari pemrosesan kulit atau bagian tubuh monster.',
-      Obtain: 'Gunakan skill "Process Materials" pada item tipe Beast atau buang item tipe Beast.'
+      Icon: 'beast_ico.png',
+      Stats: 'Material points produced from processing monster skins or body parts.',
+      Obtain: 'Process [Beast] type items using "Process Materials" skill or discard Beast type items.'
     },
     'medicine': {
       Name: 'Medicine (Material Point)', Type: 'Basic Material',
-      Icon: 'img/icons/medicine_ico.png',
-      Stats: 'Poin material yang digunakan untuk pembuatan obat-obatan dan item sintetis lainnya.',
-      Obtain: 'Gunakan skill "Process Materials" pada item tipe Medicine atau buang item tipe Medicine.'
+      Icon: 'medicine_ico.png',
+      Stats: 'Material points used for crafting medicines and various synthetic items.',
+      Obtain: 'Process [Medicine] type items using "Process Materials" skill or discard Medicine type items.'
     },
     'fee': {
       Name: 'Spina (Crafting Fee)', Type: 'Currency',
       Icon: '💰',
-      Stats: 'Biaya Spina yang harus dibayarkan untuk jasa pembuatan item di pandai besi (NPC Blacksmith).',
-      Obtain: 'Dapatkan Spina dari menjual item ke NPC, Trading dengan user lain, atau hadiah Quest.'
+      Stats: 'Amount of Spina required as a service fee for crafting items at the NPC Blacksmith.',
+      Obtain: 'Earn Spina by selling items to NPCs, participating in trade with other players, or completing quests.'
     }
   };
 
@@ -243,6 +243,11 @@ window.ItemModal = (function () {
       if (path.indexOf('/pages/') !== -1) return '../img/icons/';
       return 'img/icons/';
     }());
+
+    // Fix: if icon is a local filename (e.g. from BASIC_MATERIALS), prepend base path
+    if (typeof icon === 'string' && icon.indexOf('_ico.png') !== -1 && icon.indexOf('/') === -1) {
+      icon = modalIconBase + icon;
+    }
 
     // Image
     var imageEl = document.getElementById('modalImage');
