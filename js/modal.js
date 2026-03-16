@@ -252,32 +252,57 @@ window.ItemModal = (function () {
     var obtEl = document.getElementById('modalObtain');
     if (obt) {
       var obtHtml = '';
+      var modalIconBase = (function () {
+        var path = window.location.pathname;
+        if (path.indexOf('/pages/') !== -1) return '../img/icons/';
+        return 'img/icons/';
+      }());
+
       obt.split(';').forEach(function (op) {
         op = op.trim();
         if (!op) return;
-        var obtIcon = '📦';
+        
         var opLow = op.toLowerCase();
-        if (opLow.indexOf('drop') === 0) obtIcon = '👾';
-        else if (opLow.indexOf('quest') === 0) obtIcon = '📜';
+        var obtIcon = '📦';
+        var useImage = false;
+
+        if (opLow.indexOf('drop') === 0) {
+          obtIcon = modalIconBase + 'monsters_ico.png';
+          useImage = true;
+        } else if (opLow.indexOf('map') === 0) {
+          obtIcon = modalIconBase + 'maps_ico.png';
+          useImage = true;
+        } else if (opLow.indexOf('quest') === 0) obtIcon = '📜';
         else if (opLow.indexOf('shop') === 0) obtIcon = '🏪';
         else if (opLow.indexOf('craft') === 0) obtIcon = '⚒️';
+        else if (opLow.indexOf('smith') === 0) obtIcon = '⚒️';
+        else if (opLow.indexOf('npc') === 0) obtIcon = '⚒️';
         else if (opLow.indexOf('mining') === 0) obtIcon = '⛏️';
         else if (opLow.indexOf('event') === 0) obtIcon = '🎉';
+        else {
+          // Fallback to maps_ico if it looks like a location (no specific keyword prefix)
+          obtIcon = modalIconBase + 'maps_ico.png';
+          useImage = true;
+        }
+
+        var iconContent = useImage 
+          ? '<img src="' + esc(obtIcon) + '" alt="" style="width:20px;height:20px;object-fit:contain" ' + errHandler + ' />'
+          : esc(obtIcon);
 
         // Drop: entries are clickable → MonsterModal
         if (opLow.indexOf('drop') === 0) {
           // Extract monster name: "Drop: Monster Name (Location)" → "Monster Name"
           var monName = op.substring(op.indexOf(':') + 1).trim();
-          // Strip parenthetical location if present
           var parenIdx = monName.indexOf('(');
           if (parenIdx > 0) monName = monName.substring(0, parenIdx).trim();
+          
           obtHtml += '<div class="obtain-item drop-link" data-obtain-monster="' + esc(monName) + '" style="cursor:pointer">' +
-            '<div class="obtain-icon">' + obtIcon + '</div>' +
+            '<div class="obtain-icon">' + iconContent + '</div>' +
             '<span>' + esc(op) + '</span>' +
             '<span class="drop-arrow">→</span>' +
             '</div>';
         } else {
-          obtHtml += '<div class="obtain-item"><div class="obtain-icon">' + obtIcon + '</div><span>' + esc(op) + '</span></div>';
+          obtHtml += '<div class="obtain-item"><div class="obtain-icon">' + iconContent + '</div><span>' + esc(op) + '</span></div>';
         }
       });
       obtEl.innerHTML = obtHtml;
