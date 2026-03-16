@@ -80,59 +80,61 @@ window.ToramSheets = (function () {
   var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
   function fetchSheet(sheetName) {
-    // Check localStorage cache first
-    var cacheKey = 'tcs_' + sheetName;
+    var cacheKey = 'tcs_v2_' + sheetName;
     var tsKey    = cacheKey + '_ts';
     try {
       var cached = localStorage.getItem(cacheKey);
       var ts     = parseInt(localStorage.getItem(tsKey) || '0', 10);
       if (cached && (Date.now() - ts) < CACHE_TTL) {
-        return Promise.resolve(cached);
+        return Promise.resolve(JSON.parse(cached));
       }
-    } catch (e) { /* localStorage unavailable */ }
+    } catch (e) { /* x */ }
 
     var url =
       'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID +
-      '/export?format=csv&sheet=' + encodeURIComponent(sheetName);
+      '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(sheetName);
     
-    console.log('DEBUG Fetching URL:', url);
-
     return fetch(url).then(function (res) {
       if (!res.ok) { throw new Error('HTTP ' + res.status); }
       return res.text();
     }).then(function (text) {
-      console.log('DEBUG Raw CSV Response Length (first 100 char):', text.substring(0, 100));
+      // JSON is wrapped in google.visualization.Query.setResponse(...)
+      var start = text.indexOf('{');
+      var end   = text.lastIndexOf('}');
+      if (start === -1 || end === -1) throw new Error('Invalid JSON format');
+      var json = JSON.parse(text.substring(start, end + 1));
+      
+      var cols = json.table.cols;
+      var rows = json.table.rows.map(function(r) {
+        var obj = {};
+        r.c.forEach(function(cell, idx) {
+          if (!cols[idx]) return;
+          var key = (cols[idx].label || cols[idx].id || '').trim();
+          if (!key) return;
+          // Use .f (formatted) if .v (raw) is null/empty but .f exists
+          // This preserves symbols like > and < which are stripped from .v
+          var val = (cell && cell.v !== null) ? cell.v : '';
+          if (cell && cell.f && (val === '' || typeof val === 'number')) {
+            val = cell.f;
+          }
+          obj[key] = String(val).trim();
+        });
+        return obj;
+      });
+
       try {
-        localStorage.setItem(cacheKey, text);
+        localStorage.setItem(cacheKey, JSON.stringify(rows));
         localStorage.setItem(tsKey, String(Date.now()));
-      } catch (e) { /* quota exceeded or unavailable */ }
-      return text;
+      } catch (e) { /* x */ }
+      return rows;
     });
   }
 
   // ---- CSV PARSER ---------------------------------------------------
   // Handles quoted fields (including embedded commas and escaped quotes).
   function parseCSV(text) {
-    var lines   = text.trim().split('\n');
-    var headers = splitRow(lines[0]);
-    console.log('DEBUG CSV Headers Length:', headers.length, headers);
-
-    return lines.slice(1).filter(Boolean).map(function (line, rowIdx) {
-      if (line.includes('Chefiluro')) {
-        console.log('DEBUG Raw Line (Chefiluro):', line);
-      }
-      var vals = splitRow(line);
-      var obj  = {};
-      
-      if (rowIdx < 5) {
-        console.log('DEBUG Row ' + rowIdx + ' split into ' + vals.length + ' values');
-      }
-
-      headers.forEach(function (h, i) {
-        obj[h.trim()] = (vals[i] || '').trim();
-      });
-      return obj;
-    });
+    // Keeping for legacy/compatibility if needed, but fetchSheet now returns objects
+    return []; 
   }
 
   function splitRow(row) {
@@ -715,15 +717,7 @@ window.ToramSheets = (function () {
       }
     }
 
-    console.log('DEBUG Pet Sheet Headers:', Object.keys(rows[0] || {}));
-    
     rows.forEach(function (row, idx) {
-      // Log full row for first few pets to check for shifts
-      if (idx < 5) {
-        console.log('DEBUG Raw Pet Row ' + idx + ' (' + (row['Name'] || 'Unnamed') + '):');
-        console.table(row); 
-      }
-
       // Helper to find column case-insensitively and with/without spaces
       var get = function(keys) {
         if (typeof keys === 'string') keys = [keys];
@@ -808,12 +802,11 @@ window.ToramSheets = (function () {
     if (page !== 'monsters') { showLoading(container); }
 
     fetchSheet(sheetName)
-      .then(function (csv) {
-        var rows = parseCSV(csv);
+      .then(function (rows) {
         // Attach original sheet index (absolute) before potentially filtering or reversing
         rows.forEach(function (r, i) { r._index = i; });
-        rows.reverse();
-        renderer(rows, container);
+        var data = rows.slice().reverse(); // Don't mutate cache, reverse for "Latest" feel
+        renderer(data, container);
         // Signal to main.js that new filterable elements are ready.
         document.dispatchEvent(new CustomEvent('sheetsrendered'));
       })
@@ -845,14 +838,13 @@ window.ToramSheets = (function () {
     if (!sheetName || !renderer || !container) { return; }
 
     fetchSheet(sheetName)
-      .then(function (csv) {
-        var rows = parseCSV(csv);
+      .then(function (rows) {
         // Attach original sheet index (absolute)
         rows.forEach(function (r, i) { r._index = i; });
-        rows.reverse();
-        rows = rows.slice(0, max || 3);
-        if (rows.length) {
-          renderer(rows, container);
+        var data = rows.slice().reverse(); // Don't mutate cache
+        data = data.slice(0, max || 3);
+        if (data.length) {
+          renderer(data, container);
           document.dispatchEvent(new CustomEvent('sheetsrendered'));
         }
       })
@@ -880,9 +872,8 @@ window.ToramSheets = (function () {
     if (!sheetName) { return; }
 
     fetchSheet(sheetName)
-      .then(function (csv) {
-        var rows = parseCSV(csv);
-        if (!rows.length) return;
+      .then(function (rows) {
+        if (!rows || !rows.length) return;
 
         var categories = [];
         var featured   = null;
