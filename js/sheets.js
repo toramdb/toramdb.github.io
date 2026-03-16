@@ -114,10 +114,6 @@ window.ToramSheets = (function () {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.text();
     }).then(function (text) {
-      // Diagnostic log
-      if (sheetName === 'Pets') {
-        console.log('DEBUG Raw Pets CSV snippet (v4 - literal):', text.substring(0, 500));
-      }
       try {
         localStorage.setItem(cacheKey, text);
         localStorage.setItem(tsKey, String(Date.now()));

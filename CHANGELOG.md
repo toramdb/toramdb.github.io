@@ -2,25 +2,24 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
-## [0.24.7] — 2026-03-16
+## [0.25.0] — 2026-03-16
+### Added
+- **Pet Act Tooltips**: Menambahkan informasi tambahan dalam Bahasa Inggris pada panah ↑ dan ↓ di Modal Pet.
+  - ↑: "Extra effect / Enhanced support"
+  - ↓: "Reduced stability for physical/magic attacks"
 ### Fixed
-- **Zero-Stripping Solution**: Berpindah ke endpoint `/pub?output=csv` (Literal CSV) untuk menghentikan mesin Query Google yang menghapus simbol `>` dan `<` secara otomatis. Ini adalah format paling mentah (raw) yang tersedia.
-- **Improved CSV Parser**: Mengaktifkan kembali parser CSV internal yang lebih tangguh untuk menangani data literal.
+- **Modal Crash Fix**: Menghapus logika "Favorite" yang usang di `modal.js` untuk memperbaiki error `TypeError` saat membuka modal item.
 ### Changed
-- **Cache v3**: Menggunakan cache baru untuk memastikan data lama yang "kotor" tidak mengganggu hasil.
+- **Code Cleanup**: Menghapus semua debug log (`console.log`) pada modul Sheets dan Pet untuk performa yang lebih bersih.
 
 ---
 
-## [0.24.5] — 2026-03-16
-
-## [0.24.2] — 2026-03-16
-
-## [0.24.1] — 2026-03-16
-### Added
-- **Multi-Value Pet Acts**: Kini mendukung multiple skema dalam satu kolom (misal: `>200;<150`). Tiap bagian akan diwarnai dan diberi panah secara terpisah.
-- **Robust Data Handling**: Meningkatkan akurasi pembacaan kolom di Sheet (lebih toleran terhadap spasi/huruf kapital pada header kolom).
+## [0.24.9] — 2026-03-16
 ### Fixed
-- **Empty Values Fix**: Memperbaiki masalah data Act pet yang terkadang tidak muncul jika header kolom memiliki format sedikit berbeda di Sheet.
+- **Literal Data Fetching (Pet Data Fix)**: Solusi final untuk masalah karakter `>` dan `<` yang hilang. Sistem kini menggunakan **GID-based Literal CSV Export** untuk melewati penyaringan otomatis Google.
+- **Robust Data Handling**: Meningkatkan akurasi pembacaan kolom di Sheet, lebih toleran terhadap perbedaan spasi atau huruf kapital pada header kolom (misal: "Act1" vs "Act 1").
+### Added
+- **Multi-Value Pet Acts**: Mendukung multiple skema dalam satu kolom (misal: `>200;<150`). Tiap bagian akan diwarnai dan diberi panah secara otomatis.
 
 ---
 

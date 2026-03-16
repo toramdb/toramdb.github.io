@@ -203,7 +203,8 @@
             var rest = match[2].trim();
             var color = sign === '>' ? '#dc2626' : '#0891b2';
             var arrow = sign === '>' ? '\u2191' : '\u2193';
-            return '<span style="color:' + color + ';font-weight:600">' + esc(rest) + ' ' + arrow + '</span>';
+            var tip = sign === '>' ? 'Extra effect / Enhanced support' : 'Reduced stability for physical/magic attacks';
+            return '<span style="color:' + color + ';font-weight:600" title="' + esc(tip) + '">' + esc(rest) + ' ' + arrow + '</span>';
           }
           return esc(p);
         });
@@ -218,7 +219,6 @@
 
       function openModal(tr) {
         var d = tr.dataset;
-        console.log('Pet Data:', d); // Debug log
 
         var errHandler = 'onerror="this.onerror=null;this.src=\'../img/icons/no_image.png\';this.style.opacity=\'0.6\';"';
         // Render large pet image (or emoji fallback)

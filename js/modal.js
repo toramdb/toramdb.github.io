@@ -544,10 +544,7 @@ window.ItemModal = (function () {
       p.classList.toggle('active', i === 0);
     });
 
-    // Reset fav
-    var fav = document.getElementById('modalFav');
-    fav.classList.remove('active');
-    fav.textContent = '☆';
+    // Favorites logic removed as per user request (v0.25.0)
   }
 
   // ---------- Open / Close ------------------------------------------
