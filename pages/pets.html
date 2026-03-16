@@ -189,6 +189,18 @@
 
       function actVal(v) { return v || '<span class="text-muted">\u2014</span>'; }
 
+      function formatAct(val) {
+        if (!val) return '<span class="text-muted">\u2014</span>';
+        var first = val.charAt(0);
+        var rest = val.substring(1).trim();
+        if (first === '>') {
+          return '<span style="color:#dc2626;font-weight:600">' + esc(rest) + ' \u2191</span>';
+        } else if (first === '<') {
+          return '<span style="color:#0891b2;font-weight:600">' + esc(rest) + ' \u2193</span>';
+        }
+        return esc(val);
+      }
+
       function colorHTML(c) {
         if (!c) return '<span class="text-muted">\u2014</span>';
         if (/^https?:\/\//i.test(c)) return '<img src="' + esc(c) + '" alt="Color" style="max-width:120px;height:auto;border-radius:4px" />';
@@ -212,12 +224,12 @@
 
         var rows = [
           ['Normal Magic', nMagicHTML(d.petNmagic)],
-          ['Support',      d.petSupport ? '<span style="color:#dc2626;font-weight:600">' + esc(d.petSupport) + '</span>' : '<span class="text-muted">\u2014</span>'],
-          ['Act 1', actVal(esc(d.petAct1))],
-          ['Act 2', actVal(esc(d.petAct2))],
-          ['Act 3', actVal(esc(d.petAct3))],
-          ['Act 4', actVal(esc(d.petAct4))],
-          ['Act 5', actVal(esc(d.petAct5))],
+          ['Support <span style="color:#dc2626">(rate up \u2191)</span>', d.petSupport ? '<span style="color:#dc2626;font-weight:600">' + esc(d.petSupport) + '</span>' : '<span class="text-muted">\u2014</span>'],
+          ['Act 1 Damage Rate %', formatAct(d.petAct1)],
+          ['Act 2 Damage Rate %', formatAct(d.petAct2)],
+          ['Act 3 Damage Rate %', formatAct(d.petAct3)],
+          ['Act 4 Damage Rate %', formatAct(d.petAct4)],
+          ['Act 5 Damage Rate %', formatAct(d.petAct5)],
           ['Color Info', colorHTML(d.petColor)]
         ];
 

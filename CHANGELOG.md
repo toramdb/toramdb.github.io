@@ -2,6 +2,18 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.24.0] — 2026-03-16
+### Changed
+- **Pet Modal UI Enhancements** — Pembaruan informasi detail pada modal Pet:
+  - **Support Label**: Menambahkan indikator `(rate up ↑)` berwarna merah pada label Support.
+  - **Act Labels**: Menambahkan teks `Damage Rate %` pada label Act 1 hingga Act 5.
+### Added
+- **Dynamic Value Markers**:
+  - Simbol `>` di Sheet kini otomatis menampilkan panah `↑` dan warna **Merah**.
+  - Simbol `<` di Sheet kini otomatis menampilkan panah `↓` dan warna **Cyan**.
+
+---
+
 ## [0.23.7] — 2026-03-16
 ### Added
 - **Virtual Material Items** — Menambahkan informasi detail untuk bahan dasar:
