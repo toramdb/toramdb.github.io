@@ -4,10 +4,8 @@ Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
 ## [0.23.4] — 2026-03-16
 ### Added
-- [x] Modal Icon Customization (v0.23.4).
-  - [x] Update `modal.js` logic for Map/Drop icons.
-  - [x] Deploy and verify.
-Icons**: Mengganti emoji standar dengan ikon `.png` yang lebih premium untuk kategori **Map** (`maps_ico.png`) dan **Drop** (`monsters_ico.png`).
+- **Modal Icon Customization** — Peningkatan visual pada modal Detail Item:
+  - **Custom PNG Icons**: Mengganti emoji standar dengan ikon `.png` yang lebih premium untuk kategori **Map** (`maps_ico.png`) dan **Drop** (`monsters_ico.png`).
   - **Smart Location Detection**: Mendeteksi secara otomatis informasi lokasi (tanpa awalan kata kunci) dan memberikan ikon peta.
   - **Improved Icon Consistency**: Menambahkan dukungan ikon untuk variasi kata kunci seperti "smith", "npc", dan "npc smith".
 
