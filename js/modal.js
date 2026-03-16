@@ -60,6 +60,52 @@ window.ItemModal = (function () {
     }
   };
 
+  // Virtual entries for basic materials to prevent "Not Found"
+  var BASIC_MATERIALS = {
+    'metal': {
+      Name: 'Metal (Material Point)', Type: 'Basic Material',
+      Icon: 'img/icons/metal_ico.png',
+      Stats: 'Poin material yang digunakan sebagai bahan dasar pembuatan perlengkapan di Blacksmith.',
+      Obtain: 'Gunakan skill "Process Materials" (Alchemy Skills) pada perlengkapan tipe Metal atau buang item tipe Metal.'
+    },
+    'wood': {
+      Name: 'Wood (Material Point)', Type: 'Basic Material',
+      Icon: 'img/icons/wood_ico.png',
+      Stats: 'Poin material yang digunakan sebagai bahan dasar pembuatan perlengkapan di Blacksmith.',
+      Obtain: 'Gunakan skill "Process Materials" pada perlengkapan tipe Wood atau buang item tipe Wood.'
+    },
+    'cloth': {
+      Name: 'Cloth (Material Point)', Type: 'Basic Material',
+      Icon: 'img/icons/cloth_ico.png',
+      Stats: 'Poin material yang digunakan sebagai bahan dasar pembuatan perlengkapan di Blacksmith.',
+      Obtain: 'Gunakan skill "Process Materials" pada perlengkapan tipe Cloth atau buang item tipe Cloth.'
+    },
+    'mana': {
+      Name: 'Mana (Material Point)', Type: 'Basic Material',
+      Icon: 'img/icons/mana_ico.png',
+      Stats: 'Poin material yang sering digunakan untuk pembuatan perlengkapan berat atau sihir.',
+      Obtain: 'Gunakan skill "Process Materials" pada item tipe Mana atau buang item tipe Mana.'
+    },
+    'beast': {
+      Name: 'Beast (Material Point)', Type: 'Basic Material',
+      Icon: 'img/icons/beast_ico.png',
+      Stats: 'Poin material yang dihasilkan dari pemrosesan kulit atau bagian tubuh monster.',
+      Obtain: 'Gunakan skill "Process Materials" pada item tipe Beast atau buang item tipe Beast.'
+    },
+    'medicine': {
+      Name: 'Medicine (Material Point)', Type: 'Basic Material',
+      Icon: 'img/icons/medicine_ico.png',
+      Stats: 'Poin material yang digunakan untuk pembuatan obat-obatan dan item sintetis lainnya.',
+      Obtain: 'Gunakan skill "Process Materials" pada item tipe Medicine atau buang item tipe Medicine.'
+    },
+    'fee': {
+      Name: 'Spina (Crafting Fee)', Type: 'Currency',
+      Icon: '💰',
+      Stats: 'Biaya Spina yang harus dibayarkan untuk jasa pembuatan item di pandai besi (NPC Blacksmith).',
+      Obtain: 'Dapatkan Spina dari menjual item ke NPC, Trading dengan user lain, atau hadiah Quest.'
+    }
+  };
+
   // ---------- Cache for Sheets data ---------------------------------
   var sheetsCache = null;
   var pendingItemDetailsFetch = null;
@@ -535,6 +581,11 @@ window.ItemModal = (function () {
         } else {
           found = findInCache(itemName);
         }
+      }
+      
+      // If not in cache, check Virtual Basic Materials
+      if (!found && BASIC_MATERIALS[search]) {
+        found = BASIC_MATERIALS[search];
       }
       
       if (found) {

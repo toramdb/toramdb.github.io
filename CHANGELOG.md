@@ -2,6 +2,15 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.23.7] — 2026-03-16
+### Added
+- **Virtual Material Items** — Menambahkan informasi detail untuk bahan dasar:
+  - **Educational Tooltips**: Mengeklik Metal, Mana, dsb. kini menampilkan deskripsi fungsi dan cara mendapatkannya (Process Materials) alih-alih pesan error.
+  - **No More "Not Found"**: Menghilangkan kebingungan pengguna saat berinteraksi dengan kategori poin material di tab Recipe.
+  - **Native Content**: Konten bantuan ditulis dalam bahasa Indonesia agar lebih mudah dipahami.
+
+---
+
 ## [0.23.6] — 2026-03-16
 ### Fixed
 - **Flexible Material Detection** — Memperbaiki deteksi ikon bahan dasar (Metal, Mana, dsb):
