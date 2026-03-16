@@ -63,25 +63,34 @@ window.ToramSheets = (function () {
     // Leave as 'YOUR_GOOGLE_SHEET_ID' to keep the built-in static data.
     SHEET_ID: '1Zmk6AHYjoBTo_Ius90Ves6sTb_weTVcBPmc7r4269Zo',
 
-    // Sheet tab names (must match the tab names in your Google Sheet).
+    // Sheet tab names and GIDs (Grid IDs).
+    // To find the GID: Open the sheet in your browser and look at the URL.
+    // It should end with something like "#gid=123456789". That number is the GID.
     SHEETS: {
-      items:       'Items',
-      itemdetails: 'ItemDetails',
-      monsters:    'Monsters',
-      skills:      'Skills',
-      maps:        'Maps',
-      quests:      'Quests',
-      pets:        'Pets',
-      homepage:    'Homepage'
+      items:       { name: 'Items',       gid: '' },
+      itemdetails: { name: 'ItemDetails', gid: '' },
+      monsters:    { name: 'Monsters',    gid: '' },
+      skills:      { name: 'Skills',      gid: '' },
+      maps:        { name: 'Maps',        gid: '' },
+      quests:      { name: 'Quests',      gid: '' },
+      pets:        { name: 'Pets',        gid: '' }, // Recommended: Fill GID here for literal > < preservation
+      homepage:    { name: 'Homepage',    gid: '' }
     }
   };
 
   // ---- CSV FETCH (with localStorage cache) --------------------------
   var CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-  function fetchSheet(sheetName) {
-    var cacheKey = 'tcs_v3_' + sheetName;
-    var tsKey    = cacheKey + '_ts';
+  function fetchSheet(sheetInfo) {
+    if (typeof sheetInfo === 'string') {
+      sheetInfo = { name: sheetInfo, gid: '' };
+    }
+    
+    var sheetName = sheetInfo.name;
+    var gid       = sheetInfo.gid;
+    var cacheKey  = 'tcs_v4_' + (gid || sheetName);
+    var tsKey     = cacheKey + '_ts';
+
     try {
       var cached = localStorage.getItem(cacheKey);
       var ts     = parseInt(localStorage.getItem(tsKey) || '0', 10);
@@ -90,25 +99,24 @@ window.ToramSheets = (function () {
       }
     } catch (e) { /* x */ }
 
-    // Using the 'pub' endpoint as it is the most literal and preserves > and <
-    var url =
-      'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID +
-      '/pub?output=csv&sheet=' + encodeURIComponent(sheetName);
+    // Path 1: If GID is provided, use the absolute literal CSV export
+    // Path 2: If no GID, use the search-based CSV export (less literal)
+    var url;
+    if (gid) {
+      url = 'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID + 
+            '/export?format=csv&gid=' + gid;
+    } else {
+      url = 'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID + 
+            '/export?format=csv&sheet=' + encodeURIComponent(sheetName);
+    }
     
     return fetch(url).then(function (res) {
-      if (!res.ok) { 
-        // Fallback to /export if pub fails
-        url = 'https://docs.google.com/spreadsheets/d/' + CONFIG.SHEET_ID + '/export?format=csv&sheet=' + encodeURIComponent(sheetName);
-        return fetch(url);
-      }
-      return res;
-    }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.text();
     }).then(function (text) {
       // Diagnostic log
       if (sheetName === 'Pets') {
-        console.log('DEBUG Raw Pets CSV snippet:', text.substring(0, 500));
+        console.log('DEBUG Raw Pets CSV snippet (v4 - literal):', text.substring(0, 500));
       }
       try {
         localStorage.setItem(cacheKey, text);
