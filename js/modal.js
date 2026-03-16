@@ -7,6 +7,26 @@
 window.ItemModal = (function () {
   'use strict';
 
+  // Helper to format SellOther as "Process : [Amount] [Icon]"
+  function formatSellOther(val, iconBase) {
+    if (!val) return '';
+    var clean = val.trim();
+    // Match "3 Mana", "Mana: 3", "Mana 3", "Mana x3"
+    var match = clean.match(/^(\d+)\s+([a-zA-Z]+)$/) || clean.match(/^([a-zA-Z]+)\s*[:x]?\s*(\d+)$/);
+    if (match) {
+      var amount = isNaN(parseInt(match[1])) ? match[2] : match[1];
+      var material = isNaN(parseInt(match[1])) ? match[1] : match[2];
+      var mLow = material.toLowerCase();
+      var mats = ['metal', 'wood', 'cloth', 'mana', 'beast', 'medicine'];
+      if (mats.indexOf(mLow) !== -1) {
+        var icon = iconBase + mLow + '_ico.png';
+        var errHandler = 'onerror="this.onerror=null;this.src=\'img/icons/no_image.png\';this.style.opacity=\'0.6\';"';
+        return '<span class="price-tag">Process : ' + esc(amount) + ' <img src="' + esc(icon) + '" ' + errHandler + ' style="width:16px;height:16px;vertical-align:middle;margin-left:2px" /></span>';
+      }
+    }
+    return '<span class="price-tag">Sell: ' + esc(val) + '</span>';
+  }
+
   // ---------- Sample data (when Sheets not configured) ---------------
   var SAMPLE_ITEMS = {
     'Shadow Blade': {
@@ -267,7 +287,7 @@ window.ItemModal = (function () {
     var pricesEl = document.getElementById('modalPrices');
     var pricesHTML = '';
     if (sell) pricesHTML += '<span class="price-tag spina">Sell: ' + esc(sell) + ' Spina</span>';
-    if (sell2) pricesHTML += '<span class="price-tag">Sell: ' + esc(sell2) + '</span>';
+    if (sell2) pricesHTML += formatSellOther(sell2, modalIconBase);
     pricesEl.innerHTML = pricesHTML;
 
     // Stats

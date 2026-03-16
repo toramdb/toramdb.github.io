@@ -2,6 +2,14 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.26.0] — 2026-03-16
+### Added
+- **Material Processing Display**: Peningkatan tampilan pada kolom *SellOther* di Modal Item.
+  - Data seperti `3 Mana` atau `Mana: 3` kini otomatis ditampilkan sebagai **Process : 3** lengkap dengan ikon material yang sesuai (Drop, Metal, Mana, dsb).
+  - Mendukung berbagai varian format input dari Google Sheet.
+
+---
+
 ## [0.25.0] — 2026-03-16
 ### Added
 - **Pet Act Tooltips**: Menambahkan informasi tambahan dalam Bahasa Inggris pada panah ↑ dan ↓ di Modal Pet.
