@@ -2,6 +2,15 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.24.2] — 2026-03-16
+### Fixed
+- **Case-Sensitive Header Fix**: Memperbaiki masalah pencocokan kolom yang gagal karena perbedaan huruf besar/kecil (misal: "Act1" vs "act1").
+- **Robust Act Markers**: Memperbaiki deteksi simbol `>` dan `<` agar lebih toleran terhadap spasi.
+### Added
+- **Debug Logs**: Menambahkan `console.log` untuk mendiagnosa struktur data Sheet secara langsung (membantu melihat jika ada kolom yang bergeser atau salah nama).
+
+---
+
 ## [0.24.1] — 2026-03-16
 ### Added
 - **Multi-Value Pet Acts**: Kini mendukung multiple skema dalam satu kolom (misal: `>200;<150`). Tiap bagian akan diwarnai dan diberi panah secara terpisah.

@@ -701,16 +701,20 @@ window.ToramSheets = (function () {
       }
     }
 
-    rows.forEach(function (row) {
+    rows.forEach(function (row, idx) {
+      // DEBUG: Log the first few rows to see actual keys/values
+      if (idx < 5) console.log('DEBUG Pet Row ' + idx + ' (Name: ' + row['Name'] + '):', row);
+
       // Helper to find column case-insensitively and with/without spaces
       var get = function(keys) {
         if (typeof keys === 'string') keys = [keys];
         for (var i = 0; i < keys.length; i++) {
           var k = keys[i];
           if (row[k] !== undefined) return row[k];
+          
           // Try variations
-          var kLower = k.toLowerCase();
-          var kNoSpace = k.replace(/\s+/g, '');
+          var kLower = k.toLowerCase().trim();
+          var kNoSpace = kLower.replace(/\s+/g, '');
           for (var prop in row) {
             var pLower = prop.toLowerCase().trim();
             var pNoSpace = pLower.replace(/\s+/g, '');
@@ -721,7 +725,7 @@ window.ToramSheets = (function () {
       };
 
       var name    = esc(get('Name'));
-      var icon    = esc(get('Icon'));
+      var icon    = (get('Icon') || '').trim();
       var imgURL  = (get('ImageURL')).trim();
       var level   = esc(get('Level'));
       var spawnAt = esc(get('SpawnAt'));
