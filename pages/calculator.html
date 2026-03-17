@@ -12,77 +12,149 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 2rem;
-      max-width: 600px;
-      margin: 2rem auto;
-      box-shadow: var(--shadow-lg);
+      padding: 1.5rem;
+      max-width: 700px;
+      margin: 1.5rem auto;
+      box-shadow: var(--shadow-sm);
     }
-    .calc-grid {
+
+    .calc-fieldset {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .calc-fieldset legend {
+      padding: 0 .75rem;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .calc-grid-3 {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
     }
+
     .calc-input-group {
       display: flex;
       flex-direction: column;
-      gap: .5rem;
+      gap: .3rem;
     }
+
     .calc-input-group label {
-      font-size: .85rem;
+      font-size: .75rem;
       font-weight: 600;
       color: var(--text-secondary);
     }
+
     .calc-input-group input, .calc-input-group select {
-      padding: .75rem;
+      padding: .6rem .75rem;
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: var(--bg-body);
+      border-radius: var(--radius-sm);
+      background: var(--bg-base);
       color: var(--text-primary);
-      font-size: 1rem;
-    }
-    .calc-btn {
-      width: 100%;
-      padding: 1rem;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-md);
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: filter var(--transition), transform var(--transition);
-    }
-    .calc-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-    .calc-result {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px dashed var(--border);
-      display: none;
-    }
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: .75rem;
       font-size: .95rem;
+      width: 100%;
     }
-    .result-label { color: var(--text-secondary); }
-    .result-value { font-weight: 700; color: var(--accent); }
-    .result-total {
-      background: rgba(184,134,11,.08);
-      padding: 1rem;
-      border-radius: var(--radius-md);
-      text-align: center;
-      margin-top: 1rem;
+
+    .calc-tabs {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: .9rem;
+      font-weight: 600;
     }
-    .result-total .val {
+
+    .calc-checkbox-group {
+      margin-bottom: .75rem;
+    }
+
+    .checkbox-container {
       display: block;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--accent);
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: .25rem;
+      cursor: pointer;
+      font-size: .85rem;
+      user-select: none;
+      color: var(--text-secondary);
     }
+
+    .checkbox-container input { visibility: hidden; position: absolute; }
+
+    .checkmark {
+      position: absolute;
+      top: 0; left: 0;
+      height: 18px; width: 18px;
+      background-color: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .checkbox-container:hover input ~ .checkmark { background-color: var(--bg-card-hover); }
+
+    .checkbox-container input:checked ~ .checkmark {
+      background-color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 6px; top: 2px;
+      width: 5px; height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .checkbox-container input:checked ~ .checkmark:after { display: block; }
+
+    .quest-info-box {
+      background: rgba(184,134,11,.05);
+      padding: .75rem;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent);
+      font-size: .85rem;
+    }
+
+    .result-table-wrapper {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: .5rem;
+    }
+
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8rem;
+    }
+
+    .result-table th {
+      position: sticky; top: 0;
+      background: var(--bg-base);
+      text-align: left;
+      padding: .5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .result-table td {
+      padding: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-table tr:hover { background: var(--bg-card-hover); }
+
     @media (max-width: 600px) {
-      .calc-grid { grid-template-columns: 1fr; }
+      .calc-grid-3 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -141,46 +213,89 @@
       </nav>
 
       <div class="calc-card">
-        <div class="calc-grid">
-          <div class="calc-input-group">
-            <label for="currentLvl">Current Level</label>
-            <input type="number" id="currentLvl" value="1" min="1" max="315" />
+        <fieldset class="calc-fieldset">
+          <legend>Level</legend>
+          <div class="calc-grid-3">
+            <div class="calc-input-group">
+              <label for="currentLvl">Lv</label>
+              <input type="number" id="currentLvl" value="1" min="1" max="315" />
+            </div>
+            <div class="calc-input-group">
+              <label for="currentPct">%</label>
+              <input type="number" id="currentPct" value="0" min="0" max="99" />
+            </div>
+            <div class="calc-input-group">
+              <label for="targetLvl">TargetLv</label>
+              <input type="number" id="targetLvl" value="315" min="1" max="315" />
+            </div>
           </div>
-          <div class="calc-input-group">
-            <label for="currentPct">Current %</label>
-            <input type="number" id="currentPct" value="0" min="0" max="99" />
+          <div class="mt-1 text-center" style="font-size: 0.9rem;">
+            <strong>Total XP required:</strong> <span id="resExpReq" class="result-value">0</span>
           </div>
-          <div class="calc-input-group">
-            <label for="targetLvl">Target Level</label>
-            <input type="number" id="targetLvl" value="200" min="1" max="315" />
-          </div>
-          <div class="calc-input-group">
-            <label for="startChapter">Chapter From</label>
-            <select id="startChapter">
-              <option value="">Loading Chapters...</option>
+        </fieldset>
+
+        <div class="calc-tabs">
+          <input type="radio" name="calc-mode" id="mq-mode" checked />
+          <label for="mq-mode">Main Quest</label>
+          <input type="radio" name="calc-mode" id="npc-mode" disabled />
+          <label for="npc-mode" style="opacity: 0.5; cursor: not-allowed;">NPC Quest (Soon)</label>
+        </div>
+
+        <fieldset class="calc-fieldset" id="mq-group">
+          <legend>Main Quest</legend>
+          <div class="calc-input-group mb-1">
+            <label for="mqFrom">From</label>
+            <select id="mqFrom">
+              <option value="">Loading Quests...</option>
             </select>
           </div>
-        </div>
+          <div class="calc-input-group mb-1">
+            <label for="mqUntil">Until</label>
+            <select id="mqUntil">
+              <option value="">Loading Quests...</option>
+            </select>
+          </div>
+          
+          <div class="calc-checkbox-group">
+            <label class="checkbox-container">
+              <input type="checkbox" id="skipVenena" checked>
+              <span class="checkmark"></span>
+              Skip Pre-Venena Metacoenubia Fight
+            </label>
+          </div>
+          <div class="calc-checkbox-group">
+            <label class="checkbox-container">
+              <input type="checkbox" id="multipleMq">
+              <span class="checkmark"></span>
+              Spam Adventurer's Diaries
+            </label>
+          </div>
 
-        <button class="calc-btn" id="calculateBtn">CALCULATE ESTIMATION</button>
+          <div class="quest-info-box mt-1" id="mqInfoBox">
+            <p id="resQuestExpText"><strong>XP:</strong> 0</p>
+            <p id="resEvaluationText" class="mt-05">After doing Main Quest's above range you'll reach <strong>Lv.1 (0%)</strong></p>
+            <p id="resStartFrom" class="mt-05 text-accent" style="font-weight:600;"></p>
+            <p id="resStopAt" class="mt-05 text-accent" style="font-weight:600;"></p>
+          </div>
+        </fieldset>
 
-        <div class="calc-result" id="calcResult">
-          <div class="result-item">
-            <span class="result-label">EXP Required:</span>
-            <span class="result-value" id="resExpReq">0</span>
+        <fieldset class="calc-fieldset mt-1" id="resultTableGroup" style="display: none;">
+          <legend>Simulation Results</legend>
+          <div class="result-table-wrapper">
+            <table class="result-table">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th>Final Chapter</th>
+                  <th>Lv (%)</th>
+                </tr>
+              </thead>
+              <tbody id="resultTableBody">
+                <!-- Simulation rows will be inserted here -->
+              </tbody>
+            </table>
           </div>
-          <div class="result-item">
-            <span class="result-label">Quest EXP (Selected Chapters):</span>
-            <span class="result-value" id="resQuestExp">0</span>
-          </div>
-          <div class="result-total">
-            <span class="result-label">Required Runs / Spam:</span>
-            <span class="val" id="resRuns">0x</span>
-          </div>
-          <p class="mt-1 text-muted text-center" style="font-size: .8rem">
-            *This is an estimation based on Toram Tools formula.
-          </p>
-        </div>
+        </fieldset>
       </div>
     </div>
   </main>

@@ -693,8 +693,13 @@ window.ToramSheets = (function () {
 
       var el = document.createElement('article');
       el.className = 'data-card';
-      el.dataset.filter = (name + ' ' + type + ' ' + ch).toLowerCase();
-      el.dataset.category = type.toLowerCase().replace(/\s+/g, '-');
+      // Ensure all searchable text is in data-filter for any legacy selectors, 
+      // though main.js now filters the raw data object directly.
+      el.dataset.filter = (name + ' ' + type + ' ' + ch + ' ' + reward + ' ' + desc).toLowerCase();
+      el.dataset.category = (type.toLowerCase().includes('main') ? 'main' : 
+                            (type.toLowerCase().includes('side') ? 'side' : 
+                            (type.toLowerCase().includes('daily') ? 'daily' : 
+                            (type.toLowerCase().includes('event') ? 'event' : type.toLowerCase().replace(/\s+/g, '-')))));
       
       el.innerHTML =
         '<div class="data-card-header">' +

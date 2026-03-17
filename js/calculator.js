@@ -1,169 +1,232 @@
 /**
  * ToramDB MQ EXP Calculator
- * Ported from adv.js
+ * Premium Redesign + Advanced Logic from xp.js
  */
 
 (function() {
   'use strict';
 
-  const MAX_LEVEL = 315;
+  const LV_CAP = 315;
+  let cachedQuestData = [];
 
   // Formula Reference: https://toramtools.github.io/xp.html
-  const needXP = (lvl) => {
-    if (lvl >= MAX_LEVEL) return Infinity;
-    return Math.floor(Math.pow(lvl, 4) / 40 + lvl * 2);
-  };
+  const getXP = (lv) => Math.floor(0.025 * Math.pow(lv, 4) + 2 * lv);
+
+  // Total XP required to reach target from current
+  const getTotalXP = function (begin, beginPercentage, end) {
+    if (begin >= end) return 0;
+    let xp = Math.floor((1 - beginPercentage / 100) * getXP(begin));
+    for (let i = begin + 1; i < end; i++) {
+      xp += getXP(i);
+    }
+    return xp;
+  }
+
+  // Final level reached after adding extra XP
+  const addXP = function (begin, beginPercentage, extraXP) {
+    let remainingXP = extraXP;
+    let lv, lvPercentage;
+    let XPRequiredNextLv = Math.floor((1 - beginPercentage / 100) * getXP(begin));
+
+    if (extraXP < XPRequiredNextLv) {
+      let currentXP = (beginPercentage / 100) * getXP(begin) + extraXP;
+      return [begin, Math.floor(100 * currentXP / getXP(begin))];
+    } else {
+      remainingXP -= XPRequiredNextLv;
+      lv = begin + 1;
+      while (lv < LV_CAP && getXP(lv) <= remainingXP) {
+        remainingXP -= getXP(lv);
+        lv += 1;
+      }
+      lvPercentage = Math.floor(100 * remainingXP / getXP(lv));
+      return [lv, lvPercentage];
+    }
+  }
 
   function initCalculator() {
-    const calcBtn = document.getElementById('calculateBtn');
-    if (!calcBtn) return;
-
-    calcBtn.addEventListener('click', function() {
-      calculate();
+    // Event listeners
+    const inputs = ['currentLvl', 'currentPct', 'targetLvl', 'mqFrom', 'mqUntil', 'skipVenena', 'multipleMq'];
+    inputs.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', updateCalculator);
     });
 
-    // Handle case where data is ready before or after script loads
+    // Handle case where data is ready
     document.addEventListener('sheetsdataready', function(e) {
       if (e.detail && e.detail.page === 'quests') {
-        console.log('Calculator: Quest data ready');
-        populateChapters(e.detail.data);
-        calcBtn.disabled = false;
-        calcBtn.textContent = 'CALCULATE ESTIMATION';
+        cachedQuestData = e.detail.data;
+        populateQuestDropdowns(cachedQuestData);
       }
     });
 
     // Check if already ready
     if (window.ToramSheets && window.ToramSheets.dataState.fullData.length > 0 && window.ToramSheets.dataState.pageType === 'quests') {
-        populateChapters(window.ToramSheets.dataState.fullData);
-        calcBtn.disabled = false;
-        calcBtn.textContent = 'CALCULATE ESTIMATION';
-    } else {
-        calcBtn.disabled = true;
-        calcBtn.textContent = 'LOADING DATA...';
+      cachedQuestData = window.ToramSheets.dataState.fullData;
+      populateQuestDropdowns(cachedQuestData);
     }
   }
 
-  function populateChapters(data) {
-    const select = document.getElementById('startChapter');
-    if (!select) return;
+  function populateQuestDropdowns(data) {
+    const fromSelect = document.getElementById('mqFrom');
+    const untilSelect = document.getElementById('mqUntil');
+    if (!fromSelect || !untilSelect) return;
 
-    // Extract unique chapters
-    const chapters = new Set();
-    data.forEach(q => {
-      const chStr = (q['Chapter'] || q['chapter'] || q['Zone'] || q['Type'] || '').toString();
-      const match = chStr.match(/\d+/);
-      if (match) chapters.add(parseInt(match[0]));
+    fromSelect.innerHTML = '';
+    untilSelect.innerHTML = '';
+
+    data.forEach((q, index) => {
+      const name = q['Name'] || q['name'] || '-';
+      const ch = q['Chapter'] || q['chapter'] || '?';
+      const label = `CH${ch} - ${name}`;
+      
+      const optFrom = document.createElement('option');
+      optFrom.value = index;
+      optFrom.textContent = label;
+      fromSelect.appendChild(optFrom);
+
+      const optUntil = document.createElement('option');
+      optUntil.value = index;
+      optUntil.textContent = label;
+      untilSelect.appendChild(optUntil);
     });
 
-    // Sort chapters
-    const sortedChapters = Array.from(chapters).sort((a, b) => a - b);
-    
-    if (sortedChapters.length === 0) return;
+    // Set defaults (From: start, Until: end)
+    fromSelect.selectedIndex = 0;
+    untilSelect.selectedIndex = data.length - 1;
 
-    // Populate dropdown
-    select.innerHTML = '';
-    sortedChapters.forEach(ch => {
-      const opt = document.createElement('option');
-      opt.value = ch;
-      opt.textContent = 'Chapter ' + ch;
-      select.appendChild(opt);
-    });
+    updateCalculator();
   }
 
-  function calculate() {
-    // Inputs
-    let level = parseInt(document.getElementById('currentLvl').value) || 1;
-    let percent = parseInt(document.getElementById('currentPct').value) || 0;
-    let targetLevel = parseInt(document.getElementById('targetLvl').value) || 200;
-    const chapterFrom = parseInt(document.getElementById('startChapter').value) || 1;
+  function updateCalculator() {
+    if (!cachedQuestData || cachedQuestData.length === 0) return;
 
-    // Validation
-    if (level < 1) level = 1;
-    if (level >= MAX_LEVEL) return alert(`Current level already at max (${MAX_LEVEL})`);
-    if (targetLevel > MAX_LEVEL) targetLevel = MAX_LEVEL;
-    if (targetLevel <= level) return alert("Target level must be higher than current level!");
-
-    // Get Data from Sheets
-    const fullQuestData = (window.ToramSheets && window.ToramSheets.dataState.fullData) || [];
+    // 1. Evaluate Total XP Required
+    const lv = parseInt(document.getElementById('currentLvl').value) || 1;
+    const pct = parseInt(document.getElementById('currentPct').value) || 0;
+    const target = parseInt(document.getElementById('targetLvl').value) || LV_CAP;
     
-    // Automatically find max chapter in data
-    let maxChapterInData = 15; // Default fallback
-    fullQuestData.forEach(q => {
-        const chStr = (q['Chapter'] || q['chapter'] || q['Zone'] || q['Type'] || '0').toString();
-        const chMatch = chStr.match(/\d+/);
-        if (chMatch) {
-            const val = parseInt(chMatch[0]);
-            if (val > maxChapterInData) maxChapterInData = val;
+    const xpRequired = getTotalXP(lv, pct, target);
+    document.getElementById('resExpReq').textContent = xpRequired.toLocaleString();
+
+    // 2. Evaluate MQ Logic
+    const mqBegin = parseInt(document.getElementById('mqFrom').value) || 0;
+    const mqEnd = parseInt(document.getElementById('mqUntil').value) || 0;
+    const skipVenena = document.getElementById('skipVenena').checked;
+    const spamAdv = document.getElementById('multipleMq').checked;
+
+    if (mqBegin <= mqEnd) {
+      let mqXP = 0;
+      let mqXPReverse = 0;
+      let mqStopIndex = mqBegin;
+      let mqStartIndex = mqEnd;
+      let mqStopAtFound = false;
+      let mqStartFromFound = false;
+
+      // Extract EXP and calculate totals/recommendations
+      for (let i = mqBegin; i <= mqEnd; i++) {
+        const qForward = cachedQuestData[i];
+        const qBackward = cachedQuestData[mqEnd - (i - mqBegin)];
+
+        const getExpForQuest = (q) => {
+          let val = q['EXP'] || q['exp'];
+          if (!val && q['Reward']) {
+            const m = q['Reward'].match(/([\d,]+)\s*EXP/i);
+            if (m) val = m[1];
+          }
+          let total = parseInt((val || '0').toString().replace(/,/g, ''));
+          const name = (q['Name'] || q['name'] || '').toLowerCase();
+          if (name.includes('venena meta coenubia') && !skipVenena) total += 12500000;
+          return total;
+        };
+
+        const expF = getExpForQuest(qForward);
+        mqXP += expF;
+
+        const expB = getExpForQuest(qBackward);
+        mqXPReverse += expB;
+
+        // Recommendations (Stop At / Start From)
+        if (!mqStopAtFound && mqXP >= xpRequired) {
+          mqStopAtFound = true;
+          mqStopIndex = i;
         }
-    });
-
-    const chapterTo = maxChapterInData;
-
-    // Total Quest EXP for selected chapters
-    const selectedQuests = fullQuestData.filter(q => {
-      // Priority: Chapter -> chapter -> Zone (legacy) -> Type
-      const chStr = (q['Chapter'] || q['chapter'] || q['Zone'] || q['Type'] || '0').toString();
-      const chMatch = chStr.match(/\d+/);
-      const ch = chMatch ? parseInt(chMatch[0]) : 0;
-      return ch >= chapterFrom && ch <= chapterTo;
-    });
-
-    const questTotalXP = selectedQuests.reduce((acc, q) => {
-      // Priority: EXP -> exp -> Reward (regex)
-      let expVal = q['EXP'] || q['exp'];
-      if (!expVal && q['Reward']) {
-        const rewardMatch = q['Reward'].match(/([\d,]+)\s*EXP/i);
-        if (rewardMatch) expVal = rewardMatch[1];
+        if (!mqStartFromFound && mqXPReverse >= xpRequired) {
+          mqStartFromFound = true;
+          mqStartIndex = mqEnd - (i - mqBegin);
+        }
       }
-      const exp = parseInt((expVal || '0').toString().replace(/,/g, ''));
-      return acc + exp;
-    }, 0);
 
-    if (questTotalXP === 0) {
-      return alert("Quest data not loaded or no quests in selected chapter range. Please check your Google Sheet 'Quests' tab (Expected columns: Chapter, EXP).");
-    }
+      document.getElementById('resQuestExpText').innerHTML = `<strong>XP:</strong> ${mqXP.toLocaleString()} exp`;
+      
+      const [nLv, nLvP] = addXP(lv, pct, mqXP);
+      document.getElementById('resEvaluationText').innerHTML = 
+        `After doing Main Quest's above range you'll reach <strong>Lv.${nLv} (${nLvP}%)</strong>`;
 
-    // Calculation Logic
-    let currentXP = Math.floor((percent / 100) * needXP(level));
-    
-    // Total EXP needed to reach targetLevel
-    let totalExpNeeded = 0;
-    for (let l = level; l < targetLevel; l++) {
-        totalExpNeeded += needXP(l);
-    }
-    // Subtract what we already have in the current level
-    totalExpNeeded -= currentXP;
+      // Show recommendations if not in spam mode
+      const resStartFrom = document.getElementById('resStartFrom');
+      const resStopAt = document.getElementById('resStopAt');
 
-    // Simulation (Spam MQ runs)
-    let runs = 0;
-    let simLevel = level;
-    let simXP = currentXP;
-
-    while (runs < 1000) {
-      runs++;
-      simXP += questTotalXP;
-      while (simLevel < targetLevel && simXP >= needXP(simLevel)) {
-        simXP -= needXP(simLevel);
-        simLevel++;
+      if (mqStartFromFound && !spamAdv && mqStartIndex > mqBegin) {
+        const qName = cachedQuestData[mqStartIndex]['Name'] || cachedQuestData[mqStartIndex]['name'];
+        resStartFrom.innerHTML = `You may <strong>start</strong> from quest <strong>${qName}</strong> to reach target level`;
+      } else {
+        resStartFrom.innerHTML = '';
       }
-      if (simLevel >= targetLevel) break;
-    }
 
-    // Update UI
-    const resExpReq = document.getElementById('resExpReq');
-    const resQuestExp = document.getElementById('resQuestExp');
-    const resRuns = document.getElementById('resRuns');
-    const calcResult = document.getElementById('calcResult');
+      if (mqStopAtFound && !spamAdv && mqStopIndex < mqEnd) {
+        const qName = cachedQuestData[mqStopIndex]['Name'] || cachedQuestData[mqStopIndex]['name'];
+        resStopAt.innerHTML = `You may <strong>stop</strong> after quest <strong>${qName}</strong> to reach target level`;
+      } else {
+        resStopAt.innerHTML = '';
+      }
 
-    if (resExpReq) resExpReq.textContent = totalExpNeeded.toLocaleString();
-    if (resQuestExp) resQuestExp.textContent = questTotalXP.toLocaleString();
-    if (resRuns) {
-        resRuns.textContent = runs + (simLevel >= targetLevel ? 'x' : 'x+ (Limit)');
+      // 3. Evaluate Diaries Simulation
+      const resultTableGroup = document.getElementById('resultTableGroup');
+      if (spamAdv) {
+        resultTableGroup.style.display = 'block';
+        evaluateDiaries(lv, pct, xpRequired, mqXP, mqEnd);
+      } else {
+        resultTableGroup.style.display = 'none';
+      }
+    } else {
+      document.getElementById('resEvaluationText').innerHTML = "<em>Error: Target quest is before start quest.</em>";
+      document.getElementById('resultTableGroup').style.display = 'none';
     }
-    if (calcResult) calcResult.style.display = 'block';
   }
 
-  // Initialize when DOM is ready
+  function evaluateDiaries(startLv, startPct, targetXP, questXP, mqEndIndex) {
+    const tableBody = document.getElementById('resultTableBody');
+    tableBody.innerHTML = '';
+
+    const untilText = document.getElementById('mqUntil').options[document.getElementById('mqUntil').selectedIndex].text;
+    
+    let curLv = startLv;
+    let curPct = startPct;
+    let reachedTarget = false;
+    let runs = 0;
+
+    // Safety limit 200 runs
+    while (runs < 200) {
+      runs++;
+      [curLv, curPct] = addXP(curLv, curPct, questXP);
+      
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${runs}</td>
+        <td>${untilText}</td>
+        <td>${curLv} (${curPct}%)</td>
+      `;
+      tableBody.appendChild(row);
+
+      // Check if we hit total XP requirement
+      if (getTotalXP(startLv, startPct, curLv) + (curPct/100 * getXP(curLv)) >= targetXP) {
+        reachedTarget = true;
+        break;
+      }
+    }
+  }
+
+  // Initialize
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCalculator);
   } else {

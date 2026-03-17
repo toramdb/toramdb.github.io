@@ -2,6 +2,23 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.31.0] - 2026-03-17
+### Added
+- Pagination to Quests page (20 items per page).
+- Deep search for Quests (now searches in Reward, Description, and Chapter columns).
+- Generalized filtering logic in `main.js` to support all database pages (Items, Quests, etc.) with consistent category mapping.
+
+## [0.30.0] — 2026-03-17
+### Added
+- **MQ Calculator Redesign**: Perombakan total UI dan logika kalkulator MQ.
+  - **Advanced Logic**: Menggunakan formula EXP murni Toram Tools (`xp.js`) untuk hasil yang sangat akurat.
+  - **Quest-to-Quest Selection**: User kini bisa memilih rentang quest secara spesifik ( From - Until) langsung dari data Google Sheets.
+  - **Venena Logic Support**: Penanganan otomatis bonus EXP 12.5M dari "Pre-Venena Meta Coenubia Fight".
+  - **Diary Simulation**: Tabel simulasi level per "Run" (Diary) untuk perencanaan leveling jangka panjang.
+  - **Lvl + Pct Prediction**: Hasil kalkulasi kini menunjukkan Level dan Persentase (%) akhir yang akan dicapai.
+
+---
+
 ## [0.29.0] — 2026-03-17
 ### Added
 - **Quest UI Enhancements**: Tampilan halaman Quests yang lebih premium dan informatif.

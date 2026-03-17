@@ -89,14 +89,17 @@
     var fullData = (window.ToramSheets && window.ToramSheets.dataState.fullData) || [];
     
     filteredData = fullData.filter(function (row) {
-      // 1. Text Search (Name, Type, Rarity, Source)
-      var name   = (row['Name']   || '').toLowerCase();
-      var type   = (row['Type']   || '').toLowerCase();
-      var rarity = (row['Rarity'] || '').toLowerCase();
-      var source = (row['Source'] || '').toLowerCase();
-      var stats  = (row['Stats']  || '').toLowerCase(); // Useful for some pages
+      // 1. Text Search (Name, Type, Rarity, Source, Reward, Description)
+      var name    = (row['Name']   || '').toLowerCase();
+      var type    = (row['Type']   || '').toLowerCase();
+      var rarity  = (row['Rarity'] || '').toLowerCase();
+      var source  = (row['Source'] || '').toLowerCase();
+      var stats   = (row['Stats']  || '').toLowerCase(); 
+      var reward  = (row['Reward'] || '').toLowerCase();
+      var desc    = (row['Description'] || '').toLowerCase();
+      var chapter = (row['Chapter'] || '').toLowerCase();
       
-      var combined = (name + ' ' + type + ' ' + rarity + ' ' + source + ' ' + stats);
+      var combined = (name + ' ' + type + ' ' + rarity + ' ' + source + ' ' + stats + ' ' + reward + ' ' + desc + ' ' + chapter);
       var matchText = !query || combined.indexOf(query) !== -1;
 
       // 2. Category 1 (Type)
@@ -167,18 +170,27 @@
     paginate();
   }
 
-  // Helper from sheets.js logic to keep categorization consistent
+  // Helper to normalize types across different pages (Items, Quests, etc.)
   function typeToCategory(type) {
-    if (!type) return 'Other';
-    var t = type.toLowerCase();
-    if (t.includes('sword') || t.includes('blade')) return 'Sword';
-    if (t.includes('bow') || t.includes('gun')) return 'Bow';
-    if (t.includes('staff') || t.includes('magic')) return 'Staff';
-    if (t.includes('armor') || t.includes('garb')) return 'Armor';
-    if (t.includes('add') || t.includes('hat') || t.includes('wing')) return 'Additional';
-    if (t.includes('ring') || t.includes('charm') || t.includes('spec')) return 'Special';
-    if (t.includes('crysta')) return 'Crysta';
-    return 'Other';
+    if (!type) return 'other';
+    var t = type.toLowerCase().trim();
+    
+    // --- Quest Categories ---
+    if (t.includes('main')) return 'main';
+    if (t.includes('side')) return 'side';
+    if (t.includes('daily')) return 'daily';
+    if (t.includes('event')) return 'event';
+
+    // --- Item Categories ---
+    if (t.includes('sword') || t.includes('blade')) return 'sword';
+    if (t.includes('bow') || t.includes('gun')) return 'bow';
+    if (t.includes('staff') || t.includes('magic')) return 'staff';
+    if (t.includes('armor') || t.includes('garb')) return 'armor';
+    if (t.includes('add') || t.includes('hat') || t.includes('wing')) return 'additional';
+    if (t.includes('ring') || t.includes('charm') || t.includes('spec')) return 'special';
+    if (t.includes('crysta')) return 'crysta';
+    
+    return t.replace(/\s+/g, '-');
   }
 
   if (filterInput)   filterInput.addEventListener('input', onFilterChange);
