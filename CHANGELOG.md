@@ -2,6 +2,13 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.40.3] - 2026-03-18
+### Fixed
+- **Modal Data Persistence**: Explicitly clearing all modal fields when a monster is not found, preventing stale data from the previous monster from being displayed.
+### Added
+- **Conditional Quest Description**: Restored the `Description` field to Quest cards. Descriptions are now intelligently hidden if empty or containing placeholder values (`-`).
+- **Description Styling**: Added a dedicated style for quest descriptions to maintain a clean visual hierarchy.
+
 ## [0.40.2] - 2026-03-18
 ### Added
 - **Premium Quest Header**: Merged Chapter and Quest Type into a "Double Badge" header (Icon | Chapter | Type) for a cleaner, more professional look.

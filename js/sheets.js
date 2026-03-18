@@ -723,6 +723,9 @@ window.ToramSheets = (function () {
           '<div style="margin-bottom:0.6rem; font-size:0.85rem;">' +
             'Boss : ' + (boss && boss !== '-' ? '<a href="javascript:void(0)" class="boss-link" data-boss-name="' + boss + '">' + boss + '</a>' : '<span style="opacity:0.6;">-</span>') +
           '</div>' +
+          (desc && desc !== '-' ? 
+            '<div class="quest-desc">' + desc + '</div>' : ''
+          ) +
           (reward ? 
             '<div class="reward-box">' +
               '<strong>Reward:</strong> <span class="reward-value">' + reward + '</span>' +

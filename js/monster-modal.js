@@ -114,7 +114,12 @@ window.MonsterModal = (function () {
   function populate(mon) {
     if (!mon) {
       document.getElementById('monModalName').textContent = 'Monster Not Found';
-      document.getElementById('monModalInfo').innerHTML = '<p class="text-muted">Monster not found in database.</p>';
+      document.getElementById('monModalType').innerHTML = '';
+      document.getElementById('monModalImage').innerHTML = '<span class="placeholder-icon" style="font-size:3rem">❓</span>';
+      document.getElementById('monModalInfoBar').innerHTML = '';
+      document.getElementById('monModalInfo').innerHTML = '<p class="text-muted" style="text-align:center; padding:1rem;">Monster not found in database.</p>';
+      var dropEl = document.getElementById('monModalDrops');
+      if (dropEl) dropEl.innerHTML = '<p class="text-muted" style="text-align:center; padding:1rem;">No drop info available.</p>';
       return;
     }
 
