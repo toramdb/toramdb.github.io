@@ -151,7 +151,11 @@ window.MonsterModal = (function () {
       var item = document.createElement('div');
       var safeId = getSafeId(d);
       item.className = 'm-drop-item';
-      item.innerHTML = '<div class="m-drop-icon" id="drop-icon-' + safeId + '">📦</div> <span class="m-drop-text">' + esc(d) + '</span> <span class="m-drop-arrow">→</span>';
+      
+      // Use items_ico.png as the INITIAL placeholder instead of a box emoji
+      var placeholderHTML = (window.ToramSheets) ? window.ToramSheets.iconHTML('', '', 'item', d, 'contain') : '📦';
+      
+      item.innerHTML = '<div class="m-drop-icon" id="drop-icon-' + safeId + '">' + placeholderHTML + '</div> <span class="m-drop-text">' + esc(d) + '</span> <span class="m-drop-arrow">→</span>';
       
       // Fetch real icon if ItemModal is available
       if (window.ItemModal && window.ItemModal.getItem) {
