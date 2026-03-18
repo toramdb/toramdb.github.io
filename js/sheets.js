@@ -690,6 +690,7 @@ window.ToramSheets = (function () {
       var minlv   = esc(row['MinLevel'] || '');
       var ep      = esc(row['Episode'] || '');
       var boss    = esc(row['Boss'] || '');
+      var desc    = esc(row['Description'] || '');
       
       var tLower = typeRaw.toLowerCase();
       // Heuristic for MQ to show calculator link

@@ -2,6 +2,10 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.40.1] - 2026-03-18
+### Fixed
+- **Quest Display Fix**: Resolved a `ReferenceError` that was preventing Quest cards from being rendered. All quests now correctly appear with the new 4-row layout.
+
 ## [0.40.0] - 2026-03-18
 ### Added
 - **Quest UI Redesign**: Completely overhauled the Quest card layout into a 4-row structure:
