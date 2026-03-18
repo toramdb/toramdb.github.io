@@ -227,17 +227,29 @@ window.ToramSheets = (function () {
     // Non-equipment (emoji)
     'material':       '⛏️',
     'consumable':     '🧪',
-    'quest item':     '📦'
+    'quest item':     '📦',
+    // Monster types
+    'boss':           'img/icons/monsters_ico.png',
+    'mini-boss':      'img/icons/monsters_ico.png',
+    'mob':            'img/icons/monsters_ico.png'
   };
 
   // Resolve the best icon: ImageURL > Sheet Icon > type-based > fallback
   function resolveIcon(type) {
-    var icon = TYPE_ICONS[(type || '').toLowerCase()] || 'img/icons/1h_ico.png';
+    var t = (type || '').toLowerCase().trim();
+    var icon = TYPE_ICONS[t];
+    
+    // Fallback if type is not specifically in TYPE_ICONS
+    if (!icon) {
+       if (t.indexOf('boss') !== -1 || t === 'monster' || t === 'mob') icon = 'img/icons/monsters_ico.png';
+       else icon = 'img/icons/items_ico.png'; // Generic item fallback
+    }
+
     // Convert relative img/ paths using the correct base
     if (typeof icon === 'string' && icon.indexOf('img/icons/') === 0) {
       return ICON_BASE + icon.slice('img/icons/'.length);
     }
-    return icon;
+    return icon || '📦';
   }
 
   // ---- ICON / IMAGE HELPER ------------------------------------------

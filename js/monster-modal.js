@@ -126,7 +126,7 @@ window.MonsterModal = (function () {
       if (window.ToramSheets) {
         var imgURL = (mon['ImageURL'] || '').trim();
         var icon = mon['Icon'] || '';
-        var type = mon['Type'] || '';
+        var type = mon['Type'] || 'Boss'; // Default to Boss type for monster icon lookup
         imageEl.innerHTML = window.ToramSheets.iconHTML(imgURL, icon, type, nameRAW, 'contain');
       } else {
         imageEl.innerHTML = '<span style="font-size:3rem; opacity:0.3;">👾</span>';
@@ -170,7 +170,9 @@ window.MonsterModal = (function () {
           } else {
              // If not found in ItemDetails, try to guess icon based on name or type
              if (window.ToramSheets) {
-                iconDiv.innerHTML = window.ToramSheets.iconHTML('', '', '', d, 'contain');
+                // Pass empty type and name to get the generic item fallback from sheets.js 
+                iconDiv.innerHTML = window.ToramSheets.iconHTML('', '', 'item', d, 'contain');
+                iconDiv.style.background = 'transparent';
              }
           }
         });
