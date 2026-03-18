@@ -245,24 +245,25 @@ window.ToramSheets = (function () {
   //   - If imageURL is provided → <img> tag
   //   - If icon is provided → emoji/text from Sheet
   //   - Otherwise → auto-detect from TYPE_ICONS (supports emoji OR image URL)
-  function iconHTML(imageURL, icon, type, altText) {
+  function iconHTML(imageURL, icon, type, altText, fit) {
     var fallbackImg = ICON_BASE + 'no_image.png';
     var errHandler = 'onerror="this.onerror=null;this.src=\'' + fallbackImg + '\';this.style.opacity=\'0.6\';"';
+    var objectFit = fit || 'cover';
 
     if (imageURL) {
-      return '<img src="' + esc(imageURL) + '" alt="' + esc(altText) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:cover;border-radius:inherit" />';
+      return '<img src="' + esc(imageURL) + '" alt="' + esc(altText) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:' + objectFit + ';border-radius:inherit" />';
     }
     if (icon) {
       // If icon is a path/URL, render as img
       if (typeof icon === 'string' && (icon.indexOf('/') !== -1 || icon.indexOf('.png') !== -1)) {
-        return '<img src="' + esc(icon) + '" alt="' + esc(altText) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:contain;border-radius:inherit" />';
+        return '<img src="' + esc(icon) + '" alt="' + esc(altText) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:' + objectFit + ';border-radius:inherit" />';
       }
       return esc(icon);
     }
     var resolved = resolveIcon(type);
     // If the default icon is an image path or URL, render as <img>
     if (resolved.indexOf('http') === 0 || resolved.indexOf('../img/') === 0 || resolved.indexOf('img/') === 0) {
-      return '<img src="' + esc(resolved) + '" alt="' + esc(altText || type) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:cover;border-radius:inherit" />';
+      return '<img src="' + esc(resolved) + '" alt="' + esc(altText || type) + '" ' + errHandler + ' style="width:100%;height:100%;object-fit:' + objectFit + ';border-radius:inherit" />';
     }
     return esc(resolved);
   }

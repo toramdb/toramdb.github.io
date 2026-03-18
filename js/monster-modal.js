@@ -127,7 +127,7 @@ window.MonsterModal = (function () {
         var imgURL = (mon['ImageURL'] || '').trim();
         var icon = mon['Icon'] || '';
         var type = mon['Type'] || '';
-        imageEl.innerHTML = window.ToramSheets.iconHTML(imgURL, icon, type, nameRAW);
+        imageEl.innerHTML = window.ToramSheets.iconHTML(imgURL, icon, type, nameRAW, 'contain');
       } else {
         imageEl.innerHTML = '<span style="font-size:3rem; opacity:0.3;">👾</span>';
       }
@@ -162,7 +162,7 @@ window.MonsterModal = (function () {
               var iURL = (itemData['ImageURL'] || '').trim();
               var iIcon = itemData['Icon'] || '';
               var iType = itemData['Type'] || '';
-              iconDiv.innerHTML = window.ToramSheets.iconHTML(iURL, iIcon, iType, d);
+              iconDiv.innerHTML = window.ToramSheets.iconHTML(iURL, iIcon, iType, d, 'contain');
               iconDiv.style.background = 'transparent';
             }
           }
