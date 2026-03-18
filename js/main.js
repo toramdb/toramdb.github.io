@@ -245,8 +245,25 @@
     var paginationEl = document.querySelector('.pagination');
     if (!paginationEl) return;
 
-    var totalPages = Math.ceil(filteredData.length / PAGE_SIZE);
-    console.log(`[ToramDB] Paginating: ${filteredData.length} items, Page ${currentPage}/${totalPages}`);
+    var isGroupCategory = window.ToramSheets.dataState.pageType === 'monsters' || window.ToramSheets.dataState.pageType === 'pets';
+    var itemsToPaginate = filteredData;
+
+    if (isGroupCategory) {
+      var groups = [];
+      var groupMap = {};
+      filteredData.forEach(function (row) {
+        var key = (row['Name'] || '').trim().toLowerCase();
+        if (!groupMap[key]) {
+          groupMap[key] = [];
+          groups.push(groupMap[key]);
+        }
+        groupMap[key].push(row);
+      });
+      itemsToPaginate = groups;
+    }
+
+    var totalPages = Math.ceil(itemsToPaginate.length / PAGE_SIZE);
+    console.log(`[ToramDB] Paginating: ${itemsToPaginate.length} items/groups, Page ${currentPage}/${totalPages}`);
 
     // Hide pagination if not enough items
     if (totalPages <= 1) {
@@ -263,11 +280,17 @@
 
     paginationEl.style.display = '';
 
-    // Slice and Render ONLY the 20 items for this page
+    // Slice and Render ONLY the 20 items (or groups) for this page
     var start = (currentPage - 1) * PAGE_SIZE;
     var end = start + PAGE_SIZE;
-    var pagedSlice = filteredData.slice(start, end);
+    var pagedSlice = itemsToPaginate.slice(start, end);
     
+    if (isGroupCategory) {
+      var flat = [];
+      pagedSlice.forEach(function(g) { flat = flat.concat(g); });
+      pagedSlice = flat;
+    }
+
     window.ToramSheets.renderData(window.ToramSheets.dataState.pageType, pagedSlice, window.ToramSheets.dataState.containerId);
 
     // Build page buttons

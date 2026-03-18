@@ -2,6 +2,10 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.42.2] - 2026-03-18
+### Fixed
+- **Monster Variant Grouping**: Fixed a critical visual bug on the Monsters page where monster variants (Normal, Hard, Nightmare, Ultimate) were being split across different pages. The `paginate()` logic now intelligently groups rows by monster name before pagination, guaranteeing that all variants of a monster stay harmoniously together on the same page.
+
 ## [0.42.1] - 2026-03-18
 ### Fixed
 - **Level Cap Constraint**: Removed the hardcoded `LV_CAP` (315) limit within the EXP simulator loop. The calculator can now accurately simulate runs to future target levels (e.g., 330 or 350) without artificially stopping at 315.
