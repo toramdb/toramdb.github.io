@@ -531,8 +531,8 @@ window.ToramSheets = (function () {
       }
 
       if (window.MonsterModal) {
-        // If Compare button clicked, open modal with Compare tab active
-        window.MonsterModal.open(mName, null, isCompare ? 'compare' : 'info');
+        // Pass variants directly from card dataset to avoid lookup issues
+        window.MonsterModal.open(mName, null, isCompare ? 'compare' : 'info', variants);
       }
     });
   }

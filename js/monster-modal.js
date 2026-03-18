@@ -72,7 +72,12 @@ window.MonsterModal = (function () {
   }
 
   function populate(group, selectedVariant, startTab) {
-    if (!group || !group.length) return;
+    var monContainer = document.getElementById('monModalInfoRows');
+    if (!group || !group.length) {
+       document.getElementById('monModalName').textContent = 'Monster Not Found';
+       if(monContainer) monContainer.innerHTML = '<p class="text-muted" style="padding:1rem">Data for this monster could not be loaded.</p>';
+       return;
+    }
     currentGroup = group;
     currentVariant = selectedVariant || group[0];
 
@@ -187,44 +192,52 @@ window.MonsterModal = (function () {
     }
   }
 
-  function open(monsterName, difficulty, startTab) {
+  function open(monsterName, difficulty, startTab, initialGroup) {
     var overlay = document.getElementById('monsterModal');
     if (!overlay) return;
     buildModalHTML();
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    var group = [];
-    if (window.ToramSheets && window.ToramSheets.dataState && window.ToramSheets.dataState.fullData) {
-      // Find all variants in sheets data
-      var data = window.ToramSheets.dataState.fullData;
-      group = data.filter(function(r) { return (r['Name'] || '').toLowerCase() === monsterName.toLowerCase(); });
+    var group = initialGroup || [];
+    
+    // If no initial group, try searching in existing state
+    if (!group.length) {
+      if (window.ToramSheets && window.ToramSheets.dataState && window.ToramSheets.dataState.fullData) {
+        var data = window.ToramSheets.dataState.fullData;
+        group = data.filter(function(r) { 
+          var rname = (r['Name'] || '').trim().toLowerCase();
+          return rname === (monsterName || '').trim().toLowerCase(); 
+        });
+      }
     }
     
     // Fallback to sample if not found
     if (!group.length && SAMPLE_MONSTERS[monsterName]) {
       group = SAMPLE_MONSTERS[monsterName];
-    } else if (!group.length) {
-       // Manual find in sheets cache if fullData is not synced (e.g. called from external link)
-       if (sheetsCache) {
-          group = sheetsCache.filter(function(r) { return (r['Name'] || '').toLowerCase() === monsterName.toLowerCase(); });
-       }
+    } else if (!group.length && sheetsCache) {
+      group = sheetsCache.filter(function(r) { 
+        var rname = (r['Name'] || '').trim().toLowerCase();
+        return rname === (monsterName || '').trim().toLowerCase(); 
+      });
     }
 
     if (!group.length) {
-      // Last attempt: fetch sheet if logic allows
-      var sheetName = (window.ToramSheets && window.ToramSheets.CONFIG.SHEETS.monsters.name) || 'Monsters';
+      // Last attempt: fetch sheet
+      var sheetName = (window.ToramSheets && window.ToramSheets.CONFIG.SHEETS.monsters) || 'Monsters';
       if (window.ToramSheets && window.ToramSheets.fetchSheet) {
           window.ToramSheets.fetchSheet(sheetName).then(function(csv){
               sheetsCache = window.ToramSheets.parseCSV(csv);
-              open(monsterName, difficulty, startTab); // Recursive once cache is filled
+              open(monsterName, difficulty, startTab); 
+          }).catch(function(){
+              populate(null);
           });
           return;
       }
     }
 
     var selected = null;
-    if (difficulty) {
+    if (difficulty && group.length) {
       selected = group.find(function(v) { return (v['Difficulty'] || '').toLowerCase() === difficulty.toLowerCase(); });
     }
     populate(group, selected, startTab);
