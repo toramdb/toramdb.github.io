@@ -98,10 +98,10 @@
     var cat2  = filterSelect2 ? filterSelect2.value.toLowerCase() : '';
     var cat3  = filterSelect3 ? filterSelect3.value.toLowerCase() : '';
 
-    var fullData = (window.ToramSheets && window.ToramSheets.dataState.fullData) || [];
-    
+    var pageType = (window.ToramSheets && window.ToramSheets.dataState.pageType) || '';
+
     filteredData = fullData.filter(function (row) {
-      // 1. Text Search (Name, Type, Rarity, Source, Reward, Description)
+      // 1. Text Search
       var name    = (row['Name']   || '').toLowerCase();
       var type    = (row['Type']   || '').toLowerCase();
       var rarity  = (row['Rarity'] || '').toLowerCase();
@@ -110,28 +110,32 @@
       var reward  = (row['Reward'] || '').toLowerCase();
       var desc    = (row['Description'] || '').toLowerCase();
       var chapter = (row['Chapter'] || '').toLowerCase();
+      var element = (row['Element'] || '').toLowerCase();
       
-      var combined = name + ' ' + type + ' ' + rarity + ' ' + source + ' ' + stats + ' ' + reward + ' ' + desc + ' ' + chapter;
+      var combined = name + ' ' + type + ' ' + rarity + ' ' + source + ' ' + stats + ' ' + reward + ' ' + desc + ' ' + chapter + ' ' + element;
       var matchText = !query || combined.indexOf(query) !== -1;
 
       // 2. Category 1 (Type)
       var c1 = typeToCategory(type);
       var matchCat1 = !cat1 || c1 === cat1;
 
-      // 3. Category 2 (Rarity / Event) - Match semicolon parts
+      // 3. Category 2 (Element for monsters, Rarity for others)
       var matchCat2 = !cat2;
       if (cat2) {
-        var rarityLower = rarity.toLowerCase();
-        // Check for "Non-Event" or explicit match
-        if (cat2 === 'non-event') {
-          matchCat2 = rarityLower.indexOf('non event') !== -1 || rarityLower.indexOf('non-event') !== -1;
+        if (pageType === 'monsters') {
+          matchCat2 = element === cat2;
         } else {
-          var rParts = rarityLower.split(';').map(function(s) { return s.trim(); });
-          matchCat2 = rParts.indexOf(cat2) !== -1;
+          var rarityLower = rarity.toLowerCase();
+          if (cat2 === 'non-event') {
+            matchCat2 = rarityLower.indexOf('non event') !== -1 || rarityLower.indexOf('non-event') !== -1;
+          } else {
+            var rParts = rarityLower.split(';').map(function(s) { return s.trim(); });
+            matchCat2 = rParts.indexOf(cat2) !== -1;
+          }
         }
       }
 
-      // 4. Category 3 (Source / Drop/Craft) - Using Rarity column per user request
+      // 4. Category 3 (Source / Drop/Craft)
       var matchCat3 = !cat3;
       if (cat3) {
         if (cat3 === 'drop') {

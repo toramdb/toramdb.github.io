@@ -426,7 +426,9 @@ window.ToramSheets = (function () {
   function renderMonsters(rows, grid) {
     grid.innerHTML = '';
     if (!rows.length) {
-      showError(grid, 'No monster data found. Check your Sheet ID and tab name (Monsters).');
+      if (dataState.fullData.length === 0) {
+        showError(grid, 'No monster data found. Check your Sheet ID and tab name (Monsters).');
+      }
       return;
     }
 
