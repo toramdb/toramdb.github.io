@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.40.2] - 2026-03-18
+### Added
+- **Premium Quest Header**: Merged Chapter and Quest Type into a "Double Badge" header (Icon | Chapter | Type) for a cleaner, more professional look.
+- **Interactive Boss Modal**: Fully integrated Monster Modal into the Quests page, enabling Boss links to work correctly.
+- **Boss Link Indicator**: Added a distinct underline and hover effect on Boss names to clearly indicate they are interactive links.
+
 ## [0.40.1] - 2026-03-18
 ### Fixed
 - **Quest Display Fix**: Resolved a `ReferenceError` that was preventing Quest cards from being rendered. All quests now correctly appear with the new 4-row layout.

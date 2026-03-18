@@ -704,18 +704,16 @@ window.ToramSheets = (function () {
                             (tLower.indexOf('daily') !== -1 ? 'daily' : 
                             (tLower.indexOf('event') !== -1 ? 'event' : tLower.replace(/\s+/g, '-')))));
       
-      // Baris 1: Icon | Chapter X
-      // Baris 2: [Main/Side Quest]
-      // Baris 3: Episode XX : Name
-      // Baris 4: Boss : Name (Clickable)
+      // Row 1: [Icon] | [Chapter Badge] [Type Badge]
+      // Row 2: (Merged into Row 1)
+      // Row 3: Episode XX : Quest Name (Bold)
+      // Row 4: Boss : Boss name (Clickable)
       el.innerHTML =
         '<div class="data-card-header">' +
           '<div class="data-card-icon">' + iconHTML(imgURL, icon, 'quest icon', name) + '</div>' +
-          '<div>' +
-            '<div class="data-card-title">' + 
-               (ch ? 'Chapter ' + ch : 'Story') + 
-            '</div>' +
-            '<div class="data-card-subtitle" style="opacity:0.7; font-size:0.75rem;">' + typeRaw + (minlv ? ' · Lv.' + minlv + '+' : '') + '</div>' +
+          '<div class="tag-row">' +
+             (ch ? '<span class="tag-ch">Ch.' + ch + '</span>' : '<span class="tag-ch">Story</span>') +
+             '<span class="tag-type">' + typeRaw + '</span>' +
           '</div>' +
         '</div>' +
         '<div class="data-card-body">' +
@@ -723,7 +721,7 @@ window.ToramSheets = (function () {
             '<strong>' + (ep ? 'Episode ' + ep + ' : ' : '') + name + '</strong>' +
           '</div>' +
           '<div style="margin-bottom:0.6rem; font-size:0.85rem;">' +
-            'Boss : ' + (boss && boss !== '-' ? '<a href="javascript:void(0)" class="boss-link" data-boss-name="' + boss + '" style="color:var(--accent); font-weight:700;">' + boss + '</a>' : '<span style="opacity:0.6;">-</span>') +
+            'Boss : ' + (boss && boss !== '-' ? '<a href="javascript:void(0)" class="boss-link" data-boss-name="' + boss + '">' + boss + '</a>' : '<span style="opacity:0.6;">-</span>') +
           '</div>' +
           (reward ? 
             '<div class="reward-box">' +
