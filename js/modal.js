@@ -733,7 +733,10 @@ window.ItemModal = (function () {
       return;
     }
     ensureItemDetailsLoaded(function() {
-      cb(findInCache(name) || SAMPLE_ITEMS[name] || null);
+      // Force async to prevent race conditions in UI updates
+      setTimeout(function() {
+        cb(findInCache(name) || SAMPLE_ITEMS[name] || null);
+      }, 0);
     }, 1);
   }
 

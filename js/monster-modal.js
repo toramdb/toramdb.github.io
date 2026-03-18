@@ -157,6 +157,9 @@ window.MonsterModal = (function () {
       
       item.innerHTML = '<div class="m-drop-icon" id="drop-icon-' + safeId + '">' + placeholderHTML + '</div> <span class="m-drop-text">' + esc(d) + '</span> <span class="m-drop-arrow">→</span>';
       
+      // IMPORTANT: Append to DOM before calling getItem, because getItem might be synchronous!
+      dropEl.appendChild(item);
+
       // Fetch real icon if ItemModal is available
       if (window.ItemModal && window.ItemModal.getItem) {
         window.ItemModal.getItem(d, function(itemData) {
@@ -185,7 +188,6 @@ window.MonsterModal = (function () {
       item.onclick = function() {
         if(window.ItemModal) { close(); setTimeout(function(){ window.ItemModal.open(d); }, 200); }
       };
-      dropEl.appendChild(item);
     });
 
     // Compare Tab (Sorted Order)
