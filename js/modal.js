@@ -648,7 +648,7 @@ window.ItemModal = (function () {
     var s = window.ToramSheets.CONFIG.SHEETS.itemdetails;
     var sName = (s && s.name) ? s.name : 'ItemDetails';
     var sGid = (s && s.gid) ? s.gid : '';
-    pendingItemDetailsFetch = window.ToramSheets.fetchSheet(sName, sGid)
+    pendingItemDetailsFetch = window.ToramSheets.fetchSheet({ name: sName, gid: sGid })
       .then(function (csv) {
         sheetsCache = window.ToramSheets.parseCSV(csv);
         sheetsCache.forEach(function(r, i) { r._index = i; });
