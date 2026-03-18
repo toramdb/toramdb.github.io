@@ -2,6 +2,11 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.38.0] - 2026-03-18
+### Fixed
+- **Popular Monsters UI**: Refined monster cards on the homepage to match the detail modal aesthetic. Added "HP " prefix, improved tag padding, and increased font weight for a premium look.
+- **Consistent Tag Layout**: Implemented a flexible container for monster tags to ensure they are consistently aligned at the bottom of the card.
+
 ## [0.37.0] - 2026-03-18
 ### Fixed
 - **Quest Card Consistency**: Implemented Flexbox layout for all quest cards to ensure uniform heights in the grid and consistent alignment for titles and rewards.

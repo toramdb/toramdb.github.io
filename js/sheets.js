@@ -1082,9 +1082,11 @@ window.ToramSheets = (function () {
                   '</div>' +
                 '</div>' +
                 '<div class="data-card-body">' +
-                  (melem ? '<span class="tag' + elemClass + '">' + melem + '</span>' : '') +
-                  (mhp ? '<span class="tag">' + mhp + '</span>' : '') +
-                  (mlevel ? '<span class="tag' + lvClass + '">Lv.' + mlevel + '</span>' : '') +
+                  '<div style="margin-top:auto; display:flex; gap:0.4rem; flex-wrap:wrap;">' +
+                    (melem ? '<span class="tag' + elemClass + '">' + melem + '</span>' : '') +
+                    (mhp ? '<span class="tag">HP ' + mhp + '</span>' : '') +
+                    (mlevel ? '<span class="tag' + lvClass + '">Lv.' + mlevel + '</span>' : '') +
+                  '</div>' +
                 '</div>';
               monGrid.appendChild(article);
             });
