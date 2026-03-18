@@ -16,6 +16,10 @@ window.MonsterModal = (function () {
 
   var DIFFICULTY_ORDER = { 'easy': 0, 'normal': 1, 'hard': 2, 'nightmare': 3, 'ultimate': 4 };
 
+  function getSafeId(str) {
+    return (str || '').replace(/[^a-z0-9]/gi, '_').toLowerCase();
+  }
+
   function elemIcon(el) {
     // Icons removed as per user request
     return '';
@@ -93,9 +97,10 @@ window.MonsterModal = (function () {
     // Main Badges (Lv, Elem, HP)
     var badges = document.getElementById('monModalMainBadges');
     var el = mon['Element'] || '';
+    var elLower = el.toLowerCase();
     badges.innerHTML = 
       '<span class="m-badge lv">Lv.' + esc(mon['Level']) + '</span> ' +
-      '<span class="m-badge" style="background:#e0f2fe; color:#0369a1;">' + esc(el) + '</span> ' +
+      '<span class="m-badge elem-' + elLower + '">' + esc(el) + '</span> ' +
       '<span class="m-badge hp">HP ' + esc(mon['HP']) + '</span>';
 
     // Image / Icon
@@ -127,14 +132,15 @@ window.MonsterModal = (function () {
     dropEl.innerHTML = '';
     drops.forEach(function(d) {
       var item = document.createElement('div');
+      var safeId = getSafeId(d);
       item.className = 'm-drop-item';
-      item.innerHTML = '<div class="m-drop-icon" id="drop-icon-' + btoa(d).replace(/=/g, '') + '">📦</div> <span class="m-drop-text">' + esc(d) + '</span> <span class="m-drop-arrow">→</span>';
+      item.innerHTML = '<div class="m-drop-icon" id="drop-icon-' + safeId + '">📦</div> <span class="m-drop-text">' + esc(d) + '</span> <span class="m-drop-arrow">→</span>';
       
       // Fetch real icon if ItemModal is available
       if (window.ItemModal && window.ItemModal.getItem) {
         window.ItemModal.getItem(d, function(itemData) {
           if (itemData) {
-            var iconDiv = document.getElementById('drop-icon-' + btoa(d).replace(/=/g, ''));
+            var iconDiv = document.getElementById('drop-icon-' + safeId);
             if (iconDiv && window.ToramSheets) {
               var iURL = (itemData['ImageURL'] || '').trim();
               var iIcon = itemData['Icon'] || '';

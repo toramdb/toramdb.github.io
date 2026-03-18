@@ -469,17 +469,9 @@ window.ToramSheets = (function () {
         monIconHTML = '<img src="' + ICON_BASE + 'monsters_ico.png" alt="" ' + errHandler + ' />';
       }
 
-      // Element tag color
-      var elemLower = elem.toLowerCase();
-      var elemEmoji = '⚪'; // Default neutral
-      if (elemLower === 'fire')  elemEmoji = '🔥';
-      else if (elemLower === 'water' || elemLower === 'ice') elemEmoji = '💧';
-      else if (elemLower === 'wind')  elemEmoji = '🌪️';
-      else if (elemLower === 'earth') elemEmoji = '🧱';
-      else if (elemLower === 'dark')  elemEmoji = '🌑';
-      else if (elemLower === 'light') elemEmoji = '✨';
 
       // Drop list (Top 3)
+      var elemLower = elem.toLowerCase();
       var drops = rawDrop.split(';').map(function(d) { return d.trim(); }).filter(Boolean);
       var dropsHTML = '';
       drops.slice(0, 3).forEach(function(d) {
@@ -504,7 +496,7 @@ window.ToramSheets = (function () {
           '<span class="m-badge lv">Lv.' + level + '</span>' +
           '<span class="m-badge diff">' + diff + '</span>' +
           '<span class="m-badge hp">HP ' + hp + '</span>' +
-          (elem ? '<span class="tag ' + elemLower + '" style="border-radius:10px">' + elem + '</span>' : '') +
+          (elem ? '<span class="m-badge elem-' + elemLower + '">' + elem + '</span>' : '') +
         '</div>' +
         '<div class="m-location">Location: ' + loc + '</div>' +
         '<div class="m-drops-section">' +

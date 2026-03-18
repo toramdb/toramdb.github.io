@@ -1663,6 +1663,15 @@ footer {
 .m-badge.diff { background: #fffbeb; color: #92400e; border-color: #fef3c7; }
 .m-badge.hp { background: #fef2f2; color: #991b1b; border-color: #fee2e2; }
 
+/* Element Colors */
+.m-badge.elem-fire { background: #fef2f2; color: #991b1b; border-color: #fee2e2; }
+.m-badge.elem-water, .m-badge.elem-ice { background: #eff6ff; color: #1e40af; border-color: #dbeafe; }
+.m-badge.elem-wind { background: #f0fdf4; color: #166534; border-color: #dcfce7; }
+.m-badge.elem-earth { background: #fefce8; color: #854d0e; border-color: #fef9c3; }
+.m-badge.elem-dark { background: #faf5ff; color: #6b21a8; border-color: #f3e8ff; }
+.m-badge.elem-light { background: #fffcf0; color: #9a3412; border-color: #fef3c7; }
+.m-badge.elem-neutral { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+
 .m-location {
   display: flex;
   align-items: center;
