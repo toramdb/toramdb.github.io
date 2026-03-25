@@ -2,6 +2,17 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.44.0] - 2026-03-25
+### Added
+- **Pet Database Modernization**: Completely overhauled the Pet page from a legacy table to a modern, responsive **Data Grid** layout.
+- **Event-Aware Tagging**: Pet locations now feature smart categorization: orange "Event" tags for limited-time pets and blue "Info" tags for standard spawns.
+- **Improved Card Scaling**: Standardized pet avatars to the platform's `.data-card` spec (44x44px), resolving oversized and pixelated image issues.
+
+### Fixed
+- **Pet Modal Icon Fallback**: Resolved a bug where icons were missing in the Pet detail modal. Integrated the `ToramSheets.iconHTML` helper to ensure the standard 💰 icon (or other fallbacks) appears when no `ImageURL` is available.
+- **Grid Layout Alignment**: Corrected the Pet grid's CSS targeting to use the robust `.data-grid` system, providing a professional multi-column experience across all devices.
+- **Modal Visual Polish**: Refined the Pet detail modal header with a centered, styled preview container for a more premium and "neat" feel.
+
 ## [0.43.0] - 2026-03-19
 ### Added
 - **Monster Modal Overhaul**: Completely redesigned the monster detail modal with a Compare tab for difficulty variants (Easy, Normal, Hard, Nightmare, Ultimate).
