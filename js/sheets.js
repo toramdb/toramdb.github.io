@@ -748,7 +748,7 @@ window.ToramSheets = (function () {
       var avatarHTML = iconHTML(imgURL, icon, 'item', name, 'contain');
 
       var card = document.createElement('div');
-      card.className = 'card';
+      card.className = 'data-card';
       card.dataset.filter = name.toLowerCase();
       
       // Store full detail data for modal
@@ -767,15 +767,15 @@ window.ToramSheets = (function () {
       card.dataset.petColor   = (get(['ColorInfo', 'Color Info'])).trim();
 
       card.innerHTML =
-        '<div class="card-icon">' + avatarHTML + '</div>' +
-        '<div class="card-content">' +
-          '<div class="card-header">' +
-            '<h3 class="card-title">' + esc(name) + '</h3>' +
-            '<span class="card-badge">Lv.' + esc(level) + '</span>' +
+        '<div class="data-card-header">' +
+          '<div class="data-card-icon">' + avatarHTML + '</div>' +
+          '<div>' +
+            '<div class="data-card-title">' + esc(name) + '</div>' +
+            '<div class="data-card-subtitle">Lv.' + esc(level) + '</div>' +
           '</div>' +
-          '<div class="card-info">' +
-            '<span class="info-item">📍 ' + esc(spawnAt) + '</span>' +
-          '</div>' +
+        '</div>' +
+        '<div class="data-card-body">' +
+          '<div class="info-item" style="font-size:0.85rem;color:var(--text-secondary)">📍 ' + esc(spawnAt) + '</div>' +
         '</div>';
 
       container.appendChild(card);

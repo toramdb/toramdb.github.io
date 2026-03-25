@@ -124,8 +124,8 @@
     </div>
   </div>
 
-  <script src="../js/sheets.js?v=3.9"></script>
-  <script src="../js/main.js?v=3.9"></script>
+  <script src="../js/sheets.js?v=3.10"></script>
+  <script src="../js/main.js?v=3.10"></script>
   <script>
     // Grid filter for pets
     (function () {
@@ -136,7 +136,7 @@
       function applyGridFilter() {
         var q    = filterInput  ? filterInput.value.toLowerCase()  : '';
         var elem = filterSelect ? filterSelect.value.toLowerCase() : '';
-        grid.querySelectorAll('.card').forEach(function (card) {
+        grid.querySelectorAll('.data-card').forEach(function (card) {
           var text = (card.dataset.filter   || '').toLowerCase();
           var cat  = (card.dataset.category || '').toLowerCase();
           var ok = (!q    || text.includes(q))
@@ -248,7 +248,7 @@
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
 
       grid.addEventListener('click', function (e) {
-        var card = e.target.closest('.card');
+        var card = e.target.closest('.data-card');
         if (card && card.dataset.petName) openModal(card);
       });
     }());
