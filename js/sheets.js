@@ -1003,7 +1003,8 @@ window.ToramSheets = (function () {
                 var normalBadges = [];
                 var condBadges = [];
                 
-                fstats.split(';').forEach(function(st) {
+                // Split by semicolon OR lookahead for '>' to handle missing separators
+                fstats.split(/;|(?=>)/).forEach(function(st) {
                   st = st.trim();
                   if (!st) return;
 

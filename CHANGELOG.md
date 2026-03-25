@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.55.0] - 2026-03-25
+### Fixed
+- **Robust Featured Stats Parsing (v3.25)**: 
+  - Switched to regex splitting (`/;|(?=>)/`) to handle missing semicolon separators before `>` markers.
+  - Improved parsing accuracy when users input dense, multi-requirement stat strings in the spreadsheet.
+
 ## [0.54.0] - 2026-03-25
 ### Added
 - **Grouped Conditional Stats (v3.24)**: 
