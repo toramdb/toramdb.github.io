@@ -2,6 +2,14 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.49.0] - 2026-03-25
+### Added
+- **Featured Showcase Enhancements (v3.19)**: 
+  - Multiple stats support (split with `;`).
+  - Dynamic rarity coloring: `Event` (Gold) and `Non-Event` (Grey).
+  - Optional Level display (label hides if column is empty).
+- **Bug Fix**: Restored missing `rarityClass` helper in `sheets.js`.
+
 ## [0.48.0] - 2026-03-25
 ### Added
 - **Mobile UI Refinement**: Increased spacing (gap: 12px) and standardized alignment for all menu items in the mobile view.

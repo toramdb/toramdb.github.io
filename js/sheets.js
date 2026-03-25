@@ -998,9 +998,20 @@ window.ToramSheets = (function () {
                 });
               }
 
+              var fstatsHTML = '';
+              if (fstats) {
+                fstats.split(';').forEach(function(st) {
+                  st = st.trim();
+                  if (st) {
+                    fstatsHTML += '<span class="tag green">' + esc(st) + '</span> ';
+                  }
+                });
+                if (fstatsHTML) fstatsHTML = '<div class="tag-row mb-2">' + fstatsHTML + '</div>';
+              }
+
               var card = document.createElement('article');
               card.className = 'data-card spotlight-grid-card';
-              card.style.borderLeft = '4px solid var(--accent)';
+              card.style.borderLeft = '4px solid ' + (frarity.toLowerCase().indexOf('event') !== -1 ? 'var(--tag-event)' : 'var(--accent)');
               card.innerHTML =
                 '<div class="data-card-header">' +
                   '<div class="data-card-icon" style="background:rgba(184,134,11,.1);font-size:1.8rem">' + spotIcon + '</div>' +
@@ -1013,7 +1024,7 @@ window.ToramSheets = (function () {
                   '</div>' +
                 '</div>' +
                 '<div class="data-card-body">' +
-                  (fstats ? '<div class="tag-row mb-2"><span class="tag green">' + fstats + '</span></div>' : '') +
+                  fstatsHTML +
                   (fdesc ? '<p class="text-muted" style="line-height:1.4;margin-bottom:1rem">' + fdesc + '</p>' : '') +
                   '<div style="margin-top:auto">' +
                     '<a href="' + esc(flink) + '" class="btn btn-outline" style="width:100%;text-align:center;font-size:0.85rem;padding:0.5rem">View Details →</a>' +
@@ -1035,8 +1046,9 @@ window.ToramSheets = (function () {
               var suffix = esc(s['Icon'] || '+');  // reuse Icon col as suffix
 
               // v3.17: Store Level Cap for Calculator (fetched from Homepage 'stat' section)
-              // If Name contains 'Level Cap', save count to localStorage for use in calculator.js
-              if (label.toLowerCase().indexOf('level cap') !== -1 && count > 200) {
+              // If Name is "Level Cap", save count to localStorage. This allows 
+              // automatic MQ Calculator updates without code changes.
+              if (label.toLowerCase() === 'level cap' && count > 200) {
                 try { localStorage.setItem('toram_level_cap', count); } catch(e){}
               }
 
@@ -1116,6 +1128,17 @@ window.ToramSheets = (function () {
       .catch(function (err) {
         console.error('ToramSheets homepage:', err);
       });
+  }
+
+  function rarityClass(r) {
+    if (!r) return '';
+    var rl = r.toLowerCase().trim();
+    if (rl.indexOf('event') !== -1 && rl.indexOf('non') === -1) return 'tag-event';
+    if (rl.indexOf('non-event') !== -1) return 'tag-non-event';
+    if (rl.indexOf('legendary') !== -1) return 'legendary';
+    if (rl.indexOf('epic') !== -1) return 'epic';
+    if (rl.indexOf('rare') !== -1) return 'rare';
+    return '';
   }
 
   return {

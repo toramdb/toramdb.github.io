@@ -391,14 +391,14 @@ Item spotlight/unggulan yang ditampilkan di homepage.
 | Kolom       | Keterangan                                              |
 |-------------|---------------------------------------------------------|
 | Section     | Isi: `featured`                                          |
-| Name        | Nama item unggulan                                       |
+| Name        | Nama item unggulan. **Mendukung hingga 3 item** (grid 3 kolom). |
 | Icon        | Emoji ikon                                               |
 | ImageURL    | URL gambar item                                          |
 | Link        | URL halaman detail (misal: `pages/items.html`)          |
-| Type        | Jenis item                                               |
-| Level       | Level item                                               |
-| Rarity      | Kelangkaan                                               |
-| Stats       | Stat utama                                               |
+| Type        | Jenis item (Sword, Boss, dll)                            |
+| Level       | Level item. **Kosongkan jika tidak ingin menampilkan label "Lv."** |
+| Rarity      | `Event` (Emas/Oranye) atau `Non-Event` (Abu-abu).        |
+| Stats       | Stat item. **Bisa lebih dari satu, pisah dengan `;`** (misal: `ATK:+10;Crit:+5`). |
 | Description | Deskripsi singkat                                        |
 
 #### 🔹 Section: `stat`
@@ -407,8 +407,8 @@ Angka statistik hero counter di hero section.
 | Kolom   | Keterangan                                              |
 |---------|---------------------------------------------------------|
 | Section | Isi: `stat`                                              |
-| Name    | Label counter (misal: Items, Monsters)                  |
-| Count   | Angka yang ditampilkan (misal: 1500)                    |
+| Name    | Label counter (misal: Items, Monsters). **Gunakan "Level Cap" untuk update kalkulator.**|
+| Count   | Angka yang ditampilkan. **Isi angka level cap terbaru (misal: 315).**|
 | Icon    | Suffix setelah angka (misal: `+` → ditampilkan `1500+`)|
 
 #### 🔹 Section: `popular_monster`
@@ -433,19 +433,12 @@ Card monster populer yang tampil di homepage. Klik card → popup detail modal.
 | Section  | Name             | Icon | ImageURL | Link               | Count       | Description                        | Type           | Level | Rarity    | Stats   | Source |
 |----------|------------------|------|----------|--------------------|-------------|------------------------------------|----------------|-------|-----------|---------|--------|
 | category | Items            | ⚔️   |          | pages/items.html   | 1500+ Items |                                    |                |       |           |         |        |
-| category | Monsters         | 👾   |          | pages/monsters.html| 800+ Mobs   |                                    |                |       |           |         |        |
-| category | Skills           | ✨   |          | pages/skills.html  | 200+ Skills |                                    |                |       |           |         |        |
-| category | Maps             | 🗺️   |          | pages/maps.html    | 100+ Maps   |                                    |                |       |           |         |        |
-| category | Quests           | 📜   |          | pages/quests.html  | 350+ Quests |                                    |                |       |           |         |        |
-| category | Pets             | 🐾   |          | pages/pets.html    | 50+ Pets    |                                    |                |       |           |         |        |
-| featured | 10th Anniv Sword IV | 🗡️ |          | pages/items.html   |             | Anniversary weapon with high stats | 1 Handed Sword | 0     | Event     | ATK+485 |        |
-| popular_monster | Ifrit Rex | 🐉 | https://... |                |             | Volcano Summit                     | Boss           | 250   |           | Fire    | 2.4M   |
-| popular_monster | Crystal Spider Queen | 🕷️ | https://... |   |             | Crystal Cave                       | Boss           | 235   |           | Ice     | 1.8M   |
-| popular_monster | Fenrir Shadow | 🐺 | https://... |              |             | Frozen Tundra                      | Mini-Boss      | 210   |           | Dark    | 900K   |
+| featured | 10th Anniv Sword IV | 🗡️ |          | pages/items.html   |             | Anniversary weapon with high stats | 1 Handed Sword | 305   | Event     | ATK+485;Aspd+800 |        |
+| featured | Gale Arch Bow    | 🏹   |          | pages/items.html   |             | High damage bow                    | Bow            |       | Non-Event | ATK+280 |        |
+| stat     | Level Cap        |      |          |                    | 315         | Digunakan oleh MQ Calculator       |                |       |           |         |        |
 | stat     | Items            | +    |          |                    | 1500        |                                    |                |       |           |         |        |
 | stat     | Monsters         | +    |          |                    | 800         |                                    |                |       |           |         |        |
 | stat     | Skills           | +    |          |                    | 200         |                                    |                |       |           |         |        |
-| stat     | Players          | +    |          |                    | 5000        |                                    |                |       |           |         |        |
 
 ---
 
