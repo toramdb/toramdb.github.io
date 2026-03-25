@@ -118,11 +118,29 @@ ul { list-style: none; }
 
 /* Category card & mobile menu icon images */
 .cat-icon img { width: 48px; height: 48px; object-fit: contain; }
-.menu-icon { display: inline-block; width: 20px; height: 20px; object-fit: contain; vertical-align: middle; margin-right: 6px; }
+.menu-icon { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  width: 24px; 
+  height: 24px; 
+  flex-shrink: 0;
+  object-fit: contain; 
+}
 .hero-icon { width: 36px; height: 36px; object-fit: contain; vertical-align: middle; margin-right: 6px; }
 
 /* Mobile menu — icon + text on same row */
-#mobileMenu a { display: flex; align-items: center; gap: 6px; }
+#mobileMenu a { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  padding: 12px 1rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+  transition: background var(--transition);
+}
+#mobileMenu a:hover { background: var(--bg-card-hover); }
+#mobileMenu a:last-of-type { border-bottom: none; }
 
 /* Monster modal info bar */
 .mon-info-bar { display: flex; flex-wrap: wrap; gap: 6px; padding: .5rem 1.25rem; }

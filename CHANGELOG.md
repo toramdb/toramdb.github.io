@@ -2,6 +2,12 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.48.0] - 2026-03-25
+### Added
+- **Mobile UI Refinement**: Increased spacing (gap: 12px) and standardized alignment for all menu items in the mobile view.
+- **Icon Standardization**: Replaced legacy emojis with professional icons for Quests and Pets in the mobile menu across all 10 pages.
+- **Documentation**: Updated `sheet_guide_v318.md` with instructions for the new Dynamic Level Cap configuration.
+
 ## [0.47.0] - 2026-03-25
 ### Added
 - **Dynamic Level Cap (MQ Calculator)**: The calculator now automatically fetches the latest Level Cap from the Google Sheets `Homepage` tab (Section: `stat`, Name: `Level Cap`).

@@ -1034,7 +1034,8 @@ window.ToramSheets = (function () {
               var count = parseInt(s['Count'] || '0', 10);
               var suffix = esc(s['Icon'] || '+');  // reuse Icon col as suffix
 
-              // v3.17: Store Level Cap for Calculator
+              // v3.17: Store Level Cap for Calculator (fetched from Homepage 'stat' section)
+              // If Name contains 'Level Cap', save count to localStorage for use in calculator.js
               if (label.toLowerCase().indexOf('level cap') !== -1 && count > 200) {
                 try { localStorage.setItem('toram_level_cap', count); } catch(e){}
               }
