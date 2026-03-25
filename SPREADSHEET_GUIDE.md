@@ -398,7 +398,7 @@ Item spotlight/unggulan yang ditampilkan di homepage.
 | Type        | Jenis item (Sword, Boss, dll)                            |
 | Level       | Level item. **Kosongkan jika tidak ingin menampilkan label "Lv."** |
 | Rarity      | `Event` (Emas/Oranye) atau `Non-Event` (Abu-abu).        |
-| Stats       | Stat item. **Bisa lebih dari satu, pisah dengan `;`** (misal: `ATK:+10;Crit:+5`). |
+| Stats       | Stat item. **Pemisah `;`**. <br>🔹 Gunata `>` untuk stat kondisional (misal: `>Staff:MATK+10%`). <br>🔹 Otomatis menjadi **Merah** jika stat negatif (misal: `Dodge:-10`). |
 | Description | Deskripsi singkat                                        |
 
 #### 🔹 Section: `stat`
@@ -433,7 +433,7 @@ Card monster populer yang tampil di homepage. Klik card → popup detail modal.
 | Section  | Name             | Icon | ImageURL | Link               | Count       | Description                        | Type           | Level | Rarity    | Stats   | Source |
 |----------|------------------|------|----------|--------------------|-------------|------------------------------------|----------------|-------|-----------|---------|--------|
 | category | Items            | ⚔️   |          | pages/items.html   | 1500+ Items |                                    |                |       |           |         |        |
-| featured | 10th Anniv Sword IV | 🗡️ |          | pages/items.html   |             | Anniversary weapon with high stats | 1 Handed Sword | 305   | Event     | ATK+485;Aspd+800 |        |
+| featured | 10th Anniv Sword IV | 🗡️ |          | pages/items.html   |             | Anniversary weapon with high stats | 1 Handed Sword | 305   | Event     | ATK+485;>Light Armor:Aspd+800;AGI-10 |        |
 | featured | Gale Arch Bow    | 🏹   |          | pages/items.html   |             | High damage bow                    | Bow            |       | Non-Event | ATK+280 |        |
 | stat     | Level Cap        |      |          |                    | 315         | Digunakan oleh MQ Calculator       |                |       |           |         |        |
 | stat     | Items            | +    |          |                    | 1500        |                                    |                |       |           |         |        |

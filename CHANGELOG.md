@@ -2,6 +2,13 @@
 
 Semua perubahan penting pada proyek ToramDB dicatat di sini.
 
+## [0.50.0] - 2026-03-25
+### Added
+- **Advanced Featured Stats (v3.20)**: 
+  - Conditional stats support using `>` prefix (displays with dashed border).
+  - Negative stat auto-coloring (displays in red).
+  - Enhanced parsing consistency with item detail modals.
+
 ## [0.49.0] - 2026-03-25
 ### Added
 - **Featured Showcase Enhancements (v3.19)**: 

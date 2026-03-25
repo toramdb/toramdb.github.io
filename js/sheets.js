@@ -1002,9 +1002,23 @@ window.ToramSheets = (function () {
               if (fstats) {
                 fstats.split(';').forEach(function(st) {
                   st = st.trim();
-                  if (st) {
-                    fstatsHTML += '<span class="tag green">' + esc(st) + '</span> ';
+                  if (!st) return;
+
+                  var displayStat = st;
+                  var extraClass = '';
+
+                  if (st.charAt(0) === '>') {
+                    displayStat = st.substring(1).trim();
+                    extraClass = ' conditional';
                   }
+
+                  // Determine color: Red for negative stats
+                  var colorClass = ' green';
+                  if (displayStat.indexOf(':-') !== -1 || (displayStat.indexOf(':') === -1 && displayStat.indexOf('-') === 0)) {
+                    colorClass = ' red';
+                  }
+
+                  fstatsHTML += '<span class="tag' + colorClass + extraClass + '">' + esc(displayStat) + '</span> ';
                 });
                 if (fstatsHTML) fstatsHTML = '<div class="tag-row mb-2">' + fstatsHTML + '</div>';
               }
