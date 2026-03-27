@@ -1,6 +1,6 @@
 /**
  * ToramDB Skill Simulator Logic
- * v0.59.1 Accordion Dashboard
+ * v0.60.0 English & Elbow Connections
  */
 
 (function() {
@@ -26,7 +26,6 @@
                     label: tree.label,
                     width: tree.width || 980,
                     height: tree.height || 730,
-                    // Fix tree icon reference
                     icon: tree.icon ? tree.icon.split('/').pop() : 'skills_ico.png',
                     skills: tree.skills.map(s => ({
                         id: s.id,
@@ -35,7 +34,6 @@
                         x: s.x,
                         y: s.y,
                         reqIds: s.prerequisites || [],
-                        // Normalize skill icon lookup
                         icon: s.icon ? s.icon.split('/').pop() : `sk_${s.id}.png`
                     }))
                 };
@@ -96,7 +94,6 @@
         const wasActive = item.classList.contains('active');
         if (!wasActive) {
             item.classList.add('active');
-            // Timeout to ensure content is rendered before drawing SVG
             setTimeout(() => drawConnections(treeId), 50);
         } else {
             item.classList.remove('active');
@@ -145,7 +142,7 @@
             const unmet = skill.reqIds.find(rid => (levels[rid] || 0) < 5);
             if (unmet) {
                 const preSkill = tree.skills.find(s => s.id === unmet);
-                alert(`Harus Level 5 pada: ${preSkill ? preSkill.name : unmet}`);
+                alert(`Level 5 required for: ${preSkill ? preSkill.name : unmet}`);
                 return;
             }
         }
@@ -201,13 +198,13 @@
             skill.reqIds.forEach(reqId => {
                 const parent = tree.skills.find(s => s.id === reqId);
                 if (parent) {
-                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                    line.setAttribute("x1", parent.x);
-                    line.setAttribute("y1", parent.y);
-                    line.setAttribute("x2", skill.x);
-                    line.setAttribute("y2", skill.y);
-                    line.setAttribute("class", (levels[skill.id] || 0) > 0 ? 'path-active' : 'path-inactive');
-                    svg.appendChild(line);
+                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    // Elbow logic: Vertical then Horizontal or Horizontal then Vertical.
+                    // For Toram game style, it usually goes Horizontal then Vertical (L-shape).
+                    const d = `M ${parent.x} ${parent.y} L ${skill.x} ${parent.y} L ${skill.x} ${skill.y}`;
+                    path.setAttribute("d", d);
+                    path.setAttribute("class", (levels[skill.id] || 0) > 0 ? 'path-active' : 'path-inactive');
+                    svg.appendChild(path);
                 }
             });
         });

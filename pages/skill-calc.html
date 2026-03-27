@@ -61,23 +61,24 @@
       <div class="simulator-dashboard">
         <!-- Global SP Header -->
         <div class="sp-global-header">
-            Total SP Used: <span id="total-sp">0</span>
+            <span class="sp-title">Total Skill Points Used</span>
+            <span class="sp-counter"><span id="total-sp">0</span></span>
         </div>
 
         <!-- Star Gems Section (Placeholder) -->
-        <div class="stargems-section card-box">
-            <div class="section-title">
-                <img src="../img/icons/pets_ico.png" alt="star" class="title-icon">
-                Selected Star Gems (<span id="star-gems-cost">0</span> Costs)
+        <div class="stargem-dashboard">
+            <div class="stargem-title">Selected Star Gems</div>
+            <div style="margin-top:10px">
+                <span style="color:var(--text-muted); font-size:0.85rem">0 Costs Total</span>
             </div>
-            <button class="btn-primary" onclick="alert('Star Gems configuration coming soon!')">
-                <span class="plus-icon">+</span> Add/Remove Star Gems
+            <button class="btn-ctrl" style="margin-top:10px" onclick="alert('Star Gems configuration coming soon!')">
+                Manage Star Gems
             </button>
         </div>
 
         <!-- Skill Trees Accordion -->
-        <div id="tree-accordion" class="accordion-container">
-            <!-- Trees will be injected here dynamically -->
+        <div id="tree-accordion">
+            <!-- Trees injected here -->
         </div>
       </div>
 
