@@ -1,0 +1,214 @@
+/* Skill Simulator Styles */
+
+.simulator-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-top: 1rem;
+    border: 1px solid #eee;
+}
+
+.sim-header {
+    background: #1a2a3a;
+    color: #fff;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.sim-tree-name {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #ffcc00; /* Gold header like game */
+    font-weight: 700;
+}
+
+.sp-counter {
+    font-weight: 600;
+    background: rgba(255,255,255,0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.sim-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sim-select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: #2c3e50;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.sim-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.sim-btn.outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+}
+
+.sim-btn.outline:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Tree Area */
+.tree-viewport {
+    background: #000; /* Original dark background */
+    padding: 3rem 1rem;
+    overflow-x: auto;
+    position: relative;
+    min-height: 400px;
+}
+
+.tree-container {
+    position: relative;
+    width: 800px; /* Base width for Tamer Tree */
+    height: 400px;
+    margin: 0 auto;
+}
+
+.tree-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.nodes-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* Skill Node */
+.skill-node {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+}
+
+.skill-node:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
+
+.node-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #333;
+    border: 3px solid #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    background: radial-gradient(circle, #444 0%, #111 100%);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.skill-node.active .node-icon-wrapper {
+    border-color: #00ccff; /* Blue active glow like game */
+    box-shadow: 0 0 15px rgba(0, 204, 255, 0.6);
+}
+
+.skill-node.max .node-icon-wrapper {
+    border-color: #ffcc00;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+}
+
+.skill-node.locked {
+    filter: grayscale(1);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.node-icon {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.node-level {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.node-label {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px #000;
+    pointer-events: none;
+}
+
+/* SVG Path Styling */
+.tree-line {
+    fill: none;
+    stroke: #333;
+    stroke-width: 4px;
+    transition: stroke 0.3s;
+}
+
+.tree-line.active {
+    stroke: #00ccff;
+}
+
+.sim-footer {
+    padding: 1rem;
+    background: #fdfdfd;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tree-container {
+        transform: scale(0.85);
+        transform-origin: top left;
+    }
+    .tree-viewport {
+        min-height: 350px;
+    }
+}
