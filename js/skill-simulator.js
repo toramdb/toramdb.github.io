@@ -116,6 +116,7 @@
                 if (levels[skill.id] === undefined) levels[skill.id] = 0;
                 createNode(skill, grid, tree.id);
             });
+            updateUI(tree.id);
         });
 
         updateTotalSP();
