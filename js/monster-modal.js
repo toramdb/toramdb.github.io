@@ -86,6 +86,26 @@ window.MonsterModal = (function () {
     if (!group || !group.length) {
        document.getElementById('monModalName').textContent = 'Monster Not Found';
        if(monContainer) monContainer.innerHTML = '<p class="text-muted" style="padding:1rem">Data for this monster could not be loaded.</p>';
+       
+       // Clear residual data from previously opened monster
+       var diffTabs = document.getElementById('monModalDiffTabs');
+       if (diffTabs) diffTabs.innerHTML = '';
+       
+       var imgEl = document.getElementById('monModalImage');
+       if (imgEl) imgEl.innerHTML = '<span style="font-size:3rem; opacity:0.3;">👾</span>';
+       
+       var badges = document.getElementById('monModalMainBadges');
+       if (badges) badges.innerHTML = '';
+       
+       var loc = document.getElementById('monModalLocation');
+       if (loc) loc.innerHTML = '';
+       
+       var drops = document.getElementById('monModalDrops');
+       if (drops) drops.innerHTML = '';
+       
+       var compareRows = document.getElementById('monModalCompareRows');
+       if (compareRows) compareRows.innerHTML = '';
+       
        return;
     }
     currentGroup = group;

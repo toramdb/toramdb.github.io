@@ -2,6 +2,7 @@
 
 ### v0.64.1
 - **Monster Modal Infinite Loop**: Added a guard clause in `monster-modal.js` to prevent an infinite fetching loop when clicking a boss name on a Quest card that doesn't yet exist in the Monsters sheet. The browser will no longer freeze or crash out of memory.
+- **Monster Modal UI State**: Fixed an issue where opening a "Not Found" monster modal would incorrectly display the leftover image, stats, location, and drops from the previously opened monster. The modal correctly zeroes out old information when a monster is missing.
 ### v0.64.0 (Latest)
 - **File Restructuring**: Renamed all `skill-calc` files to `skill-simulator` (`skill-simulator.html`, `skill-simulator.js`, `skill-simulator.css`).
 - **Beta Data Integration**: Data source moved to `js/skill-simulator-data.js` (copied from `beta/skill_simulator_data.js`).
