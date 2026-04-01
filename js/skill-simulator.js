@@ -265,9 +265,9 @@
 
         if (accordion) accordion.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-color);">Loading Skill Data from Cloud...</div>';
 
-        const sheetName = (window.ToramSheets.CONFIG && window.ToramSheets.CONFIG.SHEETS && window.ToramSheets.CONFIG.SHEETS.skilltrees) ? window.ToramSheets.CONFIG.SHEETS.skilltrees.name : 'SkillTrees';
+        const sheetConfig = (window.ToramSheets.CONFIG && window.ToramSheets.CONFIG.SHEETS && window.ToramSheets.CONFIG.SHEETS.skilltrees) ? window.ToramSheets.CONFIG.SHEETS.skilltrees : { name: 'SkillTrees', gid: '1214207966' };
 
-        window.ToramSheets.fetchSheet(sheetName).then(csv => {
+        window.ToramSheets.fetchSheet(sheetConfig).then(csv => {
             const rows = window.ToramSheets.parseCSV(csv);
             if (!rows.length) {
                 if (accordion) accordion.innerHTML = '<div style="padding:2rem;text-align:center;">Error: No skill data found. Ensure "SkillTrees" tab is published.</div>';

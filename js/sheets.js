@@ -82,7 +82,7 @@ window.ToramSheets = (function () {
       quests:      { name: 'Quests',      gid: '2017598944' },
       pets:        { name: 'Pets',        gid: '1949299875' }, 
       homepage:    { name: 'Homepage',    gid: '28274370' },
-      skilltrees:  { name: 'SkillTrees',  gid: '' }
+      skilltrees:  { name: 'SkillTrees',  gid: '1214207966' }
     }
   };
 
