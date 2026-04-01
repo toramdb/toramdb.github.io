@@ -255,12 +255,14 @@
     }
 
     function loadFromSheets() {
+        const accordion = document.getElementById('tree-accordion');
+        
         if (!window.ToramSheets || !window.ToramSheets.fetchSheet) {
             console.error("ToramSheets core missing.");
+            if (accordion) accordion.innerHTML = '<div style="padding:2rem;text-align:center;color:red;">Error: ToramSheets core (sheets.js) not loaded. Please clear your browser cache.</div>';
             return;
         }
 
-        const accordion = document.getElementById('tree-accordion');
         if (accordion) accordion.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-color);">Loading Skill Data from Cloud...</div>';
 
         const sheetName = (window.ToramSheets.CONFIG && window.ToramSheets.CONFIG.SHEETS && window.ToramSheets.CONFIG.SHEETS.skilltrees) ? window.ToramSheets.CONFIG.SHEETS.skilltrees.name : 'SkillTrees';
