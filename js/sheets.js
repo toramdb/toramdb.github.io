@@ -211,12 +211,12 @@ window.ToramSheets = (function () {
     'special':        'img/icons/special_ico.png',
     'ring':           'img/icons/special_ico.png',
     // Crysta
-    'additional crysta': 'img/icons/add_crysta.png',
-    'ring crysta':       'img/icons/add_crysta.png',
-    'armor crysta':      'img/icons/armor_crysta.png',
-    'weapon crysta':     'img/icons/weapon_crysta.png',
-    'special crysta':    'img/icons/special_crysta.png',
-    'normal crysta':     'img/icons/normal_crysta.png',
+    'additional crysta': 'img/icons/crysta_add_base.png',
+    'ring crysta':       'img/icons/crysta_add_base.png',
+    'armor crysta':      'img/icons/crysta_armor_base.png',
+    'weapon crysta':     'img/icons/crysta_weapon_base.png',
+    'special crysta':    'img/icons/crysta_special_base.png',
+    'normal crysta':     'img/icons/crysta_normal_base.png',
     // Materials & other
     'beast':             'img/icons/beast_ico.png',
     'cloth':             'img/icons/cloth_ico.png',

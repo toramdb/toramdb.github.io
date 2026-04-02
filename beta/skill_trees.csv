@@ -1,0 +1,466 @@
+tree_id,tree_label,tree_width,tree_height,tree_icon,tree_visible,tree_star_gem_visible,skill_id,skill_name,skill_x,skill_y,skill_prerequisites,skill_star_gem_available,skill_star_gem_cost,skill_star_gem_level
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,hammer_slam,Hammer Slam,100,40,,true,1,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,cleaving_attack,Cleaving Attack,340,40,hammer_slam,true,2,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,storm_blaze,Storm Blaze,460,40,cleaving_attack,true,3,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,garde_blade,Garde Blade,580,40,storm_blaze,true,4,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,orge_slash,Orge Slash,700,40,garde_blade,true,5,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,hard_hit,Hard Hit,100,220,,true,1,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,astute,Astute,220,150,hard_hit,true,1,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,trigger_slash,Trigger Slash,340,150,astute,true,2,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,rampage,Rampage,460,150,trigger_slash,true,3,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,shut_out,Shut-Out,840,150,rampage,true,5,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,meteor_breaker,Meteor Breaker,580,220,trigger_slash,true,0,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,lunar_slash,Lunar Slash,700,220,meteor_breaker,true,1,5
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,sonic_blade,Sonic Blade,220,290,hard_hit,true,1,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,spiral_air,Spiral Air,340,290,sonic_blade,true,2,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,sword_tempest,Sword Tempest,460,290,spiral_air,true,3,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,buster_blade,Buster Blade,580,360,spiral_air,true,4,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,aura_blade,Aura Blade,700,360,buster_blade,true,5,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,sword_mastery,Sword Mastery,100,420,,true,1,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,quick_slash,Quick Slash,220,420,sword_mastery,true,1,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,sword_techniques,Sword Techniques,340,420,quick_slash,true,2,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,warcry,War Cry,460,490,quick_slash,true,3,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,swift_attack,Swift Attack,460,620,,false,1,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,berserk,Berserk,580,490,warcry,true,4,1
+blade,Blade Skills,980,730,sk_sword_mastery.png,true,true,gladiate,Gladiate,700,490,berserk,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,power_shot,Power Shot,100,250,,true,1,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,bulleyes,Bulleyes,220,250,power_shot,true,1,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,rain_arrow,Arrow Rain,340,250,bulleyes,true,2,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,cross_fire,Cross Fire,580,250,rain_arrow,true,4,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,twin_storm,Twin Storm,700,180,cross_fire,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,quick_loader,Quick Loader,820,250,cross_fire,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,retrograde_shot,Retrograde Shot,700,320,cross_fire,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,snipe,Snipe,460,110,bulleyes,true,3,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,piercing_shot,Piercing Shot,700,40,snipe,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,vanquisher,Vanquisher,820,110,snipe,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,moeba_shot,Moeba Shot,220,390,power_shot,true,1,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,paralysis_shot,Paralysis Shot,340,390,moeba_shot,true,2,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,smoke_dust,Smoke Dust,460,390,paralysis_shot,true,3,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,arm_break,Arm Break,580,390,smoke_dust,true,4,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,parabola_cannon,Parabola Cannon,820,390,arm_break,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,spread_shot,Spread Shot,700,460,arm_break,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,shot_mastery,Shot Mastery,100,530,,true,1,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,long_range,Long Range,340,530,shot_mastery,true,2,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,quick_draw,Quick Draw,460,530,long_range,true,3,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,decoy_shot,Decoy Shot,580,530,quick_draw,true,4,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,element_starter,Element Starter,820,530,decoy_shot,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,samurai_archery,Samurai Archery,700,600,shot_mastery,true,5,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,sneak_attack,Sneak Attack,340,670,shot_mastery,true,1,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,hunting_buddy,Hunting Buddy,580,670,sneak_attack,true,4,1
+shot,Shot Skills,1025,880,sk_shot_mastery.png,true,true,fatal_shot,Fatal Shot,460,740,,false,1,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_arrow,Magic: Arrow,100,110,,true,1,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_javelin,Magic: Javelin,220,40,magic_arrow,true,1,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_lance,Magic: Lance,340,40,magic_javelin,true,2,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_impact,Magic: Impact,460,40,magic_lance,true,3,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_finale,Magic: Finale,580,40,magic_impact,true,4,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,chronos_shift,Chronos Shift,700,40,magic_finale,true,5,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_laser,Magic: Laser,820,110,magic_finale,true,5,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_wall,Magic: Wall,220,180,magic_arrow,true,1,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_blast,Magic: Blast,340,180,magic_wall,true,2,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_storm,Magic: Storm,460,180,magic_blast,true,3,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_burst,Magic: Burst,580,180,magic_storm,true,4,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_cannon,Magic Cannon,700,180,magic_burst,true,5,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_crash,Magic: Crash,820,250,magic_storm,true,5,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_mastery,Magic Mastery,100,320,,true,1,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_knife,Magic Knife,340,320,magic_mastery,true,2,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,qadal,Qadal,460,320,magic_knife,true,3,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,spell_calibration,Spell Calibration,580,320,qadal,true,4,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,mp_charge,MP Charge,100,460,,true,1,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,chain_cast,Chain Cast,340,460,mp_charge,true,2,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,power_wave,Power Wave,460,460,chain_cast,true,3,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,maximizer,Maximizer,580,460,power_wave,true,4,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,rapid_charge,Rapid Charge,700,460,maximizer,true,5,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,enchanted_barrier,Enchanted Barrier,700,600,maximizer,true,5,1
+magic,Magic Skills,1025,750,sk_magic_mastery.png,true,true,magic_guardian_beam,Magic: Guardian Beam,460,600,,false,1,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,flash_stab,Flash Stab,100,110,,true,1,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,cannon_spear,Cannon Spear,220,110,flash_stab,true,1,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,dragon_tail,Dragon Tail,340,110,cannon_spear,true,2,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,dive_impact,Dive Impact,460,110,dragon_tail,true,3,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,dragon_tooth,Dragon Tooth,580,40,dragon_tail,true,4,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,draconic_charge,Draconic Charge,700,40,dragon_tooth,true,5,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,deadly_spear,Deadly Spear,220,250,flash_stab,true,1,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,strike_stab,Strike Stab,460,250,deadly_spear,true,3,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,chronos_drive,Chronos Drive,580,250,strike_stab,true,4,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,infinite_dimemsion,Infinite Dimension,700,250,chronos_drive,true,5,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,punish_ray,Punish Ray,340,390,deadly_spear,true,2,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,blitz_spike,Blitz Spike,460,390,punish_ray,true,3,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,lightning_hail,Lightning Hail,580,390,blitz_spike,true,4,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,thors_hammer,Thor's Hammer,700,390,lightning_hail,true,5,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,halberd_mastery,Halberd Mastery,100,530,,true,1,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,critical_spear,Critical Spear,460,530,halberd_mastery,true,3,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,tornado_lance,Tornado Lance,700,530,critical_spear,true,5,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,quick_aura,Quick Aura,100,670,,true,1,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,war_cry_of_struggle,War Cry of Struggle,340,670,quick_aura,true,2,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,god_speed_wield,Godspeed Wield,580,670,war_cry_of_struggle,true,4,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,almighty_wield,Almighty Wield,700,670,god_speed_wield,true,5,1
+halberd,Halberd Skills,950,900,sk_halberd_mastery.png,true,true,buster_lance,Buster Lance,460,740,,false,1,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,issen,Issen,100,40,,true,1,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,pulse_blade,Pulse Blade,220,40,issen,true,1,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,triple_thrust,Triple Thrust,340,40,pulse_blade,true,2,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,hasso_happa,Hasso Happa,460,40,triple_thrust,true,3,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,tenryu_ransei,Tenryu Ransei,580,40,hasso_happa,true,4,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,kasumisetsu_getsuka,Kasumisetsu Getsuka,700,40,tenryu_ransei,true,5,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,garyou_tensei,Garyou Tensei,580,180,hasso_happa,true,4,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,shadowless_slash,Shadowless Slash,700,180,garyou_tensei,true,5,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,pommel_strike,Pommel Strike,100,180,,true,1,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,magadachi,Magadachi,340,180,pommel_strike,true,2,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,zantei_settetsu,Zantei Settetsu,460,180,magadachi,true,3,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,bushido,Bushido,100,320,,true,1,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,shukuchi,Shukuchi,460,320,bushido,true,3,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,nukiuchi_sennosen,Nukiuchi Sennosen,700,320,shukuchi,true,5,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,two_handed,Two-Handed,220,460,bushido,true,1,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,meikyo_shisui,Meikyo Shisui,340,460,two_handed,true,2,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,kairiki,Kairiki Ranshin,580,460,meikyo_shisui,true,4,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,dauntless,Dauntless,700,460,kairiki,true,5,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,auspicious_wind,Auspicious Wind,340,600,meikyo_shisui,true,2,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,gust,Gust,460,600,auspicious_wind,true,3,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,zephyr_rush,Zephyr Rush,580,600,gust,true,4,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,super_gust,Super Gust,700,600,zephyr_rush,true,5,1
+mononofu,Mononofu Skills,950,850,sk_bushido.png,true,true,bounching_blade,Bounching Blade,460,720,,false,1,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,dual_sword_mastery,Dual Sword Mastery,100,110,,true,1,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,twin_slash,Twin Slash,220,110,dual_sword_mastery,true,1,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,spinning_slash,Spinning Slash,340,110,twin_slash,true,2,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,phantom_slash,Phantom Slash,460,110,spinning_slash,true,3,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,aerial_cut,Aerial Cut,700,40,spinning_slash,true,5,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,cross_parry,Cross Parry,220,250,dual_sword_mastery,true,1,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,charging_slash,Charging Slash,340,250,cross_parry,true,2,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,shadowstep,Shadowstep,460,250,charging_slash,true,3,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,shining_cross,Shining Cross,580,250,shadowstep,true,4,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,lunar_misfortune,Lunar Misfortune,700,180,shining_cross,true,5,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,twin_buster_blade,Twin Buster Blade,700,320,shining_cross,true,5,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,reflex,Reflex,220,390,dual_sword_mastery,true,1,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,flash_blast,Flash Blast,460,390,reflex,true,3,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,storm_reaper,Storm Reaper,580,390,flash_blast,true,4,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,dual_sword_control,Dual Sword Control,220,530,dual_sword_mastery,true,1,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,godspeed,Godspeed,340,530,dual_sword_control,true,2,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,saber_aura,Saber Aura,580,530,godspeed,true,4,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,crescent_saber,Crescent Saber,700,530,saber_aura,true,5,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,aerial_slay,Aerial Slay,580,670,godspeed,true,4,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,horizon_cut,Horizon Cut,700,670,aerial_slay,true,5,1
+dual,Dual Sword Skills,950,850,sk_dual_sword_mastery.png,true,true,sting_blade,Sting Blade,820,600,aerial_slay,true,5,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,smash,Smash,100,180,,true,1,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,bash,Bash,220,110,smash,true,1,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,shellbreak,Shell Break,340,110,bash,true,2,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,heavy_smash,Heavy Smash,460,110,shellbreak,true,3,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,chariot,Chariot,580,110,heavy_smash,true,4,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,abstract_arms,Abstract Arms,700,110,chariot,true,5,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,mountain_press,Mountain Press,820,40,chariot,true,5,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,sonic_wave,Sonic Wave,220,250,smash,true,1,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,earthbind,Earthbind,340,250,sonic_wave,true,2,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,triple_kick,Triple Kick,460,250,earthbind,true,3,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,rush,Rush,580,250,triple_kick,true,4,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,asura_aura,Asura Aura,700,250,rush,true,5,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,seismic_stomp,Seismic Stomp,820,180,earthbind,true,5,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,spin_sweep,Spin Sweep,820,320,rush,true,5,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,flash_blink,Flash Blink,700,400,triple_kick,true,4,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,martial_mastery,Martial Mastery,100,470,,true,1,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,martial_discipline,Martial Discipline,460,470,martial_mastery,true,3,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,chakra,Chakra,580,470,martial_discipline,true,4,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,energy_control,Energy Control,820,470,chakra,true,5,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,aggravate,Aggravate,100,610,,true,1,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,strong_chase_attack,Strong Chase Attack,340,610,aggravate,true,2,1
+martial,Martial Skills,1025,900,sk_martial_mastery.png,true,true,slide,Slide,460,680,,false,1,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,foreseen_punch,Foreseen Punch,100,40,,true,1,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,goliath_punch,Goliath Punch,220,40,foreseen_punch,true,2,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,god_hand,God Hand,340,40,goliath_punch,true,3,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,divine_rigid_body,Divine Rigid Body,460,40,god_hand,true,1,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,breathwork,Breathwork,100,180,,true,1,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,floating_kick,Floating Kick,220,180,breathwork,true,2,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,geyser_kick,Geyser Kick,460,180,floating_kick,true,4,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,combination,Combination,220,320,breathwork,true,2,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,annihilator,Annihilator,340,320,combination,true,3,1
+crusher,Crusher Skills,700,450,sk_foreseen_punch.png,true,true,terrablast,Terrablast,460,320,annihilator,true,4,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,auto_device,Auto-Device,100,250,,true,1,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,express_aid,Express Aid,220,180,auto_device,true,2,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,micro_heal,Micro Heal,340,110,express_aid,true,3,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,resurrection,Resurrection,460,40,micro_heal,true,4,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,enhance,Enhance,340,250,express_aid,true,3,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,stabiliz,Stabiliz,460,180,enhance,true,4,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,sprite_upgrade,Sprite Upgrade,580,180,stabiliz,true,5,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,sprite_shield,Sprite Shield,460,320,enhance,true,4,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,counterforce,Counterforce,220,320,auto_device,true,2,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,astral_lance,Astral Lance,340,390,counterforce,true,3,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,magic_vulkan,Magic Vulcan,460,460,astral_lance,true,4,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,cursed_altar,Cursed Altar,580,460,magic_vulkan,true,5,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,ignition,Ignition,100,600,,false,1,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,terrawrym,Terrawrym,220,600,ignition,false,1,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,faux_weapon,Faux Weapon,340,600,terrawrym,false,1,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,slash_reaper,Slash Reaper,460,600,faux_weapon,false,1,1
+sprite,Sprite Skills,700,750,sk_express_aid.png,true,true,lebenglanz,Lebenglanz,580,600,slash_reaper,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,unarmed_mastery,Unarmed Mastery,40,40,,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,qi_charge,Qi Charge,100,180,,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,lion_rage,Lion Rage,220,40,qi_charge,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,ultima_lion_rage,Ultima Lion Rage,340,40,lion_rage,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,earthshaker,Earthshaker,460,110,,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,raving_storm,Raving Storm,220,180,qi_charge,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,ultima_raving_storm,Ultima Raving Storm,340,180,raving_storm,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,internal_elixir,Internal Elixir,220,320,qi_charge,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,clash_of_enmity,Clash of Enmity,340,320,internal_elixir,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,miracle_comeback,Miracle Comeback,460,320,clash_of_enmity,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,ultima_qi_charge,Ultima Qi Charge,340,460,qi_charge,false,1,1
+barehand,Barehand Skills,700,600,sk_unarmed_mastery.png,true,true,hidden_talent,Hidden Talent,460,460,ultima_qi_charge,false,1,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,shield_mastery,Shield Mastery,100,180,,true,1,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,shield_bash,Shield Bash,220,40,shield_mastery,true,2,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,shield_cannon,Shield Cannon,340,40,shield_bash,true,3,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,guard_strike,Guard Strike,460,40,shield_cannon,true,4,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,force_shield,Force Shield,220,180,shield_mastery,true,2,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,magical_shield,Magical Shield,340,180,force_shield,true,3,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,shield_uppercut,Shield Uppercut,220,320,shield_mastery,true,2,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,dual_shields,Dual Shields,340,320,shield_uppercut,true,3,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,shield_repair,Shield Repair,460,320,dual_shields,true,4,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,belagerung,Belagerung,580,320,shield_repair,true,5,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,protection,Protection,100,460,,true,1,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,aegis,Aegis,220,460,protection,true,2,1
+shield,Shield Skills,700,600,sk_shield_mastery.png,true,true,guardian,Guardian,460,460,aegis,true,4,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,throwing_knife,Throwing Knife,100,110,,true,1,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,spike_dart,Spike Dart,220,40,throwing_knife,true,2,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,gatling_knife,Gatling Knife,340,40,spike_dart,true,3,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,amazing_throw,Amazing Throw,460,40,gatling_knife,true,4,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,poison_dagger,Poison Dagger,220,180,throwing_knife,true,2,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,double_stab,Double Stab,340,180,poison_dagger,true,3,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,hidden_arm,Hidden Arm,100,320,,true,1,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,intensive_knife,Intensive Knife,220,320,hidden_arm,true,2,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,mail_breaker,Mail Breaker,460,320,intensive_knife,true,4,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,knife_combat,Knife Combat,340,460,intensive_knife,true,3,1
+dagger,Dagger Skills,700,600,sk_dagger_tree.png,true,true,flincher_knife,Flincher Knife,460,460,knife_combat,true,4,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,assault_attack,Assault Attack,100,40,,true,1,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,parry,Parry,220,40,assault_attack,true,2,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,perfect_defense,P. Defense,340,40,parry,true,3,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,fareth,Fareth,460,40,perfect_defense,true,4,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,aftershield,Aftershield,580,40,fareth,true,5,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,provoke,Provoke,100,180,,true,1,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,rage_sword,Rage Sword,220,180,provoke,true,2,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,binding_strike,Binding Strike,340,180,rage_sword,true,3,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,knight_will,Knight Will,460,180,binding_strike,true,4,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,blink_sword,Blink Sword,580,180,knight_will,true,5,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,sonic_thrust,Sonic Thrust,220,320,rage_sword,true,2,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,revenir,Revenir,360,320,sonic_thrust,true,3,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,knight_stance,Knight's Stance,100,390,,true,1,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,knight_remedy,Knight's Remedy,460,390,knight_stance,true,4,1
+knight,Knight Skills,800,500,sk_perfect_defense.png,true,true,knight_pledge,Knight Pledge,580,390,knight_remedy,true,5,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,kick,Kick,100,40,,true,1,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,sunrise_arrow,Sunrise Arrow,220,40,kick,true,2,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,marrow,Magic Arrow,340,40,sunrise_arrow,true,3,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,satellite_arrow,Satellite Arrow,460,40,marrow,true,4,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,focus,Focus,580,40,satellite_arrow,true,5,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,sleep_trap,Sleep Trap,100,180,,true,1,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,bear_trap,Bear Trap,220,180,sleep_trap,true,2,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,land_mine,Land Mine,340,180,bear_trap,true,3,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,dark_trap,Dark Trap,460,180,land_mine,true,4,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,camouflage,Camouflage,580,180,dark_trap,true,5,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,homing_shot,Homing Shot,100,390,,true,1,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,detection,Detection,220,390,homing_shot,true,2,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,cyclon_arrow,Cyclone Arrow,340,320,detection,true,3,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,vertical_air,Vertical Air,460,320,cyclon_arrow,true,4,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,hunter_bowgun,Hunter Bowgun,340,460,detection,true,3,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,multiple_hunt,Multiple Hunt,460,460,hunter_bowgun,true,4,1
+hunter,Hunter Skills,800,600,sk_bear_trap.png,true,true,hunter_knowledge,Hunter Knowledge,580,460,multiple_hunt,true,5,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,bless,Bless,100,40,,true,1,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,gloria,Gloria,220,40,bless,true,2,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,enhanced_bless,Enhanced Bless,340,40,gloria,true,3,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,royal_heal,Royal Heal,460,40,enhanced_bless,true,4,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,sacred_teaching,Sacred Teaching,580,40,royal_heal,true,5,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,holy_fist,Holy Fist,100,180,,true,1,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,holy_light,Holy Light,220,180,holy_fist,true,2,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,ether_barrier,Ether Barrier,340,180,holy_light,true,3,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,prayer,Prayer,460,180,ether_barrier,true,4,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,aspis_soul,Aspis Soul,580,180,prayer,true,5,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,staff_thrust,Staff Thrust,100,320,,false,1,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,exorcism,Exorcism,220,320,holy_light,true,2,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,holy_book,Holy Book,340,320,exorcism,true,3,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,nemesis,Nemesis,460,320,holy_book,true,4,1
+priest,Priest Skills,800,450,sk_bless.png,true,true,holy_grace,Holy Grace,580,320,nemesis,true,5,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,assassin_stab,Assassin Stab,100,180,,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,backstep,Backstep,220,180,assassin_stab,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,arcane_strike,Arcane Strike,340,180,backstep,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,sicarius,Sicarius,460,40,backstep,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,secret_assassin,Secret Assassin,580,180,arcane_strike,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,evasion,Evasion,100,320,,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,serum,Serum,220,320,evasion,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,foresight,Foresight,340,320,serum,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,shadow_walk,Shadow Walk,460,320,foresight,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,assault_chase,Assault Chase,580,320,shadow_walk,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,venom_injection,Venom Injection,100,460,,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,corrosive_poison,Corrosive Poison,220,460,venom_injection,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,venom_thief,Venom Thief,340,460,corrosive_poison,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,death_reception,Death Reception,460,460,venom_thief,false,1,1
+assassin,Assassin Skills,800,600,sk_assassin_stab.png,true,true,poison_master,Poison Master,580,460,death_reception,false,1,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,familia,Familia,100,180,,true,1,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,lightning,Lightning,340,40,familia,true,2,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,blizzard,Blizzard,340,180,familia,true,2,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,meteor_strike,Meteor Strike,460,180,blizzard,true,3,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,imperial_ray,Imperial Ray,580,180,meteor_strike,true,4,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,magic_research,Magic Research,700,180,imperial_ray,true,5,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,mana_crystal,Mana Crystal,220,320,familia,true,1,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,stone_barrier,Stone Barrier,460,320,mana_crystal,true,3,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,advanced_familia,Advanced Familia,580,320,stone_barrier,true,4,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,kitty_treasure,Kitty's Treasure,700,320,advanced_familia,true,5,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,crystal_laser,Crystal Laser,340,460,mana_crystal,true,2,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,overlimit,Overlimit,460,460,crystal_laser,true,3,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,sorcery_guide,Sorcery Guide,580,460,overlimit,true,4,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,shift,Shift,700,460,sorcery_guide,true,5,1
+Wizard,Wizard Skills,900,600,sk_familia.png,true,true,cast_mastery,Cast Mastery,100,460,,true,1,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,golem_call,Golem Call,100,180,,false,1,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,neo_lancer,Neo Lancer,220,40,golem_call,false,2,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,attack_boost,Attack Boost,340,40,neo_lancer,false,3,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,neo_shielder,Neo Shielder,220,180,golem_call,false,2,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,shield_boost,Shield Boost,340,180,neo_shielder,false,3,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,neo_buster,Neo Buster,220,320,golem_call,false,2,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,speed_boost,Speed Boost,340,320,neo_buster,false,3,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,magic_grenade,Magic Grenade,100,530,,false,1,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,frost_grenade,Frost Grenade,220,460,magic_grenade,false,2,1
+golem,Golem Skills,700,650,sk_golem_call.png,true,false,flash_grenade,Flash Grenade,340,460,frost_grenade,false,3,1
+guard,Guard Skills,500,450,sk_heavy_armor_mastery.png,true,true,heavy_armor_mastery,Heavy Armor Mastery,100,110,,true,1,1
+guard,Guard Skills,500,450,sk_heavy_armor_mastery.png,true,true,physical_guard,Physical Guard,340,40,heavy_armor_mastery,true,3,1
+guard,Guard Skills,500,450,sk_heavy_armor_mastery.png,true,true,advanced_guard,Advanced Guard,220,110,heavy_armor_mastery,true,2,1
+guard,Guard Skills,500,450,sk_heavy_armor_mastery.png,true,true,light_armor_mastery,Light Armor Mastery,100,250,,true,1,1
+guard,Guard Skills,500,450,sk_heavy_armor_mastery.png,true,true,advanced_evasion,Advanced Evasion,220,250,light_armor_mastery,true,2,1
+guard,Guard Skills,500,450,sk_heavy_armor_mastery.png,true,true,mirage_evasion,Mirage Evasion,340,320,light_armor_mastery,true,3,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,bloody_bite,Bloody Bite,100,40,,false,1,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,dark_stinger,Dark Stinger,220,40,bloody_bite,false,1,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,red_tear,Red Tear,340,40,dark_stinger,false,1,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,soul_hunter,Soul Hunter,460,40,red_tear,false,1,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,sacrifice,Sacrifice,100,180,,false,1,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,demon_claw,Demon Claw,220,180,sacrifice,false,1,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,regretless,Regretless,340,180,demon_claw,false,1,1
+dark_power,Dark Power Skills,650,300,sk_sacrifice.png,true,true,eternal_nightmare,Eternal Nightmare,460,180,regretless,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,magic_warrior_mastery,Magic Warrior Mastery,100,40,,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,conversion,Conversion,220,40,magic_warrior_mastery,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,resonance,Resonance,340,40,conversion,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,enchanted_spell,Enchanted Spell,460,40,resonance,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,dual_bringer,Dual Bringer,580,40,enchanted_spell,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,ether_flare,Ether Flare,100,180,,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,element_slash,Element Slash,220,180,ether_flare,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,enchant_sword,Enchant Sword,340,180,element_slash,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,enchanted_burst,Enchanted Burst,460,180,enchant_sword,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,union_sword,Union Sword,580,180,enchanted_burst,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,siphon_barrier,Siphon Barrier,100,320,,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,teleport,Teleport,220,320,siphon_barrier,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,siphon_recall,Siphon Recall,340,320,teleport,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,float_dash,Float Dash,460,320,siphon_recall,false,1,1
+magic_warrior,Magic Warrior Skills,800,450,sk_magic_warrior_mastery.png,true,true,magic_skin,Magic Skin,580,320,float_dash,false,1,1
+ninja,Ninja Skills,700,300,sk_ninja_spirit.png,true,true,ninjutsu,Ninjutsu,100,40,,false,1,1
+ninja,Ninja Skills,700,300,sk_ninja_spirit.png,true,true,ninja_spirit,Ninja Spirit,220,40,ninjutsu,false,1,1
+ninja,Ninja Skills,700,300,sk_ninja_spirit.png,true,true,ninjutsu_drill,Ninjutsu Drill I,340,180,ninjutsu,false,1,1
+ninja,Ninja Skills,700,300,sk_ninja_spirit.png,true,true,ninjutsu_drill_ii,Ninjutsu Drill II,460,180,ninjutsu_drill,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,l_boomerang_i,L Boomerang,100,40,,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,l_boomerang_ii,L Boomerang II,220,40,l_boomerang_i,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,l_boomerang_iii,L Boomerang III,340,40,l_boomerang_ii,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,n_dragon_tooth,N Dragon Tooth,340,180,,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,healing_shot,Healing Shot,100,320,,true,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,arrow_sharpening,Arrow Sharpening,220,320,healing_shot,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,survival_instinct,Survival Instinct,340,320,arrow_sharpening,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,frontliner,Frontliner,100,460,,false,1,1
+partisan,Partisan Skills,600,600,sk_l_boomerang_i.png,true,true,frontliner_ii,Frontliner II,220,460,frontliner,false,1,1
+minstrel,Minstrel Skills,700,600,sk_life_song.png,true,true,healing_song,Healing Song,100,180,,false,1,1
+minstrel,Minstrel Skills,700,600,sk_life_song.png,true,true,fairy_song,Fairy Song,220,180,healing_song,false,1,1
+minstrel,Minstrel Skills,700,600,sk_life_song.png,true,true,passion_song,Passion Song,460,40,fairy_song,false,1,1
+minstrel,Minstrel Skills,700,600,sk_life_song.png,true,true,wisdom_song,Wisdon Song,460,180,fairy_song,false,1,1
+minstrel,Minstrel Skills,700,600,sk_life_song.png,true,true,life_song,Life Song,220,320,fairy_song,false,1,1
+minstrel,Minstrel Skills,700,600,sk_life_song.png,true,true,fantasy_song,Fantasy Song,340,320,life_song,false,1,1
+minstrel,Minstrel Skills,700,600,sk_life_song.png,true,true,ad_lib,Ad-Lib,340,460,,false,1,1
+dancer,Dancer Skills,700,400,sk_fairy_dance.png,true,true,fairy_dance,Fairy Dance,100,40,,false,1,1
+dancer,Dancer Skills,700,400,sk_fairy_dance.png,true,true,frenzy_dance,Frenzy Dance,220,40,fairy_dance,false,1,1
+dancer,Dancer Skills,700,400,sk_fairy_dance.png,true,true,astute_dance,Astute Dance,340,40,frenzy_dance,false,1,1
+dancer,Dancer Skills,700,400,sk_fairy_dance.png,true,true,charming_dance,Charming Dance,460,40,astute_dance,false,1,1
+dancer,Dancer Skills,700,400,sk_fairy_dance.png,true,true,spirited_dance,Spirited Dance,220,180,fairy_dance,false,1,1
+dancer,Dancer Skills,700,400,sk_fairy_dance.png,true,true,elegant_poise,Elegant Poise,340,250,,false,1,1
+dancer,Dancer Skills,700,400,sk_fairy_dance.png,true,true,nature_wonder,Nature's Wonder,460,250,elegant_poise,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,grave_digger,Grave Digger,100,180,,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,phantom_missle,Phantom Missle,220,40,grave_digger,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,blood_siphon,Blood Siphon,340,40,phantom_missle,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,soul_stream,Soul Stream,460,40,blood_siphon,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,skeleton_call,Skeleton Call,340,180,grave_digger,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,demonic_pact,Demonic Pact,460,180,skeleton_call,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,fine_shovel,Fine Shovel,220,320,grave_digger,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,harvest,Harvest,340,320,fine_shovel,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,opportunist,Opportunist,460,320,harvest,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,tomb,Tomb,100,460,,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,skull_shaker,Skull Shaker,340,460,tomb,false,1,1
+necromancer,Necromancer Skills,800,600,sk_grave_digger.png,true,true,hazard_strike,Hazard Strike,460,460,skull_shaker,false,1,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,first_aid,First Aid,100,110,,true,1,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,mini_heal,Mini Heal,220,40,,true,1,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,recovery,Recovery,340,40,mini_heal,true,2,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,sanctuary,Sanctuary,460,40,recovery,true,3,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,heal,Heal,580,40,sanctuary,true,4,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,life_recovery,Life Recovery,220,180,,true,1,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,brave_aura,Brave Aura,340,180,life_recovery,true,2,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,high_cycle,High Cycle,460,180,brave_aura,true,3,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,quick_motion,Quick Motion,580,180,high_cycle,true,4,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,mana_recharge,Mana Recharge,220,320,,true,1,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,magic_barrier,Magic Barrier,340,320,mana_recharge,true,2,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,immunity,Immunity,460,320,magic_barrier,true,3,1
+support,Support Skills,900,450,sk_mini_heal.png,true,true,fast_reaction,Fast Reaction,580,320,immunity,true,4,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,play_dead,Play Dead,100,110,,true,1,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,exp_up,EXP Gain UP,100,250,,true,1,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,drop_up,Drop Rate UP,100,390,,true,1,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,safe_rest,Safe Rest,220,180,,true,1,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,hp_boost,HP Boost,340,40,safe_rest,true,2,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,fighter_high,Fighter's High,340,180,safe_rest,true,1,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,short_rest,Short Rest,220,320,,true,1,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,mp_boost,MP Boost,340,320,short_rest,true,2,1
+survival,Survival Skills,600,600,sk_play_dead.png,true,true,sober_analysis,Sober Analysis,340,460,short_rest,true,2,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,magic_up,Magic UP,100,40,,true,1,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,concentrate,Concentrate,220,40,magic_up,true,1,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,desperate_resist,Desperate Resist,340,40,concentrate,true,2,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,increased_energy,Increased Energy,460,40,desperate_resist,true,3,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,spell_burst,Spell Burst,580,40,increased_energy,true,4,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,attack_up,Attack UP,100,180,,true,1,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,whack,Whack,220,180,attack_up,true,1,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,critical_up,Critical UP,340,180,whack,true,2,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,intimidating_power,Intimidating Power,460,180,critical_up,true,3,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,secret_chase_attack,Secret Chase Attack,580,180,intimidating_power,true,4,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,defense_up,Defense UP,100,320,,true,1,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,dodge_up,Dodge UP,220,320,defense_up,true,1,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,accuracy_up,Accuracy UP,340,320,dodge_up,true,2,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,defense_mastery,Defense Mastery,460,320,accuracy_up,true,3,1
+battle,Battle Skills,800,450,sk_whack.png,true,true,super_grip,Super Grip,580,320,defense_mastery,true,4,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,refine_equipment,Refine Equipment,100,180,,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,notice_anvil,Notice's Anvil,220,40,refine_equipment,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,craftsman_anvil,Craftsman's Anvil,340,40,notice_anvil,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,blacksmith_anvil,Blacksmith's Anvil,460,40,craftsman_anvil,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,master_anvil,Master's Anvil,580,40,blacksmith_anvil,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,master_anvil_ii,Master's Anvil II,700,40,master_anvil,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,mid_class_refinement,Mid-Class Refinement,340,180,refine_equipment,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,high_class_refinement,High-Class Refinement,460,180,mid_class_refinement,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,expert_refinement,Expert Refinement,580,180,high_class_refinement,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,create_equipment,Create Equipment,220,320,refine_equipment,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,careful_creation,Careful Creation,340,320,create_equipment,true,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,expert_creation,Expert's Creation,580,320,careful_creation,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,customize_equipment,Customize Equipment,340,460,create_equipment,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,accurate_customization,Accurate Customization,460,460,customize_equipment,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,expert_customization,Expert's Customization,580,460,accurate_customization,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,expert_customization_ii,Expert's Customization II,700,460,expert_customization,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,metal_compassion,Metal Compassion,820,40,,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,fabric_compassion,Fabric Compassion,820,180,,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,beast_compassion,Beast Compassion,820,320,,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,wood_compassion,Wood Compassion,820,460,,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,medicine_compassion,Medicine Compassion,820,600,,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,mana_compassion,Mana Compassion,820,740,,false,1,1
+smith,Smith Skills,1025,900,sk_refine_equipment.png,true,true,process_material,Process Material,100,460,,true,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,process_material,Process Material,100,320,,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,item_synthesis,Item Synthesis,100,180,,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,notice_bottle,Notice's Bottle,220,40,item_synthesis,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,craftsman_bottle,Craftsman's Bottle,340,40,notice_bottle,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,synthesist_bottle,Synthesist's Bottle,460,40,craftsman_bottle,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,master_bottle,Master's Bottle,580,40,synthesist_bottle,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,master_bottle_ii,Master's Bottle II,700,40,master_bottle,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,mid_class_synthesis,Mid-Class Synthesis,340,180,item_synthesis,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,high_class_synthesis,High-Class Synthesis,460,180,mid_class_synthesis,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,expert_synthesis,Expert's Synthesis,580,180,high_class_synthesis,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,expert_synthesis_ii,Expert's Synthesis II,700,180,expert_synthesis,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,synthesize_equipment,Synthesize Equipment,340,320,item_synthesis,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,technical_synthesis,Technical Synthesis I,460,320,synthesize_equipment,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,technical_synthesis_ii,Technical Synthesis II,580,320,technical_synthesis,false,1,1
+alchemy,Alchemy Skills,900,500,sk_item_synthesis.png,true,true,technical_synthesis_iii,Technical Synthesis III,700,320,technical_synthesis_ii,false,1,1
+tamer,Tamer Skills,500,500,sk_taming.png,true,true,taming,Taming,100,40,,true,1,1
+tamer,Tamer Skills,500,500,sk_taming.png,true,true,capture_technique,Capture Technique I,220,40,taming,true,1,1
+tamer,Tamer Skills,500,500,sk_taming.png,true,true,capture_technique_ii,Capture Technique II,340,40,capture_technique,true,1,1
+tamer,Tamer Skills,500,500,sk_taming.png,true,true,skillful_capture,Skillful Capture,220,180,taming,true,1,1
+tamer,Tamer Skills,500,500,sk_taming.png,true,true,careful_capture,Careful Capture,340,180,skillful_capture,true,1,1
+tamer,Tamer Skills,500,500,sk_taming.png,true,true,pet_heal,Pet Heal,220,320,taming,true,1,1
+tamer,Tamer Skills,500,500,sk_taming.png,true,true,pet_mp_charge,Pet MP Charge,340,320,pet_heal,true,1,1
+event,Event Skills,500,500,sg_icon.png,false,true,morning_star,Morning Star,100,40,,true,1,1
+event,Event Skills,500,500,sg_icon.png,false,true,iron_pipe,Iron Pipe,100,40,,true,1,1
+event,Event Skills,500,500,sg_icon.png,false,true,retro_bowgun,Retro Bowgun,100,40,,true,1,1
+event,Event Skills,500,500,sg_icon.png,false,true,magnum,Magnum,100,40,,true,1,1

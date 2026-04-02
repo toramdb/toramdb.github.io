@@ -454,22 +454,23 @@ window.ItemModal = (function () {
         var isCurrent = stepName.toLowerCase() === name.toLowerCase();
         var currentClass = isCurrent ? ' enhancement-current' : '';
 
-        // Resolve icon for this crysta step
+        // Resolve icon for this crysta step (Rank-based automation)
         var stepIcon = '';
-        if (window.ToramSheets) {
-          stepIcon = window.ToramSheets.resolveIcon(type);
-        }
-        var iconHTML;
-        if (!stepIcon) {
-          iconHTML = '💎';
-        } else if (stepIcon.indexOf('<img') !== -1) {
-          iconHTML = stepIcon;
-        } else if (stepIcon.match(/\.(png|jpg|gif|svg|webp)/i)) {
-          var errHandler = 'onerror="this.onerror=null;this.src=\'img/icons/no_image.png\';this.style.opacity=\'0.6\';"';
-          iconHTML = '<img src="' + esc(stepIcon) + '" alt="' + esc(stepName) + '" ' + errHandler + ' />';
-        } else {
-          iconHTML = esc(stepIcon);
-        }
+        var tLow = type.toLowerCase();
+        var category = "normal";
+
+        if (tLow.indexOf('weapon') !== -1) category = 'weapon';
+        else if (tLow.indexOf('armor') !== -1) category = 'armor';
+        else if (tLow.indexOf('special') !== -1) category = 'special';
+        else if (tLow.indexOf('additional') !== -1 || tLow.indexOf('ring') !== -1) category = 'add';
+
+        var rank = "up";
+        if (idx === 0) rank = "base";
+        else if (idx === steps.length - 1 && steps.length > 1) rank = "max";
+        
+        stepIcon = modalIconBase + 'crysta_' + category + '_' + rank + '.png';
+
+        var iconHTML = '<img src="' + esc(stepIcon) + '" alt="' + esc(stepName) + '" ' + errHandler + ' />';
 
         pathHTML += '<div class="enhancement-step' + currentClass + '"' +
           (isCurrent ? '' : ' data-enhance-name="' + esc(stepName) + '"') +

@@ -25,6 +25,7 @@
 
   var params = new URLSearchParams(window.location.search);
   var itemName = params.get('name');
+  var sheetsCache = null;
 
   // ---------- Static sample data (used when Sheets not configured) ---
   var SAMPLE_ITEMS = {
@@ -114,6 +115,19 @@
     var stats = item['Stats']     || '';
     var obt   = item['Obtain']    || '';
     var rec   = item['Recipe']    || '';
+
+    var isCrysta = type.toLowerCase().indexOf('crysta') !== -1;
+    var materialTypes = ['beast', 'cloth', 'mana', 'wood', 'metal', 'medicine', 'teleport', 'material'];
+    var isMaterial = materialTypes.indexOf(type.toLowerCase()) !== -1;
+
+    // Update tab labels
+    var tabs = document.querySelectorAll('.detail-tab');
+    tabs.forEach(function(t) {
+      if (t.dataset.tab === 'stats' && isMaterial) t.textContent = 'Details';
+      if (t.dataset.tab === 'recipe') {
+        t.textContent = isMaterial ? 'Used For' : (isCrysta ? 'Enhancement Path' : 'Recipe');
+      }
+    });
 
     // Page title & breadcrumb
     document.title = esc(name) + ' — ToramDB';
@@ -211,20 +225,99 @@
       obtEl.innerHTML = obtHtml;
     }
 
-    // Recipe
+    // Recipe / Used For
     var recEl = document.getElementById('recipeContent');
-    if (rec) {
+    if (isCrysta && rec) {
+      var steps = rec.split(';').map(function (s) { return s.trim(); }).filter(Boolean);
+      var pathHTML = '<div class="enhancement-path">';
+      var iconBase = (function() {
+        var path = window.location.pathname;
+        if (path.indexOf('/pages/') !== -1) return '../img/icons/';
+        return 'img/icons/';
+      }());
+
+      steps.forEach(function (stepName, idx) {
+        var isCurrent = stepName.toLowerCase() === name.toLowerCase();
+        var currentClass = isCurrent ? ' enhancement-current' : '';
+        
+        var tLow = type.toLowerCase();
+        var category = "normal";
+        if (tLow.indexOf('weapon') !== -1) category = 'weapon';
+        else if (tLow.indexOf('armor') !== -1) category = 'armor';
+        else if (tLow.indexOf('special') !== -1) category = 'special';
+        else if (tLow.indexOf('additional') !== -1 || tLow.indexOf('ring') !== -1) category = 'add';
+
+        var rank = "up";
+        if (idx === 0) rank = "base";
+        else if (idx === steps.length - 1 && steps.length > 1) rank = "max";
+        
+        var stepIcon = iconBase + 'crysta_' + category + '_' + rank + '.png';
+        var errHandler = 'onerror="this.onerror=null;this.src=\'../img/icons/no_image.png\';"';
+
+        pathHTML += '<div class="enhancement-step' + currentClass + '" onclick="window.location.href=\'detail.html?name=' + encodeURIComponent(stepName) + '\'" style="cursor:pointer">' +
+          '<div class="enhancement-icon"><img src="' + stepIcon + '" ' + errHandler + ' /></div>' +
+          '<div class="enhancement-name">' + esc(stepName) + '</div>' +
+          (isCurrent ? '<div class="enhancement-badge">Current</div>' : '') +
+          '</div>';
+        if (idx < steps.length - 1) pathHTML += '<div class="enhancement-arrow">↓</div>';
+      });
+      recEl.innerHTML = pathHTML + '</div>';
+    } else if (isMaterial) {
+      var usedIn = findUsedIn(name);
+      if (usedIn.length > 0) {
+        var usedHtml = '';
+        usedIn.forEach(function (match) {
+          usedHtml += '<div class="recipe-item" style="cursor:pointer" onclick="window.location.href=\'detail.html?name=' + encodeURIComponent(match.itemName) + '\'">' +
+            '<div class="recipe-icon">⚒️</div>' +
+            '<span>' + esc(match.itemName) + ' <small class="text-muted">x' + esc(match.amount) + '</small></span></div>';
+        });
+        recEl.innerHTML = usedHtml;
+      } else {
+        recEl.innerHTML = '<p class="text-muted">No usage info.</p>';
+      }
+    } else if (rec) {
       var recHtml = '';
       var recParts = rec.split(';');
       for (var k = 0; k < recParts.length; k++) {
         var rp = recParts[k].trim();
         if (!rp) continue;
-        recHtml += '<div class="recipe-item">' +
+        var rName = rp.replace(/(\s+x\d+.*|:.*)$/i, '').trim();
+        recHtml += '<div class="recipe-item" style="cursor:pointer" onclick="window.location.href=\'detail.html?name=' + encodeURIComponent(rName) + '\'">' +
           '<div class="recipe-icon">🧪</div>' +
           '<span>' + esc(rp) + '</span></div>';
       }
       recEl.innerHTML = recHtml;
     }
+  }
+
+  function findInCache(name) {
+    if (!sheetsCache || !name) return null;
+    var search = name.trim().toLowerCase();
+    for (var i = 0; i < sheetsCache.length; i++) {
+      if ((sheetsCache[i]['Name'] || '').trim().toLowerCase() === search) return sheetsCache[i];
+    }
+    return null;
+  }
+
+  function findUsedIn(materialName) {
+    if (!sheetsCache) return [];
+    var results = [];
+    var search = materialName.toLowerCase();
+    for (var i = 0; i < sheetsCache.length; i++) {
+      var item = sheetsCache[i];
+      var recipe = item['Recipe'] || '';
+      if (!recipe) continue;
+      recipe.split(';').forEach(function (part) {
+        var p = part.trim();
+        if (!p) return;
+        var ingName = p.replace(/(\s+x\d+.*|:.*)$/i, '').trim();
+        var amtMatch = p.match(/(?:x|:\s*)(\d+)/i);
+        if (ingName.toLowerCase() === search) {
+          results.push({ itemName: item['Name'], amount: amtMatch ? amtMatch[1] : '???' });
+        }
+      });
+    }
+    return results;
   }
 
   // ---------- Tab switching ----------------------------------------
@@ -263,6 +356,7 @@
     window.ToramSheets.fetchSheet(sheetName)
       .then(function (csv) {
         var rows = window.ToramSheets.parseCSV(csv);
+        sheetsCache = rows;
         var found = null;
         for (var i = 0; i < rows.length; i++) {
           if ((rows[i]['Name'] || '').toLowerCase() === itemName.toLowerCase()) {

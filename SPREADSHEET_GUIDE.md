@@ -82,12 +82,12 @@ Daftar semua item/equipment yang ditampilkan sebagai card di halaman Items.
 
 | Type              | Icon                  |
 |-------------------|-----------------------|
-| Additional Crysta | ![](img/icons/add_crysta.png)     |
-| Ring Crysta       | ![](img/icons/add_crysta.png)     |
-| Armor Crysta      | ![](img/icons/armor_crysta.png)   |
-| Weapon Crysta     | ![](img/icons/weapon_crysta.png)  |
-| Special Crysta    | ![](img/icons/special_crysta.png) |
-| Normal Crysta     | ![](img/icons/normal_crysta.png)  |
+| Additional Crysta | ![](img/icons/crysta_add_base.png)     |
+| Ring Crysta       | ![](img/icons/crysta_add_base.png)     |
+| Armor Crysta      | ![](img/icons/crysta_armor_base.png)   |
+| Weapon Crysta     | ![](img/icons/crysta_weapon_base.png)  |
+| Special Crysta    | ![](img/icons/crysta_special_base.png) |
+| Normal Crysta     | ![](img/icons/crysta_normal_base.png)  |
 
 ### Contoh Data
 
