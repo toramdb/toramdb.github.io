@@ -255,7 +255,7 @@
           '</div>';
       };
 
-      var rawPaths = rec.split('|').map(function (s) { return s.trim(); }).filter(Boolean);
+      var rawPaths = rec.split(/[|｜]/).map(function (s) { return s.trim(); }).filter(Boolean);
       var pathHTML = '<div class="enhancement-tree">';
 
       if (rawPaths.length > 1) {
@@ -288,8 +288,8 @@
         });
         pathHTML += '</div>';
       } else {
-        // LINEAR LOGIC (original, cleaned up)
-        var steps = rec.split(/[>;]/).map(function (s) { return s.trim(); }).filter(Boolean);
+        // LINEAR LOGIC
+        var steps = rec.split(/[>;|｜]/).map(function (s) { return s.trim(); }).filter(Boolean);
         steps.forEach(function (stepName, idx) {
           var rank = "up";
           if (idx === 0) rank = "base";
