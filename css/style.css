@@ -854,7 +854,7 @@ ul { list-style: none; }
   justify-content: space-between;
   font-size: 0.8rem;
   color: var(--text-main);
-  padding: 0.3rem 0;
+  padding: 0.15rem 0;
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
@@ -871,9 +871,9 @@ ul { list-style: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
   border-bottom: 1px solid rgba(0,0,0,0.03);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
 }
 .f-stat-row:last-child {
   border-bottom: none;
@@ -884,7 +884,7 @@ ul { list-style: none; }
 }
 .f-stat-value {
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 .f-stat-value.positive { color: var(--success); }
 .f-stat-value.negative { color: var(--danger); }

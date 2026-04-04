@@ -1078,8 +1078,9 @@ window.ToramSheets = (function () {
 
                var fdescHTML = '';
                if (fdesc) {
-                 if (fdesc.toLowerCase().indexOf('map :') === 0) {
-                   var mapLocation = fdesc.substring(5).trim();
+                 var mapMatch = fdesc.match(/^map\s*:(.*)/i);
+                 if (mapMatch) {
+                   var mapLocation = mapMatch[1].trim();
                    fdescHTML = '<div class="f-map-info"><span class="icon">📍</span> ' + esc(mapLocation) + '</div>';
                  } else {
                    fdescHTML = '<p class="text-muted" style="line-height:1.4;margin-bottom:1rem">' + esc(fdesc) + '</p>';
