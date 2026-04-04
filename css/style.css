@@ -2112,42 +2112,55 @@ footer {
 /* Branching logic visual connection */
 @media (min-width: 768px) {
   .enhancement-tree > .enhancement-arrow {
-    margin-bottom: -2px; /* Pull the arrow down to touch the branch line */
+    margin-bottom: -1px;
     position: relative;
     z-index: 2;
   }
+
+  .enhancement-branches {
+    position: relative;
+    padding-top: 1.5rem; /* Space for the branching lines */
+    margin-top: -0.5rem;
+  }
+
+  /* The horizontal connector bar */
   .enhancement-branches::before {
     content: '';
     position: absolute;
-    top: -0.5rem;
+    top: 0;
     left: 25%;
     right: 25%;
-    height: 1rem;
-    border-top: 2px solid #94a3b8;
+    height: 2px;
+    background: #94a3b8;
     z-index: 1;
   }
   
-  /* Vertical 'neck' to connect arrow to horizontal branch line */
+  /* The vertical 'neck' connecting to the arrow above */
   .enhancement-branches::after {
     content: '';
     position: absolute;
-    top: -0.5rem;
+    top: -1rem;
     left: 50%;
     transform: translateX(-50%);
     width: 2px;
-    height: 0.5rem;
+    height: 1rem;
     background: #94a3b8;
     z-index: 1;
   }
 
-  /* Connecting lines from each branch up to the horizontal bar */
+  /* The vertical 'hangers' for each branch */
+  .enhancement-branch {
+    position: relative;
+  }
+
   .enhancement-branch::before {
     content: '';
     position: absolute;
-    top: -0.5rem;
+    top: -1.5rem;
     left: 50%;
+    transform: translateX(-50%);
     width: 2px;
-    height: 0.5rem;
+    height: 1.5rem;
     background: #94a3b8;
     z-index: 1;
   }
