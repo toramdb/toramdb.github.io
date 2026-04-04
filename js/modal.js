@@ -495,7 +495,7 @@ window.ItemModal = (function () {
 
       if (rawPaths.length > 1) {
         var processedPaths = rawPaths.map(function(p) {
-          return p.split(/[>;;]/).map(function(s) { 
+          return p.split(/[>;|｜；]/).map(function(s) { 
             return s.replace(/[\[\]]/g, '').trim(); 
           }).filter(Boolean);
         });
@@ -527,7 +527,7 @@ window.ItemModal = (function () {
         pathHTML += '</div>';
       } else {
         // LINEAR LOGIC
-        var steps = cleanRec.split(/[>;|｜]/).map(function (s) { 
+        var steps = cleanRec.split(/[>;|｜；]/).map(function (s) { 
           return s.replace(/[\[\]]/g, '').trim(); 
         }).filter(Boolean);
         steps.forEach(function (stepName, idx) {

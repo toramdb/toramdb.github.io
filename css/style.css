@@ -2102,24 +2102,28 @@ footer {
 }
 
 .enhancement-arrow {
+  margin: 0.25rem 0;
   font-size: 1rem;
   color: #94a3b8;
   font-weight: bold;
+  line-height: 1;
 }
 
 /* Branching logic visual connection */
 @media (min-width: 768px) {
+  .enhancement-tree > .enhancement-arrow {
+    margin-bottom: -2px; /* Pull the arrow down to touch the branch line */
+    position: relative;
+    z-index: 2;
+  }
   .enhancement-branches::before {
     content: '';
     position: absolute;
     top: -0.5rem;
-    left: 20%;
-    right: 20%;
-    height: 1.5rem;
+    left: 25%;
+    right: 25%;
+    height: 1rem;
     border-top: 2px solid #94a3b8;
-    border-left: 2px solid #e2e8f0;
-    border-right: 2px solid #e2e8f0;
-    border-radius: 12px 12px 0 0;
     z-index: 1;
   }
   
@@ -2133,6 +2137,19 @@ footer {
     width: 2px;
     height: 0.5rem;
     background: #94a3b8;
+    z-index: 1;
+  }
+
+  /* Connecting lines from each branch up to the horizontal bar */
+  .enhancement-branch::before {
+    content: '';
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    width: 2px;
+    height: 0.5rem;
+    background: #94a3b8;
+    z-index: 1;
   }
 }
 
