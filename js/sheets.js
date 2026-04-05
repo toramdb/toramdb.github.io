@@ -236,7 +236,6 @@ window.ToramSheets = (function () {
     'mini-boss':      'img/icons/monsters_ico.png',
     'mob':            'img/icons/monsters_ico.png',
     // Special
-    'blacksmith':     'img/icons/blacksmith_ico.png',
     'ore':            'img/icons/ore_ico.png',
     'reset':          'img/icons/reset_ico.png',
     'collapse':       'img/icons/collapse_ico.png'
@@ -246,11 +245,10 @@ window.ToramSheets = (function () {
   function resolveIcon(type, name, source) {
     var t = (type || '').toLowerCase().trim();
     var n = (name || '').toLowerCase().trim();
-    var s = (source || '').toLowerCase().trim();
 
     // 1. Keyword-based matching (Highest Priority)
-    if (s.indexOf('craft: blacksmith npc') !== -1 || s.indexOf('blacksmith npc') !== -1) return ICON_BASE + 'blacksmith_ico.png';
-    if (n.indexOf('ore') !== -1) return ICON_BASE + 'ore_ico.png';
+    // Precise word match for 'ore' to avoid 'cores' detection
+    if (/\bore\b/i.test(n)) return ICON_BASE + 'ore_ico.png';
 
     // 2. Type-based matching
     var icon = TYPE_ICONS[t];

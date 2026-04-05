@@ -373,6 +373,9 @@ window.ItemModal = (function () {
         if (opLow.indexOf('drop') === 0) {
           obtIcon = modalIconBase + 'monsters_ico.png';
           useImage = true;
+        } else if (opLow.indexOf('blacksmith npc') !== -1) {
+          obtIcon = modalIconBase + 'blacksmith_ico.png';
+          useImage = true;
         } else if (opLow.indexOf('map') === 0) {
           obtIcon = modalIconBase + 'maps_ico.png';
           useImage = true;
