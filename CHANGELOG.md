@@ -1,6 +1,9 @@
 # ToramDB Skill Simulator Changelog
 
-### v0.66.5 (Latest)
+### v0.66.6 (Latest)
+- **Modernized Notifications**: Integrated **SweetAlert2** library to replace default browser `alert()` and `confirm()` dialogs. Notifications now feature a customized ToramDB dark theme with smoother transitions and non-blocking interactions.
+
+### v0.66.5
 - **Enhancement Tree Optimization**: Implemented Longest Common Prefix (LCP) algorithm for multi-level stem merging. This ensures that upgrade paths sharing multiple common preceding steps (e.g., Grass Dragon Yelb -> Wandering Wheel) are rendered as a single vertical path before branching, eliminating visual clutter and duplicate nodes.
 
 ### v0.66.4

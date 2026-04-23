@@ -177,7 +177,13 @@
             const unmet = skill.reqIds.find(rid => (levels[rid] || 0) < 5);
             if (unmet) {
                 const preSkill = tree.skills.find(s => s.id === unmet);
-                alert(`Level 5 required for: ${preSkill ? preSkill.name : unmet}`);
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Requirement unmet',
+                    text: `Level 5 required for: ${preSkill ? preSkill.name : unmet}`,
+                    confirmButtonText: 'Got it',
+                    heightAuto: false
+                });
                 return;
             }
         }
@@ -270,11 +276,30 @@
     }
 
     function resetAll() {
-        if (confirm("Reset ALL skill points across ALL trees?")) {
-            Object.keys(levels).forEach(id => levels[id] = 0);
-            Object.keys(SKILL_TREES).forEach(tid => updateUI(tid));
-            saveState();
-        }
+        Swal.fire({
+            title: 'Reset All Skill Points?',
+            text: "This will reset all skill points across ALL trees. This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e74c3c',
+            cancelButtonColor: '#333',
+            confirmButtonText: 'Yes, reset everything!',
+            heightAuto: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Object.keys(levels).forEach(id => levels[id] = 0);
+                Object.keys(SKILL_TREES).forEach(tid => updateUI(tid));
+                saveState();
+                
+                Swal.fire({
+                    title: 'Reset Completed',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false,
+                    heightAuto: false
+                });
+            }
+        });
     }
 
     function collapseAll() {
