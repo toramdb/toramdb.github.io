@@ -179,9 +179,10 @@
                 const preSkill = tree.skills.find(s => s.id === unmet);
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Requirement unmet',
-                    text: `Level 5 required for: ${preSkill ? preSkill.name : unmet}`,
+                    title: 'Skill Locked',
+                    text: `You need to reach Level 5 with ${preSkill ? preSkill.name : unmet} first.`,
                     confirmButtonText: 'Got it',
+                    confirmButtonColor: '#e74c3c',
                     heightAuto: false
                 });
                 return;
@@ -277,13 +278,14 @@
 
     function resetAll() {
         Swal.fire({
-            title: 'Reset All Skill Points?',
-            text: "This will reset all skill points across ALL trees. This action cannot be undone.",
+            title: 'Reset All Points?',
+            text: "This will return all your spent skill points to 0.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#e74c3c',
             cancelButtonColor: '#333',
-            confirmButtonText: 'Yes, reset everything!',
+            confirmButtonText: 'Yes, Reset All',
+            cancelButtonText: 'Cancel',
             heightAuto: false
         }).then((result) => {
             if (result.isConfirmed) {
